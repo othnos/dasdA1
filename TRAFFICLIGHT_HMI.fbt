@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="TRAFFICLIGHT_HMI" Comment="Hmi for one set of traffic lights" >
+  <Identification Standard="61499-1" Classification="HMI" Function="Output" Type="4xLED" />
+  <VersionInfo Organization="Holobloc Inc" Version="0.3" Author="JHC" Date="2011-03-28" Remarks="Updated documentation." />
+  <VersionInfo Organization="Holobloc Inc" Version="0.2" Author="JHC" Date="2008-11-10" Remarks="Moved to fb.rt.doc." />
+  <VersionInfo Organization="Holobloc Inc" Version="0.1" Author="JHC" Date="2008-06-04" Remarks="Updated DOCTYPE." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2001-02-21" />
+<CompilerInfo header="package fb.rt.A1; import fb.rt.hmi.*;" >
+  <Compiler Language="Java" Vendor="Sun" Product="JDK" Version="1.6.0" />
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="GREEN" />
+        <With Var="YELLOW" />
+        <With Var="RED" />
+      </Event>
+      <Event Name="REQ" Comment="Display Request" >
+        <With Var="GREEN" />
+        <With Var="YELLOW" />
+        <With Var="RED" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="GREEN" Type="BOOL" />
+      <VarDeclaration Name="YELLOW" Type="BOOL" />
+      <VarDeclaration Name="RED" Type="BOOL" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="GREEN_LIGHT" Type="OUT_BOOL" x="738.88885" y="11.111111" >
+      <Parameter Name="QI" Value="1" />
+      <Parameter Name="LABEL" Value="&#34;GREEN&#34;" />
+      <Parameter Name="C0" Value="[0,0,0]" />
+      <Parameter Name="C1" Value="[0,255,0]" />
+    </FB>
+    <FB Name="YELLOW_LIGHT" Type="OUT_BOOL" x="1605.5555" y="11.111111" >
+      <Parameter Name="QI" Value="1" />
+      <Parameter Name="LABEL" Value="&#34;YELLOW&#34;" />
+      <Parameter Name="C1" Value="[255,255,0]" />
+      <Parameter Name="C0" Value="[0,0,0]" />
+    </FB>
+    <FB Name="RED_LIGHT" Type="OUT_BOOL" x="2450.0" y="11.111111" >
+      <Parameter Name="QI" Value="1" />
+      <Parameter Name="LABEL" Value="&#34;RED&#34;" />
+      <Parameter Name="C1" Value="[255,0,0]" />
+      <Parameter Name="C0" Value="[0,0,0]" />
+    </FB>
+    <EventConnections>
+      <Connection Source="GREEN_LIGHT.INITO" Destination="YELLOW_LIGHT.INIT" dx1="35.2941" />
+      <Connection Source="YELLOW_LIGHT.INITO" Destination="RED_LIGHT.INIT" dx1="41.1765" />
+      <Connection Source="RED_LIGHT.INITO" Destination="INITO" dx1="2764.7058" />
+      <Connection Source="GREEN_LIGHT.CNF" Destination="YELLOW_LIGHT.REQ" dx1="64.7059" />
+      <Connection Source="YELLOW_LIGHT.CNF" Destination="RED_LIGHT.REQ" dx1="64.7059" />
+      <Connection Source="RED_LIGHT.CNF" Destination="CNF" dx1="2741.1765" />
+      <Connection Source="INIT" Destination="GREEN_LIGHT.INIT" />
+      <Connection Source="REQ" Destination="GREEN_LIGHT.REQ" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="GREEN" Destination="GREEN_LIGHT.IN" />
+      <Connection Source="YELLOW" Destination="YELLOW_LIGHT.IN" />
+      <Connection Source="RED" Destination="RED_LIGHT.IN" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

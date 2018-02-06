@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE System SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<System Name="A1T1_a" Comment="Simple traffic light" >
+  <Identification Standard="61499-1" />
+  <VersionInfo Organization="Holobloc Inc." Version="0.1" Author="JHC" Date="2009-03-05" Remarks="Deleted Application." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2004-01-10" Remarks="Modified from FLASHERT_TESTD." />
+  <Device Name="CTL_PANEL" Type="FRAME_DEVICE" x="527.7778" y="11.111111" >
+    <Parameter Name="BOUNDS" Value="[50,100,325,100]" />
+    <Parameter Name="GRID" Value="[1,1]" />
+    <Resource Name="RES1" Type="PANEL_RESOURCE" x="366.66666" y="833.3333" >
+      <FBNetwork >
+        <FB Name="trafficLight" Type="TRAFFICLIGHT_HMI" x="2255.5554" y="11.111111" >
+        </FB>
+        <FB Name="myTimer" Type="E_CYCLE" x="1155.5555" y="1705.5555" >
+          <Parameter Name="DT" Value="t#250ms" />
+        </FB>
+        <FB Name="gBool" Type="IN_BOOL" x="738.88885" y="200.0" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;Green&#34;" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="trafficLight.INIT" dx1="55.555553" />
+          <Connection Source="myTimer.EO" Destination="trafficLight.REQ" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="myTimer.START" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="gBool.INIT" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="gBool.OUT" Destination="trafficLight.GREEN" dx1="55.555553" />
+          <Connection Source="gBool.OUT" Destination="trafficLight.YELLOW" dx1="55.555553" />
+          <Connection Source="gBool.OUT" Destination="trafficLight.RED" dx1="55.555553" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+  </Device>
+</System>
