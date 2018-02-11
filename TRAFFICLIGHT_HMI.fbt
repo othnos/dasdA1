@@ -6,18 +6,18 @@
   <VersionInfo Organization="Holobloc Inc" Version="0.2" Author="JHC" Date="2008-11-10" Remarks="Moved to fb.rt.doc." />
   <VersionInfo Organization="Holobloc Inc" Version="0.1" Author="JHC" Date="2008-06-04" Remarks="Updated DOCTYPE." />
   <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2001-02-21" />
-<CompilerInfo header="package fb.rt.A1; import fb.rt.hmi.*;" >
+<CompilerInfo header="package fb.rt.dasdA1; import fb.rt.hmi.*;" >
   <Compiler Language="Java" Vendor="Sun" Product="JDK" Version="1.6.0" />
 </CompilerInfo>
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" >
-        <With Var="GREEN" />
+        <With Var="GREEN_TEST" />
         <With Var="YELLOW" />
         <With Var="RED" />
       </Event>
       <Event Name="REQ" Comment="Display Request" >
-        <With Var="GREEN" />
+        <With Var="GREEN_TEST" />
         <With Var="YELLOW" />
         <With Var="RED" />
       </Event>
@@ -29,7 +29,7 @@
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="GREEN" Type="BOOL" />
+      <VarDeclaration Name="GREEN_TEST" Type="BOOL" />
       <VarDeclaration Name="YELLOW" Type="BOOL" />
       <VarDeclaration Name="RED" Type="BOOL" />
     </InputVars>
@@ -64,7 +64,7 @@
       <Connection Source="REQ" Destination="GREEN_LIGHT.REQ" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="GREEN" Destination="GREEN_LIGHT.IN" />
+      <Connection Source="GREEN_TEST" Destination="GREEN_LIGHT.IN" />
       <Connection Source="YELLOW" Destination="YELLOW_LIGHT.IN" />
       <Connection Source="RED" Destination="RED_LIGHT.IN" />
     </DataConnections>
