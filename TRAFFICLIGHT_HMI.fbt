@@ -12,12 +12,12 @@
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" >
-        <With Var="GREEN_TEST" />
+        <With Var="GREEN" />
         <With Var="YELLOW" />
         <With Var="RED" />
       </Event>
       <Event Name="REQ" Comment="Display Request" >
-        <With Var="GREEN_TEST" />
+        <With Var="GREEN" />
         <With Var="YELLOW" />
         <With Var="RED" />
       </Event>
@@ -29,7 +29,7 @@
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="GREEN_TEST" Type="BOOL" />
+      <VarDeclaration Name="GREEN" Type="BOOL" />
       <VarDeclaration Name="YELLOW" Type="BOOL" />
       <VarDeclaration Name="RED" Type="BOOL" />
     </InputVars>
@@ -64,7 +64,7 @@
       <Connection Source="REQ" Destination="GREEN_LIGHT.REQ" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="GREEN_TEST" Destination="GREEN_LIGHT.IN" />
+      <Connection Source="GREEN" Destination="GREEN_LIGHT.IN" />
       <Connection Source="YELLOW" Destination="YELLOW_LIGHT.IN" />
       <Connection Source="RED" Destination="RED_LIGHT.IN" />
     </DataConnections>
