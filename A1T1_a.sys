@@ -9,7 +9,7 @@
     <Parameter Name="GRID" Value="[1,1]" />
     <Resource Name="RES1" Type="PANEL_RESOURCE" x="366.66666" y="833.3333" >
       <FBNetwork >
-        <FB Name="trafficLight" Type="TRAFFICLIGHT_HMI" x="2255.5554" y="11.111111" >
+        <FB Name="trafficLight" Type="TRAFFICLIGHT_HMI" x="2350.0" y="72.22222" >
         </FB>
         <FB Name="myTimer" Type="E_CYCLE" x="1155.5555" y="1705.5555" >
           <Parameter Name="DT" Value="t#250ms" />
