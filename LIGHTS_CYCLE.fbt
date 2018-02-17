@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="LIGHTS_CYCLE" Comment="Composite Function Block Type" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+<CompilerInfo header="package fb.rt.student;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="START" >
+        <With Var="GREENT" />
+        <With Var="YELLOWT" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" >
+        <With Var="GREENOUT" />
+        <With Var="YELLOWOUT" />
+        <With Var="REDOUT" />
+        <With Var="GREENRT" />
+        <With Var="YELLOWRT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="GREENT" Type="UINT" />
+      <VarDeclaration Name="YELLOWT" Type="UINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="GREENOUT" Type="BOOL" />
+      <VarDeclaration Name="YELLOWOUT" Type="BOOL" />
+      <VarDeclaration Name="REDOUT" Type="BOOL" />
+      <VarDeclaration Name="GREENRT" Type="UINT" />
+      <VarDeclaration Name="YELLOWRT" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="greenCTD" Type="E_CTD" x="5900.0" y="394.44443" >
+    </FB>
+    <FB Name="yellowCTD" Type="E_CTD" x="5450.0" y="2011.1111" >
+    </FB>
+    <FB Name="Cycle" Type="E_CYCLE" x="2450.0" y="1127.7777" >
+      <Parameter Name="DT" Value="t#100ms" />
+    </FB>
+    <FB Name="GYSwitch" Type="E_SWITCH" x="2994.4443" y="1127.7777" >
+    </FB>
+    <FB Name="split" Type="E_SPLIT" x="249.99998" y="44.444443" >
+    </FB>
+    <FB Name="split2" Type="E_SPLIT" x="1527.7777" y="777.7778" >
+    </FB>
+    <FB Name="YRSwitch" Type="E_SWITCH" x="3433.3333" y="2300.0" >
+    </FB>
+    <FB Name="redSR" Type="E_SR" x="5766.6665" y="3272.2222" >
+    </FB>
+    <FB Name="split3" Type="E_SPLIT" x="3566.6665" y="827.7778" >
+    </FB>
+    <FB Name="greenNOT" Type="FB_NOT" x="6638.8887" y="394.44443" >
+    </FB>
+    <FB Name="yellowNOT" Type="FB_NOT" x="6277.7773" y="2011.1111" >
+    </FB>
+    <FB Name="split4" Type="E_SPLIT" x="5127.7773" y="3155.5554" >
+    </FB>
+    <FB Name="mul10ms" Type="FB_MUL_UINT" x="4583.333" y="627.7778" >
+      <Parameter Name="IN2" Value="10" />
+    </FB>
+    <FB Name="mul10ms2" Type="FB_MUL_UINT" x="4550.0" y="2122.2222" >
+      <Parameter Name="IN2" Value="10" />
+    </FB>
+    <EventConnections>
+      <Connection Source="split.EO2" Destination="split2.EI" dx1="55.555553" />
+      <Connection Source="START" Destination="split.EI" />
+      <Connection Source="Cycle.EO" Destination="GYSwitch.EI" dx1="55.555553" />
+      <Connection Source="split2.EO2" Destination="Cycle.START" dx1="55.555553" />
+      <Connection Source="GYSwitch.EO1" Destination="YRSwitch.EI" dx1="55.555553" />
+      <Connection Source="YRSwitch.EO0" Destination="yellowCTD.CD" dx1="55.555553" />
+      <Connection Source="GYSwitch.EO0" Destination="split3.EI" dx1="55.555553" />
+      <Connection Source="split3.EO1" Destination="redSR.R" dx1="55.555553" />
+      <Connection Source="split3.EO2" Destination="greenCTD.CD" dx1="166.66666" />
+      <Connection Source="redSR.EO" Destination="CNF" />
+      <Connection Source="greenCTD.CDO" Destination="greenNOT.REQ" dx1="55.555553" />
+      <Connection Source="greenNOT.CNF" Destination="CNF" />
+      <Connection Source="yellowCTD.CDO" Destination="yellowNOT.REQ" dx1="55.555553" />
+      <Connection Source="yellowNOT.CNF" Destination="CNF" />
+      <Connection Source="YRSwitch.EO1" Destination="split4.EI" dx1="55.555553" />
+      <Connection Source="split4.EO1" Destination="redSR.S" dx1="55.555553" />
+      <Connection Source="split4.EO2" Destination="Cycle.STOP" dx1="55.555553" dx2="55.555553" dy="83.33333" />
+      <Connection Source="split.EO1" Destination="mul10ms.REQ" dx1="55.555553" />
+      <Connection Source="mul10ms.CNF" Destination="greenCTD.LD" dx1="55.555553" />
+      <Connection Source="split2.EO1" Destination="mul10ms2.REQ" dx1="127.77777" />
+      <Connection Source="mul10ms2.CNF" Destination="yellowCTD.LD" dx1="55.555553" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="greenCTD.Q" Destination="GYSwitch.G" dx1="55.555553" dx2="55.555553" dy="888.88885" />
+      <Connection Source="yellowCTD.Q" Destination="YRSwitch.G" dx1="55.555553" dx2="55.555553" dy="427.77777" />
+      <Connection Source="redSR.Q" Destination="REDOUT" />
+      <Connection Source="greenCTD.Q" Destination="greenNOT.IN" dx1="55.555553" />
+      <Connection Source="greenNOT.OUT" Destination="GREENOUT" />
+      <Connection Source="yellowCTD.Q" Destination="yellowNOT.IN" dx1="55.555553" />
+      <Connection Source="yellowNOT.OUT" Destination="YELLOWOUT" />
+      <Connection Source="GREENT" Destination="mul10ms.IN1" />
+      <Connection Source="mul10ms.OUT" Destination="greenCTD.PV" dx1="55.555553" />
+      <Connection Source="YELLOWT" Destination="mul10ms2.IN1" />
+      <Connection Source="mul10ms2.OUT" Destination="yellowCTD.PV" dx1="55.555553" />
+      <Connection Source="greenCTD.CV" Destination="GREENRT" />
+      <Connection Source="yellowCTD.CV" Destination="YELLOWRT" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>
