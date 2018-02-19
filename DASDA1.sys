@@ -8,191 +8,442 @@
   <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-17" Remarks="Minor cleanup" />
   <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
   <Device Name="HMI_LAYER" Type="FRAME_DEVICE" x="611.1111" y="361.11108" >
-    <Parameter Name="BOUNDS" Value="[0,0,200,400]" />
-    <Resource Name="HMI" Type="PANEL_RESOURCE" x="1222.2222" y="1250.0" >
-      <Parameter Name="ROWS" Value="5" />
+    <Parameter Name="BOUNDS" Value="[0,0,200,600]" />
+    <Resource Name="HMI_up" Type="PANEL_RESOURCE" x="1188.8888" y="1166.6666" >
       <Parameter Name="COLS" Value="1" />
+      <Parameter Name="ROWS" Value="10" />
       <FBNetwork >
-        <FB Name="inevent" Type="IN_EVENT" x="1788.8888" y="499.99997" >
+        <FB Name="start" Type="PUBL_0" x="7466.6665" y="1377.7777" >
+        </FB>
+        <FB Name="greenTime" Type="IN_ANY" x="3155.5554" y="1011.1111" >
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="IVAL" Value="&#34;5&#34;" />
+        </FB>
+        <FB Name="yellowTime" Type="IN_ANY" x="6422.222" y="1011.1111" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="IVAL" Value="&#34;1&#34;" />
+        </FB>
+        <FB Name="times" Type="PUBL_2" x="6922.222" y="1011.1111" >
+        </FB>
+        <FB Name="LABEL1" Type="FB_LABEL" x="2211.111" y="188.88889" >
+          <Parameter Name="LABEL" Value="&#34;Northern lights control&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="LABEL2" Type="FB_LABEL" x="2683.3333" y="377.77777" >
+          <Parameter Name="LABEL" Value="&#34;Green time&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="LABEL3" Type="FB_LABEL" x="5955.555" y="644.4444" >
+          <Parameter Name="LABEL" Value="&#34;Yellow time&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="minGreenTime" Type="IN_ANY" x="4361.111" y="194.44444" >
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="IVAL" Value="&#34;3&#34;" />
+        </FB>
+        <FB Name="LABEL4" Type="FB_LABEL" x="3766.6665" y="211.1111" >
+          <Parameter Name="LABEL" Value="&#34;Minimum green time&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="Walker1" Type="IN_EVENT" x="5305.555" y="394.44443" >
+          <Parameter Name="LABEL" Value="&#34;Walker&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="WalkerTimes" Type="PUBL_1" x="7972.2217" y="2177.7776" >
+        </FB>
+        <FB Name="inevent" Type="IN_EVENT" x="1055.5555" y="1005.55554" >
           <Parameter Name="LABEL" Value="&#34;START&#34;" />
           <Parameter Name="QI" Value="1" />
         </FB>
-        <FB Name="start" Type="PUBL_0" x="4494.4443" y="1327.7777" >
-        </FB>
-        <FB Name="greenTime" Type="IN_ANY" x="2516.6665" y="727.7778" >
-          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
-          <Parameter Name="QI" Value="1" />
-          <Parameter Name="IVAL" Value="&#34;2&#34;" />
-        </FB>
-        <FB Name="yellowTime" Type="IN_ANY" x="3166.6665" y="966.6666" >
-          <Parameter Name="QI" Value="1" />
-          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
-          <Parameter Name="IVAL" Value="&#34;2&#34;" />
-        </FB>
-        <FB Name="times" Type="PUBL_2" x="3811.111" y="1327.7777" >
-        </FB>
         <EventConnections>
-          <Connection Source="START.COLD" Destination="inevent.INIT" dx1="55.555553" />
-          <Connection Source="greenTime.INITO" Destination="yellowTime.INIT" dx1="116.666664" />
-          <Connection Source="inevent.INITO" Destination="greenTime.INIT" dx1="127.77777" />
-          <Connection Source="inevent.IND" Destination="greenTime.REQ" dx1="55.555553" />
-          <Connection Source="yellowTime.INITO" Destination="times.INIT" dx1="155.55554" />
+          <Connection Source="yellowTime.IND" Destination="times.REQ" dx1="55.555553" />
+          <Connection Source="LABEL1.INITO" Destination="LABEL2.INIT" dx1="55.555553" />
+          <Connection Source="LABEL2.INITO" Destination="greenTime.INIT" dx1="55.555553" />
+          <Connection Source="greenTime.INITO" Destination="LABEL4.INIT" dx1="55.555553" />
+          <Connection Source="LABEL4.INITO" Destination="minGreenTime.INIT" dx1="55.555553" />
+          <Connection Source="greenTime.IND" Destination="yellowTime.REQ" dx1="55.555553" />
+          <Connection Source="yellowTime.INITO" Destination="times.INIT" dx1="55.555553" />
           <Connection Source="times.INITO" Destination="start.INIT" dx1="55.555553" />
           <Connection Source="times.CNF" Destination="start.REQ" dx1="55.555553" />
-          <Connection Source="greenTime.IND" Destination="yellowTime.REQ" dx1="55.555553" />
-          <Connection Source="yellowTime.IND" Destination="times.REQ" dx1="55.555553" />
+          <Connection Source="minGreenTime.INITO" Destination="Walker1.INIT" dx1="166.66666" />
+          <Connection Source="Walker1.INITO" Destination="LABEL3.INIT" dx1="150.0" />
+          <Connection Source="LABEL3.INITO" Destination="yellowTime.INIT" dx1="55.555553" />
+          <Connection Source="Walker1.IND" Destination="minGreenTime.REQ" dx1="55.555553" dx2="55.555553" dy="583.3333" />
+          <Connection Source="minGreenTime.IND" Destination="WalkerTimes.REQ" dx1="116.666664" />
+          <Connection Source="start.INITO" Destination="WalkerTimes.INIT" dx1="55.555553" dx2="55.555553" dy="944.4444" />
+          <Connection Source="START.COLD" Destination="inevent.INIT" dx1="55.555553" />
+          <Connection Source="inevent.INITO" Destination="LABEL1.INIT" dx1="55.555553" />
+          <Connection Source="inevent.IND" Destination="greenTime.REQ" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
-          <Connection Source="greenTime.OUT" Destination="times.SD_1" dx1="55.555553" />
           <Connection Source="yellowTime.OUT" Destination="times.SD_2" dx1="55.555553" />
+          <Connection Source="greenTime.OUT" Destination="times.SD_1" dx1="55.555553" />
+          <Connection Source="minGreenTime.OUT" Destination="WalkerTimes.SD_1" dx1="55.555553" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+    <Resource Name="HMI_left" Type="PANEL_RESOURCE" x="1188.8888" y="1822.2222" >
+      <Parameter Name="COLS" Value="1" />
+      <Parameter Name="ROWS" Value="10" />
+      <FBNetwork >
+        <FB Name="start2" Type="PUBL_0" x="7466.6665" y="1377.7777" >
+        </FB>
+        <FB Name="greenTime2" Type="IN_ANY" x="3155.5554" y="1011.1111" >
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="IVAL" Value="&#34;5&#34;" />
+        </FB>
+        <FB Name="yellowTime2" Type="IN_ANY" x="6422.222" y="1011.1111" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="IVAL" Value="&#34;1&#34;" />
+        </FB>
+        <FB Name="times2" Type="PUBL_2" x="6922.222" y="1011.1111" >
+        </FB>
+        <FB Name="LABEL1" Type="FB_LABEL" x="2211.111" y="188.88889" >
+          <Parameter Name="LABEL" Value="&#34;Northern lights control&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="LABEL2" Type="FB_LABEL" x="2683.3333" y="377.77777" >
+          <Parameter Name="LABEL" Value="&#34;Green time&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="LABEL3" Type="FB_LABEL" x="5955.555" y="644.4444" >
+          <Parameter Name="LABEL" Value="&#34;Yellow time&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="minGreenTime2" Type="IN_ANY" x="4361.111" y="194.44444" >
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="IVAL" Value="&#34;3&#34;" />
+        </FB>
+        <FB Name="LABEL4" Type="FB_LABEL" x="3766.6665" y="211.1111" >
+          <Parameter Name="LABEL" Value="&#34;Minimum green time&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="Walker1" Type="IN_EVENT" x="5300.0" y="394.44443" >
+          <Parameter Name="LABEL" Value="&#34;Walker&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="WalkerTimes2" Type="PUBL_1" x="7972.2217" y="2177.7776" >
+        </FB>
+        <FB Name="inevent" Type="IN_EVENT" x="1055.5555" y="1005.55554" >
+          <Parameter Name="LABEL" Value="&#34;START&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <EventConnections>
+          <Connection Source="yellowTime2.IND" Destination="times2.REQ" dx1="55.555553" />
+          <Connection Source="LABEL1.INITO" Destination="LABEL2.INIT" dx1="55.555553" />
+          <Connection Source="LABEL2.INITO" Destination="greenTime2.INIT" dx1="55.555553" />
+          <Connection Source="greenTime2.INITO" Destination="LABEL4.INIT" dx1="55.555553" />
+          <Connection Source="LABEL4.INITO" Destination="minGreenTime2.INIT" dx1="55.555553" />
+          <Connection Source="greenTime2.IND" Destination="yellowTime2.REQ" dx1="55.555553" />
+          <Connection Source="yellowTime2.INITO" Destination="times2.INIT" dx1="55.555553" />
+          <Connection Source="times2.INITO" Destination="start2.INIT" dx1="55.555553" />
+          <Connection Source="times2.CNF" Destination="start2.REQ" dx1="55.555553" />
+          <Connection Source="minGreenTime2.INITO" Destination="Walker1.INIT" dx1="166.66666" />
+          <Connection Source="Walker1.INITO" Destination="LABEL3.INIT" dx1="150.0" />
+          <Connection Source="LABEL3.INITO" Destination="yellowTime2.INIT" dx1="55.555553" />
+          <Connection Source="Walker1.IND" Destination="minGreenTime2.REQ" dx1="55.555553" dx2="55.555553" dy="583.3333" />
+          <Connection Source="minGreenTime2.IND" Destination="WalkerTimes2.REQ" dx1="116.666664" />
+          <Connection Source="start2.INITO" Destination="WalkerTimes2.INIT" dx1="55.555553" dx2="55.555553" dy="944.4444" />
+          <Connection Source="START.COLD" Destination="inevent.INIT" dx1="55.555553" />
+          <Connection Source="inevent.INITO" Destination="LABEL1.INIT" dx1="55.555553" />
+          <Connection Source="inevent.IND" Destination="greenTime2.REQ" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="yellowTime2.OUT" Destination="times2.SD_2" dx1="55.555553" />
+          <Connection Source="greenTime2.OUT" Destination="times2.SD_1" dx1="55.555553" />
+          <Connection Source="minGreenTime2.OUT" Destination="WalkerTimes2.SD_1" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
   </Device>
   <Device Name="MODEL_LAYER" Type="FRAME_DEVICE" x="605.55554" y="1566.6666" >
-    <Resource Name="LIGHTS" Type="PANEL_RESOURCE" x="905.55554" y="1194.4445" >
+    <Resource Name="LIGHTS_U" Type="PANEL_RESOURCE" x="905.55554" y="1200.0" >
       <FBNetwork >
-        <FB Name="LightsControl" Type="PUBL_3" x="6227.7773" y="272.2222" >
+        <FB Name="LightsControl" Type="PUBL_3" x="4872.222" y="277.77777" >
         </FB>
-        <FB Name="start" Type="SUBL_0" x="1266.6666" y="372.2222" >
+        <FB Name="start" Type="SUBL_0" x="1561.1111" y="194.44444" >
         </FB>
-        <FB Name="times" Type="SUBL_2" x="688.88885" y="205.55554" >
+        <FB Name="times" Type="SUBL_2" x="461.11108" y="194.44444" >
         </FB>
-        <FB Name="LIGHTSCYCLE" Type="LIGHTS_CYCLE" x="2322.2222" y="1050.0" >
+        <FB Name="LightsRT" Type="PUBL_2" x="6150.0" y="633.3333" >
         </FB>
-        <FB Name="LightsRT" Type="PUBL_2" x="6733.333" y="1527.7777" >
+        <FB Name="WalkerTimes" Type="SUBL_1" x="1033.3333" y="194.44444" >
+        </FB>
+        <FB Name="LC1" Type="LIGHTS_CYCLE" x="2744.4443" y="1094.4445" >
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="times.INIT" dx1="55.555553" />
-          <Connection Source="times.INITO" Destination="start.INIT" dx1="55.555553" />
-          <Connection Source="start.INITO" Destination="LightsControl.INIT" dx1="55.555553" />
-          <Connection Source="start.IND" Destination="LIGHTSCYCLE.START" dx1="55.555553" />
-          <Connection Source="LIGHTSCYCLE.CNF" Destination="LightsControl.REQ" dx1="55.555553" />
-          <Connection Source="LightsControl.INITO" Destination="LightsRT.INIT" dx1="55.555553" dx2="55.555553" dy="1227.7777" />
           <Connection Source="LightsControl.CNF" Destination="LightsRT.REQ" dx1="55.555553" />
+          <Connection Source="start.INITO" Destination="LightsControl.INIT" dx1="55.555553" />
+          <Connection Source="LightsControl.INITO" Destination="LightsRT.INIT" dx1="55.555553" />
+          <Connection Source="times.INITO" Destination="WalkerTimes.INIT" dx1="55.555553" />
+          <Connection Source="WalkerTimes.INITO" Destination="start.INIT" dx1="55.555553" />
+          <Connection Source="start.IND" Destination="LC1.START" dx1="55.555553" />
+          <Connection Source="WalkerTimes.IND" Destination="LC1.WALKER" dx1="105.55555" />
+          <Connection Source="LC1.CNF" Destination="LightsControl.REQ" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
-          <Connection Source="LIGHTSCYCLE.GREENOUT" Destination="LightsControl.SD_1" dx1="55.555553" />
-          <Connection Source="LIGHTSCYCLE.YELLOWOUT" Destination="LightsControl.SD_2" dx1="55.555553" />
-          <Connection Source="LIGHTSCYCLE.REDOUT" Destination="LightsControl.SD_3" dx1="55.555553" />
-          <Connection Source="LIGHTSCYCLE.GREENRT" Destination="LightsRT.SD_1" dx1="55.555553" />
-          <Connection Source="LIGHTSCYCLE.YELLOWRT" Destination="LightsRT.SD_2" dx1="55.555553" />
-          <Connection Source="times.RD_1" Destination="LIGHTSCYCLE.GREENT" dx1="55.555553" />
-          <Connection Source="times.RD_2" Destination="LIGHTSCYCLE.YELLOWT" dx1="55.555553" />
+          <Connection Source="WalkerTimes.RD_1" Destination="LC1.WALKERT" dx1="55.555553" />
+          <Connection Source="times.RD_1" Destination="LC1.GREENT" dx1="94.44444" />
+          <Connection Source="times.RD_2" Destination="LC1.YELLOWT" dx1="55.555553" />
+          <Connection Source="LC1.GREENOUT" Destination="LightsControl.SD_1" dx1="55.555553" />
+          <Connection Source="LC1.YELLOWOUT" Destination="LightsControl.SD_2" dx1="55.555553" />
+          <Connection Source="LC1.REDOUT" Destination="LightsControl.SD_3" dx1="55.555553" />
+          <Connection Source="LC1.GREENRT" Destination="LightsRT.SD_1" dx1="55.555553" />
+          <Connection Source="LC1.YELLOWRT" Destination="LightsRT.SD_2" dx1="55.555553" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+    <Resource Name="LIGHTS_L" Type="PANEL_RESOURCE" x="922.22217" y="1799.9999" >
+      <FBNetwork >
+        <FB Name="LightsControl2" Type="PUBL_3" x="4872.222" y="277.77777" >
+        </FB>
+        <FB Name="start2" Type="SUBL_0" x="1561.1111" y="194.44444" >
+        </FB>
+        <FB Name="times2" Type="SUBL_2" x="455.55554" y="194.44444" >
+        </FB>
+        <FB Name="LightsRT2" Type="PUBL_2" x="6150.0" y="633.3333" >
+        </FB>
+        <FB Name="WalkerTimes2" Type="SUBL_1" x="1033.3333" y="188.88889" >
+        </FB>
+        <FB Name="LC2" Type="LIGHTS_CYCLE" x="2744.4443" y="1094.4445" >
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="times2.INIT" dx1="55.555553" />
+          <Connection Source="LightsControl2.CNF" Destination="LightsRT2.REQ" dx1="55.555553" />
+          <Connection Source="start2.INITO" Destination="LightsControl2.INIT" dx1="55.555553" />
+          <Connection Source="LightsControl2.INITO" Destination="LightsRT2.INIT" dx1="55.555553" />
+          <Connection Source="times2.INITO" Destination="WalkerTimes2.INIT" dx1="55.555553" />
+          <Connection Source="WalkerTimes2.INITO" Destination="start2.INIT" dx1="55.555553" />
+          <Connection Source="start2.IND" Destination="LC2.START" dx1="55.555553" />
+          <Connection Source="WalkerTimes2.IND" Destination="LC2.WALKER" dx1="105.55555" />
+          <Connection Source="LC2.CNF" Destination="LightsControl2.REQ" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="WalkerTimes2.RD_1" Destination="LC2.WALKERT" dx1="55.555553" />
+          <Connection Source="times2.RD_1" Destination="LC2.GREENT" dx1="94.44444" />
+          <Connection Source="times2.RD_2" Destination="LC2.YELLOWT" dx1="55.555553" />
+          <Connection Source="LC2.GREENOUT" Destination="LightsControl2.SD_1" dx1="55.555553" />
+          <Connection Source="LC2.YELLOWOUT" Destination="LightsControl2.SD_2" dx1="55.555553" />
+          <Connection Source="LC2.REDOUT" Destination="LightsControl2.SD_3" dx1="55.555553" />
+          <Connection Source="LC2.GREENRT" Destination="LightsRT2.SD_1" dx1="55.555553" />
+          <Connection Source="LC2.YELLOWRT" Destination="LightsRT2.SD_2" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
   </Device>
   <Device Name="VIEW_LAYER" Type="FRAME_DEVICE" x="611.1111" y="944.4444" >
-    <Parameter Name="BOUNDS" Value="[200,0,600,400]" />
+    <Parameter Name="BOUNDS" Value="[200,0,630,400]" />
     <Parameter Name="GRID" Value="[1,1]" />
     <Resource Name="view_res" Type="PANEL_RESOURCE" x="677.7778" y="983.3333" >
       <FBNetwork >
-        <FB Name="LightsControl" Type="SUBL_3" x="183.33333" y="2238.889" >
+        <FB Name="LightsControl" Type="SUBL_3" x="5205.555" y="55.555553" >
         </FB>
-        <FB Name="GREENVIEW" Type="OUT_BOOL" x="661.1111" y="2238.889" >
+        <FB Name="GREENVIEW" Type="OUT_BOOL" x="5633.333" y="238.88889" >
           <Parameter Name="C0" Value="[255,255,255]" />
           <Parameter Name="C1" Value="[0,255,0]" />
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34; &#34;" />
         </FB>
-        <FB Name="YELLOWVIEW" Type="OUT_BOOL" x="1172.2222" y="2755.5554" >
+        <FB Name="YELLOWVIEW" Type="OUT_BOOL" x="6088.8887" y="505.55554" >
           <Parameter Name="C0" Value="[255,255,255]" />
           <Parameter Name="C1" Value="[255,255,0]" />
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34; &#34;" />
         </FB>
-        <FB Name="REDVIEW" Type="OUT_BOOL" x="1655.5555" y="3127.7776" >
+        <FB Name="REDVIEW" Type="OUT_BOOL" x="6544.4443" y="777.7778" >
           <Parameter Name="C0" Value="[255,255,255]" />
           <Parameter Name="C1" Value="[255,0,0]" />
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34; &#34;" />
         </FB>
-        <FB Name="space11" Type="XSPACE" x="877.7778" y="294.44443" >
+        <FB Name="space11" Type="XSPACE" x="477.77777" y="283.3333" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[220,75]" />
         </FB>
-        <FB Name="space12" Type="XSPACE" x="1305.5555" y="694.4444" >
+        <FB Name="space12" Type="XSPACE" x="883.3333" y="777.7778" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[10,75]" />
           <Parameter Name="COLORS" Value="[black,black]" />
         </FB>
-        <FB Name="space13" Type="XSPACE" x="2055.5554" y="644.4444" >
+        <FB Name="space13" Type="XSPACE" x="1261.1111" y="1161.1111" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[40,75]" />
         </FB>
-        <FB Name="space16" Type="XSPACE" x="5372.222" y="755.55554" >
+        <FB Name="space16" Type="XSPACE" x="3255.5554" y="1177.7777" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[10,75]" />
           <Parameter Name="COLORS" Value="[black,black]" />
         </FB>
-        <FB Name="space17" Type="XSPACE" x="5911.111" y="1033.3333" >
+        <FB Name="space17" Type="XSPACE" x="3677.7776" y="0.0" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[220,75]" />
         </FB>
-        <FB Name="space21" Type="XSPACE" x="6394.4443" y="244.44443" >
+        <FB Name="space21" Type="XSPACE" x="4044.4443" y="244.44443" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[220,25]" />
         </FB>
-        <FB Name="space22" Type="XSPACE" x="6833.333" y="1094.4445" >
+        <FB Name="space22" Type="XSPACE" x="4400.0" y="627.7778" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[10,25]" />
           <Parameter Name="COLORS" Value="[black,black]" />
         </FB>
-        <FB Name="space23" Type="XSPACE" x="7427.7773" y="1205.5555" >
+        <FB Name="space23" Type="XSPACE" x="4761.111" y="888.88885" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[40,25]" />
         </FB>
-        <FB Name="space24" Type="XSPACE" x="2138.889" y="2411.111" >
+        <FB Name="space24" Type="XSPACE" x="7005.555" y="11.111111" >
           <Parameter Name="DIMS" Value="[38,25]" />
           <Parameter Name="DIA" Value="1" />
         </FB>
-        <FB Name="space25" Type="XSPACE" x="2533.3333" y="3277.7776" >
+        <FB Name="space25" Type="XSPACE" x="7433.333" y="377.77777" >
           <Parameter Name="DIMS" Value="[10,25]" />
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="COLORS" Value="[black,black]" />
         </FB>
-        <FB Name="LightsRT" Type="SUBL_2" x="3216.6665" y="161.1111" >
+        <FB Name="LightsRT" Type="SUBL_2" x="2088.889" y="5.5555553" >
         </FB>
-        <FB Name="space14" Type="XSPACE" x="2766.6665" y="794.4444" >
+        <FB Name="space14" Type="XSPACE" x="1705.5555" y="5.5555553" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[30,75]" />
           <Parameter Name="LBLS" Value="&#34;RT:, , , , &#34;" />
         </FB>
-        <FB Name="RT" Type="OUT_ANY" x="3911.1108" y="455.55554" >
+        <FB Name="RT" Type="OUT_ANY" x="2511.111" y="255.55554" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
           <Parameter Name="W" Value="3" />
         </FB>
-        <FB Name="space15" Type="XSPACE" x="4688.8887" y="716.6666" >
+        <FB Name="space15" Type="XSPACE" x="2877.7776" y="822.22217" >
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="DIMS" Value="[40,75]" />
         </FB>
-        <FB Name="space26" Type="XSPACE" x="2961.111" y="2388.889" >
+        <FB Name="space26" Type="XSPACE" x="272.2222" y="2105.5554" >
           <Parameter Name="DIMS" Value="[200,25]" />
           <Parameter Name="DIA" Value="1" />
         </FB>
-        <FB Name="space31" Type="XSPACE" x="3399.9998" y="3233.3333" >
+        <FB Name="space31" Type="XSPACE" x="616.6666" y="2444.4443" >
           <Parameter Name="DIMS" Value="[230,10]" />
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="COLORS" Value="[black,black]" />
         </FB>
-        <FB Name="space32" Type="XSPACE" x="3888.8887" y="2438.889" >
+        <FB Name="space32" Type="XSPACE" x="961.1111" y="2744.4443" >
           <Parameter Name="DIMS" Value="[147,10]" />
           <Parameter Name="DIA" Value="1" />
         </FB>
-        <FB Name="space33" Type="XSPACE" x="4988.8887" y="2644.4443" >
+        <FB Name="space33" Type="XSPACE" x="1311.1111" y="3094.4443" >
           <Parameter Name="DIMS" Value="[220,10]" />
           <Parameter Name="DIA" Value="1" />
           <Parameter Name="COLORS" Value="[black,black]" />
         </FB>
+        <FB Name="space41" Type="XSPACE" x="1772.2222" y="2244.4443" >
+          <Parameter Name="DIMS" Value="[595,40]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space42" Type="XSPACE" x="2311.111" y="2227.7776" >
+          <Parameter Name="DIMS" Value="[180,20]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="LightsControl2" Type="SUBL_3" x="2727.7776" y="2266.6665" >
+        </FB>
+        <FB Name="GREENVIEW2" Type="OUT_BOOL" x="3483.3333" y="2144.4443" >
+          <Parameter Name="C0" Value="[255,255,255]" />
+          <Parameter Name="C1" Value="[0,255,0]" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34; &#34;" />
+        </FB>
+        <FB Name="space43" Type="XSPACE" x="4049.9998" y="2155.5554" >
+          <Parameter Name="DIMS" Value="[400,20]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space51" Type="XSPACE" x="4455.555" y="2155.5554" >
+          <Parameter Name="DIMS" Value="[100,20]" />
+          <Parameter Name="DIA" Value="1" />
+          <Parameter Name="LBLS" Value="&#34; , ,RT: , , &#34;" />
+        </FB>
+        <FB Name="LightsRT2" Type="SUBL_2" x="4844.4443" y="2172.2222" >
+        </FB>
+        <FB Name="RT2" Type="OUT_ANY" x="5266.6665" y="2172.2222" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="W" Value="3" />
+        </FB>
+        <FB Name="space52" Type="XSPACE" x="5761.111" y="2155.5554" >
+          <Parameter Name="DIMS" Value="[43,20]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="YELLOWVIEW2" Type="OUT_BOOL" x="6183.333" y="2166.6665" >
+          <Parameter Name="C0" Value="[255,255,255]" />
+          <Parameter Name="C1" Value="[255,255,0]" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34; &#34;" />
+        </FB>
+        <FB Name="space53" Type="XSPACE" x="6694.4443" y="2122.2222" >
+          <Parameter Name="DIMS" Value="[400,20]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space61" Type="XSPACE" x="7105.555" y="2111.111" >
+          <Parameter Name="DIMS" Value="[180,20]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="REDVIEW2" Type="OUT_BOOL" x="427.77777" y="3672.2222" >
+          <Parameter Name="C0" Value="[255,255,255]" />
+          <Parameter Name="C1" Value="[255,0,0]" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34; &#34;" />
+        </FB>
+        <FB Name="space62" Type="XSPACE" x="1716.6666" y="3888.8887" >
+          <Parameter Name="DIMS" Value="[400,20]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space71" Type="XSPACE" x="2166.6665" y="3127.7776" >
+          <Parameter Name="DIMS" Value="[595,40]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space81" Type="XSPACE" x="2577.7776" y="3855.5554" >
+          <Parameter Name="DIMS" Value="[230,10]" />
+          <Parameter Name="DIA" Value="1" />
+          <Parameter Name="COLORS" Value="[black,black]" />
+        </FB>
+        <FB Name="space82" Type="XSPACE" x="3227.7776" y="3866.6665" >
+          <Parameter Name="DIMS" Value="[147,10]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space83" Type="XSPACE" x="3833.3333" y="3161.111" >
+          <Parameter Name="DIMS" Value="[220,10]" />
+          <Parameter Name="DIA" Value="1" />
+          <Parameter Name="COLORS" Value="[black,black]" />
+        </FB>
+        <FB Name="space91" Type="XSPACE" x="4355.555" y="3677.7776" >
+          <Parameter Name="DIMS" Value="[220,75]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space92" Type="XSPACE" x="5022.222" y="3677.7776" >
+          <Parameter Name="DIMS" Value="[10,75]" />
+          <Parameter Name="DIA" Value="1" />
+          <Parameter Name="COLORS" Value="[black,black]" />
+        </FB>
+        <FB Name="space93" Type="XSPACE" x="5750.0" y="3677.7776" >
+          <Parameter Name="DIMS" Value="[147,75]" />
+          <Parameter Name="DIA" Value="1" />
+        </FB>
+        <FB Name="space94" Type="XSPACE" x="7122.222" y="3677.7776" >
+          <Parameter Name="DIMS" Value="[10,75]" />
+          <Parameter Name="DIA" Value="1" />
+          <Parameter Name="COLORS" Value="[black,black]" />
+        </FB>
         <EventConnections>
-          <Connection Source="LightsControl.INITO" Destination="GREENVIEW.INIT" dx1="55.555553" />
+          <Connection Source="LightsControl.INITO" Destination="GREENVIEW.INIT" dx1="55.555553" dx2="55.555553" dy="2238.889" />
           <Connection Source="GREENVIEW.INITO" Destination="YELLOWVIEW.INIT" dx1="55.555553" dx2="55.555553" dy="1600.0" />
-          <Connection Source="YELLOWVIEW.INITO" Destination="REDVIEW.INIT" dx1="55.555553" />
-          <Connection Source="LightsControl.IND" Destination="GREENVIEW.REQ" dx1="55.555553" />
-          <Connection Source="GREENVIEW.CNF" Destination="YELLOWVIEW.REQ" dx1="55.555553" />
-          <Connection Source="YELLOWVIEW.CNF" Destination="REDVIEW.REQ" dx1="55.555553" />
+          <Connection Source="YELLOWVIEW.INITO" Destination="REDVIEW.INIT" dx1="55.555553" dx2="55.555553" dy="2705.5554" />
+          <Connection Source="LightsControl.IND" Destination="GREENVIEW.REQ" dx1="55.555553" dx2="55.555553" dy="2238.889" />
+          <Connection Source="GREENVIEW.CNF" Destination="YELLOWVIEW.REQ" dx1="55.555553" dx2="55.555553" dy="2600.0" />
+          <Connection Source="YELLOWVIEW.CNF" Destination="REDVIEW.REQ" dx1="55.555553" dx2="55.555553" dy="2705.5554" />
           <Connection Source="START.COLD" Destination="space11.INIT" dx1="55.555553" />
           <Connection Source="space11.INITO" Destination="space12.INIT" dx1="55.555553" />
           <Connection Source="space12.INITO" Destination="space13.INIT" dx1="55.555553" />
@@ -201,24 +452,54 @@
           <Connection Source="space21.INITO" Destination="space22.INIT" dx1="55.555553" />
           <Connection Source="space22.INITO" Destination="space23.INIT" dx1="55.555553" />
           <Connection Source="space23.INITO" Destination="LightsControl.INIT" dx1="55.555553" dx2="55.555553" dy="783.3333" />
-          <Connection Source="REDVIEW.INITO" Destination="space24.INIT" dx1="55.555553" />
-          <Connection Source="space24.INITO" Destination="space25.INIT" dx1="55.555553" />
+          <Connection Source="REDVIEW.INITO" Destination="space24.INIT" dx1="55.555553" dx2="55.555553" dy="1716.6666" />
+          <Connection Source="space24.INITO" Destination="space25.INIT" dx1="55.555553" dx2="55.555553" dy="3349.9998" />
           <Connection Source="space13.INITO" Destination="space14.INIT" dx1="55.555553" />
           <Connection Source="space14.INITO" Destination="LightsRT.INIT" dx1="55.555553" />
           <Connection Source="LightsRT.INITO" Destination="RT.INIT" dx1="55.555553" />
           <Connection Source="LightsRT.IND" Destination="RT.REQ" dx1="55.555553" />
           <Connection Source="RT.INITO" Destination="space15.INIT" dx1="55.555553" />
           <Connection Source="space15.INITO" Destination="space16.INIT" dx1="55.555553" />
-          <Connection Source="space25.INITO" Destination="space26.INIT" dx1="55.555553" />
+          <Connection Source="space25.INITO" Destination="space26.INIT" dx1="55.555553" dx2="55.555553" dy="1555.5555" />
           <Connection Source="space26.INITO" Destination="space31.INIT" dx1="55.555553" />
           <Connection Source="space31.INITO" Destination="space32.INIT" dx1="55.555553" />
-          <Connection Source="space32.INITO" Destination="space33.INIT" dx1="55.555553" />
+          <Connection Source="space32.INITO" Destination="space33.INIT" dx1="55.555553" dx2="55.555553" dy="1100.0" />
+          <Connection Source="space33.INITO" Destination="space41.INIT" dx1="55.555553" />
+          <Connection Source="space41.INITO" Destination="space42.INIT" dx1="55.555553" />
+          <Connection Source="space42.INITO" Destination="LightsControl2.INIT" dx1="55.555553" />
+          <Connection Source="LightsControl2.INITO" Destination="GREENVIEW2.INIT" dx1="55.555553" />
+          <Connection Source="LightsControl2.IND" Destination="GREENVIEW2.REQ" dx1="55.555553" />
+          <Connection Source="GREENVIEW2.INITO" Destination="space43.INIT" dx1="55.555553" />
+          <Connection Source="space43.INITO" Destination="space51.INIT" dx1="55.555553" />
+          <Connection Source="space51.INITO" Destination="LightsRT2.INIT" dx1="55.555553" />
+          <Connection Source="LightsRT2.INITO" Destination="RT2.INIT" dx1="55.555553" />
+          <Connection Source="LightsRT2.IND" Destination="RT2.REQ" dx1="55.555553" />
+          <Connection Source="RT2.INITO" Destination="space52.INIT" dx1="55.555553" />
+          <Connection Source="space52.INITO" Destination="YELLOWVIEW2.INIT" dx1="55.555553" />
+          <Connection Source="YELLOWVIEW2.INITO" Destination="space53.INIT" dx1="55.555553" />
+          <Connection Source="space53.INITO" Destination="space61.INIT" dx1="55.555553" />
+          <Connection Source="space61.INITO" Destination="REDVIEW2.INIT" dx1="55.555553" dx2="55.555553" dy="811.1111" />
+          <Connection Source="REDVIEW2.INITO" Destination="space62.INIT" dx1="55.555553" />
+          <Connection Source="space62.INITO" Destination="space71.INIT" dx1="55.555553" />
+          <Connection Source="space71.INITO" Destination="space81.INIT" dx1="55.555553" />
+          <Connection Source="space81.INITO" Destination="space82.INIT" dx1="55.555553" />
+          <Connection Source="space82.INITO" Destination="space83.INIT" dx1="55.555553" />
+          <Connection Source="space83.INITO" Destination="space91.INIT" dx1="55.555553" />
+          <Connection Source="space91.INITO" Destination="space92.INIT" dx1="55.555553" />
+          <Connection Source="space92.INITO" Destination="space93.INIT" dx1="55.555553" />
+          <Connection Source="space93.INITO" Destination="space94.INIT" dx1="55.555553" />
+          <Connection Source="GREENVIEW2.CNF" Destination="YELLOWVIEW2.REQ" dx1="55.555553" />
+          <Connection Source="YELLOWVIEW2.CNF" Destination="REDVIEW2.REQ" dx1="55.555553" dx2="55.555553" dy="1588.8888" />
         </EventConnections>
         <DataConnections>
-          <Connection Source="LightsControl.RD_1" Destination="GREENVIEW.IN" dx1="55.555553" />
-          <Connection Source="LightsControl.RD_2" Destination="YELLOWVIEW.IN" dx1="55.555553" />
-          <Connection Source="LightsControl.RD_3" Destination="REDVIEW.IN" dx1="55.555553" />
+          <Connection Source="LightsControl.RD_1" Destination="GREENVIEW.IN" dx1="55.555553" dx2="55.555553" dy="2461.111" />
+          <Connection Source="LightsControl.RD_2" Destination="YELLOWVIEW.IN" dx1="55.555553" dx2="55.555553" dy="2866.6665" />
+          <Connection Source="LightsControl.RD_3" Destination="REDVIEW.IN" dx1="55.555553" dx2="55.555553" dy="3127.7776" />
           <Connection Source="LightsRT.RD_1" Destination="RT.IN" dx1="55.555553" />
+          <Connection Source="LightsControl2.RD_1" Destination="GREENVIEW2.IN" dx1="55.555553" />
+          <Connection Source="LightsControl2.RD_2" Destination="YELLOWVIEW2.IN" dx1="55.555553" />
+          <Connection Source="LightsControl2.RD_3" Destination="REDVIEW2.IN" dx1="55.555553" dx2="55.555553" dy="1722.2222" />
+          <Connection Source="LightsRT2.RD_1" Destination="RT2.IN" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>

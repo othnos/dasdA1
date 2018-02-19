@@ -13,6 +13,10 @@
         <With Var="GREENT" />
         <With Var="YELLOWT" />
       </Event>
+      <Event Name="WALKER" >
+        <With Var="WALKERT" />
+        <With Var="YELLOWT" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="CNF" >
@@ -26,6 +30,7 @@
     <InputVars>
       <VarDeclaration Name="GREENT" Type="UINT" />
       <VarDeclaration Name="YELLOWT" Type="UINT" />
+      <VarDeclaration Name="WALKERT" Type="UINT" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="GREENOUT" Type="BOOL" />
@@ -45,31 +50,36 @@
     </FB>
     <FB Name="GYSwitch" Type="E_SWITCH" x="2994.4443" y="1127.7777" >
     </FB>
-    <FB Name="split" Type="E_SPLIT" x="249.99998" y="44.444443" >
+    <FB Name="split" Type="E_SPLIT" x="2294.4443" y="183.33333" >
     </FB>
-    <FB Name="split2" Type="E_SPLIT" x="1527.7777" y="777.7778" >
+    <FB Name="split2" Type="E_SPLIT" x="1755.5555" y="1494.4443" >
     </FB>
     <FB Name="YRSwitch" Type="E_SWITCH" x="3433.3333" y="2300.0" >
     </FB>
-    <FB Name="redSR" Type="E_SR" x="5766.6665" y="3272.2222" >
+    <FB Name="redSR" Type="E_SR" x="5905.555" y="2977.7776" >
     </FB>
-    <FB Name="split3" Type="E_SPLIT" x="3566.6665" y="827.7778" >
+    <FB Name="split3" Type="E_SPLIT" x="3555.5554" y="1127.7777" >
     </FB>
     <FB Name="greenNOT" Type="FB_NOT" x="6638.8887" y="394.44443" >
     </FB>
     <FB Name="yellowNOT" Type="FB_NOT" x="6277.7773" y="2011.1111" >
     </FB>
-    <FB Name="split4" Type="E_SPLIT" x="5127.7773" y="3155.5554" >
+    <FB Name="split4" Type="E_SPLIT" x="4016.6665" y="3577.7776" >
     </FB>
-    <FB Name="mul10ms" Type="FB_MUL_UINT" x="4583.333" y="627.7778" >
+    <FB Name="mul10ms" Type="FB_MUL_UINT" x="5261.111" y="605.55554" >
       <Parameter Name="IN2" Value="10" />
     </FB>
     <FB Name="mul10ms2" Type="FB_MUL_UINT" x="4550.0" y="2122.2222" >
       <Parameter Name="IN2" Value="10" />
     </FB>
+    <FB Name="CmpGT" Type="FB_GT_UINT" x="338.8889" y="66.666664" >
+    </FB>
+    <FB Name="allow" Type="E_PERMIT" x="861.1111" y="66.666664" >
+    </FB>
+    <FB Name="select" Type="E_SEL_UINT" x="1488.8888" y="0.0" >
+    </FB>
     <EventConnections>
-      <Connection Source="split.EO2" Destination="split2.EI" dx1="55.555553" />
-      <Connection Source="START" Destination="split.EI" />
+      <Connection Source="split.EO2" Destination="split2.EI" dx1="55.555553" dx2="55.555553" dy="566.6666" />
       <Connection Source="Cycle.EO" Destination="GYSwitch.EI" dx1="55.555553" />
       <Connection Source="split2.EO2" Destination="Cycle.START" dx1="55.555553" />
       <Connection Source="GYSwitch.EO1" Destination="YRSwitch.EI" dx1="55.555553" />
@@ -77,18 +87,23 @@
       <Connection Source="GYSwitch.EO0" Destination="split3.EI" dx1="55.555553" />
       <Connection Source="split3.EO1" Destination="redSR.R" dx1="55.555553" />
       <Connection Source="split3.EO2" Destination="greenCTD.CD" dx1="166.66666" />
-      <Connection Source="redSR.EO" Destination="CNF" />
       <Connection Source="greenCTD.CDO" Destination="greenNOT.REQ" dx1="55.555553" />
-      <Connection Source="greenNOT.CNF" Destination="CNF" />
       <Connection Source="yellowCTD.CDO" Destination="yellowNOT.REQ" dx1="55.555553" />
-      <Connection Source="yellowNOT.CNF" Destination="CNF" />
-      <Connection Source="YRSwitch.EO1" Destination="split4.EI" dx1="55.555553" />
+      <Connection Source="YRSwitch.EO1" Destination="split4.EI" dx1="55.555553" dx2="55.555553" dy="944.4444" />
       <Connection Source="split4.EO1" Destination="redSR.S" dx1="55.555553" />
-      <Connection Source="split4.EO2" Destination="Cycle.STOP" dx1="55.555553" dx2="55.555553" dy="83.33333" />
-      <Connection Source="split.EO1" Destination="mul10ms.REQ" dx1="55.555553" />
+      <Connection Source="split4.EO2" Destination="Cycle.STOP" dx1="55.555553" dx2="55.555553" dy="338.8889" />
       <Connection Source="mul10ms.CNF" Destination="greenCTD.LD" dx1="55.555553" />
       <Connection Source="split2.EO1" Destination="mul10ms2.REQ" dx1="127.77777" />
       <Connection Source="mul10ms2.CNF" Destination="yellowCTD.LD" dx1="55.555553" />
+      <Connection Source="greenNOT.CNF" Destination="CNF" />
+      <Connection Source="yellowNOT.CNF" Destination="CNF" />
+      <Connection Source="redSR.EO" Destination="CNF" />
+      <Connection Source="WALKER" Destination="CmpGT.REQ" />
+      <Connection Source="CmpGT.CNF" Destination="allow.EI" dx1="55.555553" dx2="55.555553" dy="1933.3333" />
+      <Connection Source="allow.EO" Destination="select.EI1" dx1="55.555553" />
+      <Connection Source="START" Destination="select.EI0" />
+      <Connection Source="select.EO" Destination="split.EI" dx1="55.555553" />
+      <Connection Source="split.EO1" Destination="mul10ms.REQ" dx1="111.11111" />
     </EventConnections>
     <DataConnections>
       <Connection Source="greenCTD.Q" Destination="GYSwitch.G" dx1="55.555553" dx2="55.555553" dy="888.88885" />
@@ -98,12 +113,17 @@
       <Connection Source="greenNOT.OUT" Destination="GREENOUT" />
       <Connection Source="yellowCTD.Q" Destination="yellowNOT.IN" dx1="55.555553" />
       <Connection Source="yellowNOT.OUT" Destination="YELLOWOUT" />
-      <Connection Source="GREENT" Destination="mul10ms.IN1" />
       <Connection Source="mul10ms.OUT" Destination="greenCTD.PV" dx1="55.555553" />
       <Connection Source="YELLOWT" Destination="mul10ms2.IN1" />
       <Connection Source="mul10ms2.OUT" Destination="yellowCTD.PV" dx1="55.555553" />
       <Connection Source="greenCTD.CV" Destination="GREENRT" />
       <Connection Source="yellowCTD.CV" Destination="YELLOWRT" />
+      <Connection Source="GREENT" Destination="CmpGT.IN1" />
+      <Connection Source="WALKERT" Destination="CmpGT.IN2" />
+      <Connection Source="CmpGT.OUT" Destination="allow.PERMIT" dx1="55.555553" dx2="55.555553" dy="1933.3333" />
+      <Connection Source="WALKERT" Destination="select.IN1" />
+      <Connection Source="GREENT" Destination="select.IN0" />
+      <Connection Source="select.OUT" Destination="mul10ms.IN1" dx1="55.555553" />
     </DataConnections>
   </FBNetwork>
 </FBType>
