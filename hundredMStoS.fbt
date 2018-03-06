@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="hundredMStoS" Comment="A simple FB with a single algorithm and REQ/CNF pair" >
+  <Identification Standard="61499-1" />
+  <VersionInfo Organization="Holobloc Inc" Version="0.0" Author="JHC" Date="2006-09-03" />
+<CompilerInfo header="package fb.rt.student;" classdef="SimpleFB" >
+  <Compiler Language="Java" Vendor="Sun" Product="JDK" Version="1.5.0" />
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="GTIME" />
+        <With Var="YTIME" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="RT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="GTIME" Type="UINT" />
+      <VarDeclaration Name="YTIME" Type="UINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="RT" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+  <Algorithm Name="REQ" Comment="Normally executed algorithm" >
+<ST><![CDATA[IF GTIME>=10 THEN
+RT := ((GTIME - 1 - ((GTIME - 1) MOD 10))/10) + 1;
+ELSIF (GTIME<10 AND GTIME>0) THEN
+RT := 1;
+ELSIF (GTIME=0 AND YTIME>=10) THEN
+RT := ((YTIME - 1 - ((YTIME - 1) MOD 10))/10) + 1;
+ELSIF (GTIME=0 AND YTIME<10 AND YTIME>0) THEN
+RT := 1;
+ELSE
+RT := 0;
+END_IF;]]></ST>
+  </Algorithm>
+  </BasicFB>
+</FBType>
