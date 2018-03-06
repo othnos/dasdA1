@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE System SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<System Name="DASDAass2" Comment="System Configuration" >
+  <Identification Standard="61499-1" />
+  <VersionInfo Organization="Holobloc Inc." Version="0.4" Author="JHC" Date="2009-03-05" Remarks="Deleted Application." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.3" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWSYSTEM." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2002-11-05" Remarks="Fixed missing (empty) FBD in Application." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-17" Remarks="Minor cleanup" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+  <Device Name="VIEW_LAYER" Type="FRAME_DEVICE" x="600.0" y="666.6666" >
+    <Parameter Name="BOUNDS" Value="[200,0,250,200]" />
+    <Resource Name="VIEW_RES" Type="VIEW_PANEL" x="516.6666" y="427.77777" >
+      <Parameter Name="DIA" Value="25" />
+      <Parameter Name="SIZE" Value="[10,8]" />
+      <Parameter Name="VERTICAL" Value="0" />
+      <FBNetwork >
+        <FB Name="PUSHER3" Type="SOL_VIEWL" x="483.3333" y="11.111111" >
+          <Parameter Name="LEN" Value="1" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space11" Type="XSPACE" x="877.7778" y="499.99997" >
+          <Parameter Name="DIMS" Value="[1,1]" />
+        </FB>
+        <FB Name="PUSHER2" Type="SOL_VIEWL" x="1222.2222" y="827.7778" >
+          <Parameter Name="LEN" Value="1" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space12" Type="XSPACE" x="1616.6666" y="1327.7777" >
+          <Parameter Name="DIMS" Value="[1,1]" />
+        </FB>
+        <FB Name="PUSHER1" Type="SOL_VIEWL" x="2055.5554" y="0.0" >
+          <Parameter Name="LEN" Value="1" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space13" Type="XSPACE" x="2444.4443" y="488.88885" >
+          <Parameter Name="DIMS" Value="[5,1]" />
+        </FB>
+        <FB Name="PostTTConv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="3155.5554" y="672.22217" >
+          <Parameter Name="LEN" Value="9" />
+          <Parameter Name="DIR" Value="VDIR#LEFT" />
+        </FB>
+        <FB Name="TurnTable" Type="XSPACE" x="4188.8887" y="38.888885" >
+          <Parameter Name="DIMS" Value="[1,1]" />
+          <Parameter Name="COLORS" Value="[green,green]" />
+        </FB>
+        <FB Name="PostP3Conv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="4588.8887" y="38.888885" >
+          <Parameter Name="LEN" Value="3" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space21" Type="XSPACE" x="5022.222" y="650.0" >
+          <Parameter Name="DIMS" Value="[1,3]" />
+        </FB>
+        <FB Name="PostP2Conv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="5366.6665" y="800.0" >
+          <Parameter Name="LEN" Value="3" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space22" Type="XSPACE" x="5833.333" y="16.666666" >
+          <Parameter Name="DIMS" Value="[1,3]" />
+        </FB>
+        <FB Name="PostP1Conv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="6222.222" y="338.8889" >
+          <Parameter Name="LEN" Value="3" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space23" Type="XSPACE" x="6783.333" y="1094.4445" >
+          <Parameter Name="DIMS" Value="[4,1]" />
+        </FB>
+        <FB Name="PreTTConv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="7211.111" y="1283.3333" >
+          <Parameter Name="LEN" Value="8" />
+          <Parameter Name="DIR" Value="VDIR#UP" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="PUSHER3.INIT" dx1="55.555553" />
+          <Connection Source="PUSHER3.INITO" Destination="space11.INIT" dx1="55.555553" />
+          <Connection Source="space11.INITO" Destination="PUSHER2.INIT" dx1="55.555553" />
+          <Connection Source="PUSHER2.INITO" Destination="space12.INIT" dx1="55.555553" />
+          <Connection Source="space12.INITO" Destination="PUSHER1.INIT" dx1="55.555553" />
+          <Connection Source="PUSHER1.INITO" Destination="space13.INIT" dx1="55.555553" />
+          <Connection Source="space13.INITO" Destination="PostTTConv.INIT" dx1="55.555553" />
+          <Connection Source="TurnTable.INITO" Destination="PostP3Conv.INIT" dx1="55.555553" />
+          <Connection Source="PostP3Conv.INITO" Destination="space21.INIT" dx1="55.555553" />
+          <Connection Source="space21.INITO" Destination="PostP2Conv.INIT" dx1="55.555553" />
+          <Connection Source="PostP2Conv.INITO" Destination="space22.INIT" dx1="55.555553" />
+          <Connection Source="space22.INITO" Destination="PostP1Conv.INIT" dx1="55.555553" />
+          <Connection Source="PostP1Conv.INITO" Destination="space23.INIT" dx1="55.555553" />
+          <Connection Source="space23.INITO" Destination="PreTTConv.INIT" dx1="55.555553" />
+          <Connection Source="PostTTConv.INITO" Destination="TurnTable.INIT" dx1="55.555553" />
+        </EventConnections>
+      </FBNetwork>
+    </Resource>
+  </Device>
+  <Device Name="HMI_LAYER" Type="FRAME_DEVICE" x="600.0" y="1216.6666" >
+    <Parameter Name="BOUNDS" Value="[0,0,200,200]" />
+    <Resource Name="HMI_1" Type="PANEL_RESOURCE" x="588.88885" y="677.7778" >
+      <Parameter Name="COLS" Value="1" />
+      <FBNetwork >
+        <FB Name="MAbutton" Type="RADIO_BOOL" x="661.1111" y="94.44444" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL1" Value="&#34;AUTO&#34;" />
+          <Parameter Name="LABEL0" Value="&#34;MANUAL&#34;" />
+          <Parameter Name="IN" Value="1" />
+        </FB>
+        <FB Name="LOAD" Type="IN_EVENT" x="2366.6665" y="1072.2222" >
+          <Parameter Name="LABEL" Value="&#34;LOAD&#34;" />
+        </FB>
+        <FB Name="COLOR" Type="IN_CHOICE" x="1444.4443" y="866.6666" >
+          <Parameter Name="CHOICES" Value="&#34;RED, ORANGE, BLUE&#34;" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="MAbutton.INIT" dx1="55.555553" />
+          <Connection Source="COLOR.INITO" Destination="LOAD.INIT" dx1="483.3333" />
+          <Connection Source="MAbutton.INITO" Destination="COLOR.INIT" dx1="211.1111" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="COLOR.QO" Destination="LOAD.QI" dx1="55.555553" />
+          <Connection Source="MAbutton.OUT" Destination="COLOR.QI" dx1="144.44444" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+  </Device>
+</System>
