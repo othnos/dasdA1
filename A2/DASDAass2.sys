@@ -19,16 +19,11 @@
           <Parameter Name="LABEL0" Value="&#34;MANUAL&#34;" />
           <Parameter Name="IN" Value="1" />
         </FB>
-        <FB Name="LOAD" Type="IN_EVENT" x="2366.6665" y="1072.2222" >
+        <FB Name="LOAD" Type="IN_EVENT" x="2705.5554" y="711.1111" >
           <Parameter Name="LABEL" Value="&#34;LOAD&#34;" />
         </FB>
-        <FB Name="COLOR" Type="IN_CHOICE" x="1444.4443" y="866.6666" >
+        <FB Name="COLOR" Type="IN_CHOICE" x="1616.6666" y="611.1111" >
           <Parameter Name="CHOICES" Value="&#34;RED, ORANGE, BLUE&#34;" />
-        </FB>
-        <FB Name="position" Type="IN_ANY" x="3583.3333" y="1094.4445" >
-          <Parameter Name="W" Value="3" />
-          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
-          <Parameter Name="IVAL" Value="&#34;0&#34;" />
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="MAbutton.INIT" dx1="55.555553" />
@@ -118,11 +113,12 @@
           <Parameter Name="DT" Value="t#100ms" />
           <Parameter Name="LABEL" Value="&#34;UP&#34;" />
         </FB>
-        <FB Name="CONVTRYOUT" Type="MECH_VIEW" x="538.88885" y="1377.7777" >
+        <FB Name="CONVTRYOUT" Type="MECH_VIEW" x="977.7777" y="1394.4443" >
           <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
           <Parameter Name="LEN" Value="6" />
           <Parameter Name="DIR" Value="VDIR#UP" />
           <Parameter Name="WKPC" Value="[255,0,0]" />
+          <Parameter Name="POS" Value="0" />
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="PUSHER3.INIT" dx1="55.555553" />
@@ -157,25 +153,43 @@
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="METRONOME.START" dx1="366.66666" />
-          <Connection Source="START.COLD" Destination="METR_PUB.INIT" dx1="983.3333" />
-          <Connection Source="METRONOME.EO" Destination="METR_PUB.REQ" dx1="211.1111" />
           <Connection Source="START.STOP" Destination="METRONOME.STOP" dx1="55.555553" />
+          <Connection Source="METRONOME.EO" Destination="METR_PUB.INIT" dx1="55.555553" />
         </EventConnections>
       </FBNetwork>
     </Resource>
     <Resource Name="CNV_1_MODEL" Type="PANEL_RESOURCE" x="1227.7777" y="216.66666" >
       <FBNetwork >
-        <FB Name="CNV1_PUB" Type="PUBL_2" x="2333.3333" y="716.6666" >
-          <Parameter Name="SD_1" Value="50" />
+        <FB Name="CNV1_PUB" Type="PUBL_2" x="3827.7776" y="466.66666" >
           <Parameter Name="ID" Value="&#34;CNV1_PUB&#34;" />
-          <Parameter Name="SD_2" Value="[255,0,0]" />
         </FB>
-        <FB Name="METR_PUB" Type="SUBL_0" x="1483.3333" y="2838.8887" >
+        <FB Name="METR_PUB" Type="SUBL_0" x="433.3333" y="2216.6665" >
           <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
         </FB>
+        <FB Name="MOTOR_ON" Type="SUBL_0" x="494.44443" y="1422.2222" >
+          <Parameter Name="ID" Value="&#34;MOTOR_ON&#34;" />
+        </FB>
+        <FB Name="LOAD_PALLET" Type="SUBL_1" x="1350.0" y="694.4444" >
+          <Parameter Name="ID" Value="&#34;LOAD_PALLET&#34;" />
+        </FB>
+        <FB Name="MOTOR_START_STOP" Type="E_TOGGLE" x="1133.3333" y="1550.0" >
+        </FB>
+        <FB Name="CNV_1_CONTROL" Type="CNV_1_CONTROL" x="2555.5554" y="472.2222" >
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="PULSE_BIT" Type="E_TOGGLE" x="1266.6666" y="2266.6665" >
+        </FB>
         <EventConnections>
-          <Connection Source="START.COLD" Destination="CNV1_PUB.INIT" dx1="55.555553" />
+          <Connection Source="MOTOR_ON.INITO" Destination="MOTOR_START_STOP.REQ" dx1="55.555553" />
+          <Connection Source="LOAD_PALLET.INITO" Destination="CNV_1_CONTROL.LOAD" dx1="55.555553" />
+          <Connection Source="METR_PUB.INITO" Destination="PULSE_BIT.REQ" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="CNV_1_CONTROL.INIT" dx1="55.555553" />
         </EventConnections>
+        <DataConnections>
+          <Connection Source="MOTOR_START_STOP.OUT" Destination="CNV_1_CONTROL.MOTOR_ON" dx1="227.77777" />
+          <Connection Source="LOAD_PALLET.RD_1" Destination="CNV_1_CONTROL.COLOR_IN" dx1="55.555553" />
+          <Connection Source="PULSE_BIT.OUT" Destination="CNV_1_CONTROL.PULSE_INPUT" dx1="333.3333" />
+        </DataConnections>
       </FBNetwork>
     </Resource>
     <Resource Name="TT_MODEL" Type="PANEL_RESOURCE" x="1955.5554" y="200.0" >
