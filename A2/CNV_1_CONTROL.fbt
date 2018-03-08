@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="CNV_1_CONTROL" Comment="Basic Function Block Type" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Holobloc Inc" Version="0.3" Author="JHC" Date="2009-09-15" Remarks="Changed transition priorities." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-30" />
+<CompilerInfo header="package fb.rt.dasdA1.A2;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="QI" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="QI" />
+      </Event>
+      <Event Name="LOAD" >
+        <With Var="COLOR_IN" />
+        <With Var="QI" />
+      </Event>
+      <Event Name="TT_AVAILABLE" >
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="QO" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="QO" />
+      </Event>
+      <Event Name="UNLOAD" >
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="QI" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="COLOR_IN" Type="COLOR" />
+      <VarDeclaration Name="PULSE_INPUT" Type="BOOL" />
+      <VarDeclaration Name="MOTOR_ON" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="QO" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="COLOR_OUT" Type="COLOR" />
+      <VarDeclaration Name="Position" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="922.22217" y="138.88889" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="216.66666" y="755.55554" >
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="INSERT_BOX" x="1961.1111" y="899.99994" >
+        <ECAction Algorithm="LOAD" Output="CNF" />
+      </ECState>
+      <ECState Name="UNLOAD_BOX" x="2127.7776" y="1605.5555" >
+        <ECAction Algorithm="SET_POS_TO_120" Output="UNLOAD" />
+      </ECState>
+      <ECState Name="PALLET_ON_MOVE" x="911.1111" y="2005.5554" >
+        <ECAction Algorithm="MOVE_PALLET" Output="CNF" />
+      </ECState>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="555.55554" y="138.88889" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="555.55554" y="600.0" />
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="922.22217" y="427.77777" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="216.66666" y="427.77777" />
+      <ECTransition Source="START" Destination="INSERT_BOX" Condition="LOAD" x="1461.1111" y="694.4444" />
+      <ECTransition Source="INSERT_BOX" Destination="START" Condition="1" x="1961.1111" y="661.1111" />
+      <ECTransition Source="START" Destination="UNLOAD_BOX" Condition="TT_AVAILABLE [Position = 100]" x="1488.8888" y="1394.4443" />
+      <ECTransition Source="UNLOAD_BOX" Destination="START" Condition="1" x="2216.6665" y="1461.1111" />
+      <ECTransition Source="START" Destination="PALLET_ON_MOVE" Condition="LOAD [MOTOR_ON]" x="555.55554" y="1583.3333" />
+      <ECTransition Source="PALLET_ON_MOVE" Destination="START" Condition="1" x="994.4444" y="1605.5555" />
+    </ECC>
+  <Algorithm Name="INIT" Comment="Initialization algorithm" >
+<ST><![CDATA[]]></ST>
+  </Algorithm>
+  <Algorithm Name="REQ" Comment="Normally executed algorithm" >
+<ST><![CDATA[]]></ST>
+  </Algorithm>
+  <Algorithm Name="LOAD" >
+<ST><![CDATA[COLOR_IN := COLOR_OUT;]]></ST>
+  </Algorithm>
+  <Algorithm Name="SET_POS_TO_120" >
+<ST><![CDATA[IF Position = 100 THEN
+Position := 120;
+COLOR_OUT := null;
+END_IF;]]></ST>
+  </Algorithm>
+  <Algorithm Name="MOVE_PALLET" >
+<ST><![CDATA[//INT COUNT = 0;
+//WHILE Position <= 100; DO
+//IF PULSE_INPUT THEN
+//COUNT := COUNT + 1;
+//Position := Position + COUNT*0.001;
+//ELSE
+//END_IF;
+//END_WHILE;]]></ST>
+  </Algorithm>
+  </BasicFB>
+</FBType>
