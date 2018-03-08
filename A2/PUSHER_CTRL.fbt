@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="PUSHER_CTRL" Comment="Composite Function Block Type" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+<CompilerInfo header="package fb.rt.dasdA1.A2;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="FWD" />
+        <With Var="ACT_ID" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="FWD" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="FWD" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="ACT_ID" Type="WSTRING" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="ACT" Type="PUBL_1" x="1616.6666" y="361.11108" >
+    </FB>
+    <EventConnections>
+      <Connection Source="INIT" Destination="ACT.INIT" />
+      <Connection Source="ACT.INITO" Destination="INITO" />
+      <Connection Source="REQ" Destination="ACT.REQ" />
+      <Connection Source="ACT.CNF" Destination="CNF" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="FWD" Destination="ACT.SD_1" />
+      <Connection Source="ACT_ID" Destination="ACT.ID" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

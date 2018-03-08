@@ -27,30 +27,42 @@
         </FB>
         <FB Name="LOADEVENT" Type="PUBL_0" x="3522.2222" y="733.3333" >
         </FB>
-        <FB Name="MAPUBL" Type="PUBL_1" x="2622.2222" y="2188.889" >
+        <FB Name="MAPUBL" Type="PUBL_1" x="1866.6666" y="1916.6666" >
         </FB>
-        <FB Name="tes" Type="IN_BOOL" x="1933.3333" y="2188.889" >
+        <FB Name="tes" Type="IN_BOOL" x="899.99994" y="1899.9999" >
           <Parameter Name="LABEL" Value="&#34;motoron&#34;" />
           <Parameter Name="QI" Value="1" />
           <Parameter Name="IN" Value="0" />
         </FB>
         <FB Name="METR_PUB" Type="SUBL_0" x="161.1111" y="1600.0" >
         </FB>
+        <FB Name="PUSHER1" Type="PUSHER_CTRL" x="2555.5554" y="2177.7776" >
+          <Parameter Name="ACT_ID" Value="&#34;P1_ACT&#34;" />
+        </FB>
+        <FB Name="PUSHER2" Type="PUSHER_CTRL" x="3422.2222" y="2283.3333" >
+          <Parameter Name="ACT_ID" Value="&#34;P2_ACT&#34;" />
+        </FB>
         <EventConnections>
           <Connection Source="COLOR.INITO" Destination="LOAD.INIT" dx1="483.3333" />
           <Connection Source="MAbutton.INITO" Destination="COLOR.INIT" dx1="211.1111" />
           <Connection Source="LOAD.INITO" Destination="LOADEVENT.INIT" dx1="55.555553" />
           <Connection Source="LOAD.IND" Destination="LOADEVENT.REQ" dx1="55.555553" />
-          <Connection Source="tes.IND" Destination="MAPUBL.REQ" dx1="55.555553" />
           <Connection Source="START.COLD" Destination="METR_PUB.INIT" dx1="55.555553" dx2="55.555553" dy="1672.2222" />
           <Connection Source="METR_PUB.INITO" Destination="MAbutton.INIT" dx1="27.777777" />
           <Connection Source="tes.INITO" Destination="MAPUBL.INIT" dx1="55.555553" />
           <Connection Source="LOADEVENT.INITO" Destination="tes.INIT" dx1="55.555553" dx2="55.555553" dy="961.1111" />
+          <Connection Source="MAPUBL.INITO" Destination="PUSHER1.INIT" dx1="211.1111" />
+          <Connection Source="tes.IND" Destination="MAPUBL.REQ" dx1="55.555553" />
+          <Connection Source="MAPUBL.CNF" Destination="PUSHER1.REQ" dx1="55.555553" />
+          <Connection Source="PUSHER1.INITO" Destination="PUSHER2.INIT" dx1="55.555553" />
+          <Connection Source="PUSHER1.CNF" Destination="PUSHER2.REQ" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="COLOR.QO" Destination="LOAD.QI" dx1="55.555553" />
           <Connection Source="MAbutton.OUT" Destination="COLOR.QI" dx1="144.44444" />
           <Connection Source="tes.OUT" Destination="MAPUBL.SD_1" dx1="55.555553" />
+          <Connection Source="tes.OUT" Destination="PUSHER1.FWD" dx1="55.555553" />
+          <Connection Source="tes.OUT" Destination="PUSHER2.FWD" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
@@ -69,9 +81,11 @@
         <FB Name="space11" Type="XSPACE" x="977.7777" y="16.666666" >
           <Parameter Name="DIMS" Value="[1,1]" />
         </FB>
-        <FB Name="PUSHER2" Type="SOL_VIEWL" x="1427.7777" y="116.666664" >
+        <FB Name="PUSHER2" Type="SOL_VIEWL" x="1327.7777" y="744.4444" >
           <Parameter Name="LEN" Value="1" />
           <Parameter Name="DIR" Value="VDIR#DOWN" />
+          <Parameter Name="REND_ID" Value="&#34;P2_REND&#34;" />
+          <Parameter Name="UI_ID" Value="&#34;P2_UI&#34;" />
         </FB>
         <FB Name="space12" Type="XSPACE" x="1888.8888" y="1088.8888" >
           <Parameter Name="DIMS" Value="[1,1]" />
@@ -79,6 +93,8 @@
         <FB Name="PUSHER1" Type="SOL_VIEWL" x="2055.5554" y="0.0" >
           <Parameter Name="LEN" Value="1" />
           <Parameter Name="DIR" Value="VDIR#DOWN" />
+          <Parameter Name="REND_ID" Value="&#34;P1_REND&#34;" />
+          <Parameter Name="UI_ID" Value="&#34;P1_UI&#34;" />
         </FB>
         <FB Name="space13" Type="XSPACE" x="2583.3333" y="88.888885" >
           <Parameter Name="DIMS" Value="[4,1]" />
@@ -131,7 +147,7 @@
           <Parameter Name="DT" Value="t#100ms" />
           <Parameter Name="LABEL" Value="&#34;UP&#34;" />
         </FB>
-        <FB Name="CONVTRYOUT" Type="MECH_VIEW" x="2222.2222" y="2088.889" >
+        <FB Name="CONVTRYOUT" Type="MECH_VIEW" x="2222.2222" y="2422.2222" >
           <Parameter Name="LEN" Value="6" />
           <Parameter Name="DIR" Value="VDIR#UP" />
         </FB>
@@ -236,8 +252,36 @@
     <Resource Name="CNV_2_MODEL" Type="PANEL_RESOURCE" x="2794.4443" y="194.44444" >
     </Resource>
     <Resource Name="PUSHER1_MODEL" Type="PANEL_RESOURCE" x="499.99997" y="949.99994" >
+      <Parameter Name="ROWS" Value="0" />
+      <Parameter Name="COLS" Value="1" />
+      <FBNetwork >
+        <FB Name="PUSHER1" Type="PUSHER_MDL" x="1383.3333" y="88.888885" >
+          <Parameter Name="ACT_ID" Value="&#34;P1_ACT&#34;" />
+          <Parameter Name="CLK_ID" Value="&#34;METR_PUB&#34;" />
+          <Parameter Name="UI_ID" Value="&#34;P1_UI&#34;" />
+          <Parameter Name="REND_ID" Value="&#34;P1_REND&#34;" />
+          <Parameter Name="VF" Value="15" />
+          <Parameter Name="VR" Value="10" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="PUSHER1.INIT" dx1="55.555553" />
+        </EventConnections>
+      </FBNetwork>
     </Resource>
     <Resource Name="PUSHER_2_MODEL" Type="PANEL_RESOURCE" x="1261.1111" y="927.7778" >
+      <FBNetwork >
+        <FB Name="PUSHER2" Type="PUSHER_MDL" x="1094.4445" y="111.11111" >
+          <Parameter Name="ACT_ID" Value="&#34;P2_ACT&#34;" />
+          <Parameter Name="CLK_ID" Value="&#34;METR_PUB&#34;" />
+          <Parameter Name="UI_ID" Value="&#34;P2_UI&#34;" />
+          <Parameter Name="REND_ID" Value="&#34;P2_REND&#34;" />
+          <Parameter Name="VF" Value="15" />
+          <Parameter Name="VR" Value="10" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="PUSHER2.INIT" dx1="55.555553" />
+        </EventConnections>
+      </FBNetwork>
     </Resource>
     <Resource Name="PUSHER3_MODEL" Type="PANEL_RESOURCE" x="2011.1111" y="922.22217" >
     </Resource>
