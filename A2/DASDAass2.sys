@@ -7,91 +7,11 @@
   <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2002-11-05" Remarks="Fixed missing (empty) FBD in Application." />
   <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-17" Remarks="Minor cleanup" />
   <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
-  <Device Name="VIEW_LAYER" Type="FRAME_DEVICE" x="600.0" y="666.6666" >
-    <Parameter Name="BOUNDS" Value="[200,0,250,200]" />
-    <Resource Name="VIEW_RES" Type="VIEW_PANEL" x="516.6666" y="427.77777" >
-      <Parameter Name="DIA" Value="25" />
-      <Parameter Name="SIZE" Value="[10,8]" />
-      <Parameter Name="VERTICAL" Value="0" />
-      <FBNetwork >
-        <FB Name="PUSHER3" Type="SOL_VIEWL" x="483.3333" y="11.111111" >
-          <Parameter Name="LEN" Value="1" />
-          <Parameter Name="DIR" Value="VDIR#DOWN" />
-        </FB>
-        <FB Name="space11" Type="XSPACE" x="877.7778" y="499.99997" >
-          <Parameter Name="DIMS" Value="[1,1]" />
-        </FB>
-        <FB Name="PUSHER2" Type="SOL_VIEWL" x="1222.2222" y="827.7778" >
-          <Parameter Name="LEN" Value="1" />
-          <Parameter Name="DIR" Value="VDIR#DOWN" />
-        </FB>
-        <FB Name="space12" Type="XSPACE" x="1616.6666" y="1327.7777" >
-          <Parameter Name="DIMS" Value="[1,1]" />
-        </FB>
-        <FB Name="PUSHER1" Type="SOL_VIEWL" x="2055.5554" y="0.0" >
-          <Parameter Name="LEN" Value="1" />
-          <Parameter Name="DIR" Value="VDIR#DOWN" />
-        </FB>
-        <FB Name="space13" Type="XSPACE" x="2444.4443" y="488.88885" >
-          <Parameter Name="DIMS" Value="[5,1]" />
-        </FB>
-        <FB Name="PostTTConv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="3155.5554" y="672.22217" >
-          <Parameter Name="LEN" Value="9" />
-          <Parameter Name="DIR" Value="VDIR#LEFT" />
-        </FB>
-        <FB Name="TurnTable" Type="XSPACE" x="4188.8887" y="38.888885" >
-          <Parameter Name="DIMS" Value="[1,1]" />
-          <Parameter Name="COLORS" Value="[green,green]" />
-        </FB>
-        <FB Name="PostP3Conv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="4588.8887" y="38.888885" >
-          <Parameter Name="LEN" Value="3" />
-          <Parameter Name="DIR" Value="VDIR#DOWN" />
-        </FB>
-        <FB Name="space21" Type="XSPACE" x="5022.222" y="650.0" >
-          <Parameter Name="DIMS" Value="[1,3]" />
-        </FB>
-        <FB Name="PostP2Conv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="5366.6665" y="800.0" >
-          <Parameter Name="LEN" Value="3" />
-          <Parameter Name="DIR" Value="VDIR#DOWN" />
-        </FB>
-        <FB Name="space22" Type="XSPACE" x="5833.333" y="16.666666" >
-          <Parameter Name="DIMS" Value="[1,3]" />
-        </FB>
-        <FB Name="PostP1Conv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="6222.222" y="338.8889" >
-          <Parameter Name="LEN" Value="3" />
-          <Parameter Name="DIR" Value="VDIR#DOWN" />
-        </FB>
-        <FB Name="space23" Type="XSPACE" x="6783.333" y="1094.4445" >
-          <Parameter Name="DIMS" Value="[4,1]" />
-        </FB>
-        <FB Name="PreTTConv" Type="MECH_VIEWL" Comment="Supply transfer mechanism" x="7211.111" y="1283.3333" >
-          <Parameter Name="LEN" Value="8" />
-          <Parameter Name="DIR" Value="VDIR#UP" />
-        </FB>
-        <EventConnections>
-          <Connection Source="START.COLD" Destination="PUSHER3.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER3.INITO" Destination="space11.INIT" dx1="55.555553" />
-          <Connection Source="space11.INITO" Destination="PUSHER2.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER2.INITO" Destination="space12.INIT" dx1="55.555553" />
-          <Connection Source="space12.INITO" Destination="PUSHER1.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER1.INITO" Destination="space13.INIT" dx1="55.555553" />
-          <Connection Source="space13.INITO" Destination="PostTTConv.INIT" dx1="55.555553" />
-          <Connection Source="TurnTable.INITO" Destination="PostP3Conv.INIT" dx1="55.555553" />
-          <Connection Source="PostP3Conv.INITO" Destination="space21.INIT" dx1="55.555553" />
-          <Connection Source="space21.INITO" Destination="PostP2Conv.INIT" dx1="55.555553" />
-          <Connection Source="PostP2Conv.INITO" Destination="space22.INIT" dx1="55.555553" />
-          <Connection Source="space22.INITO" Destination="PostP1Conv.INIT" dx1="55.555553" />
-          <Connection Source="PostP1Conv.INITO" Destination="space23.INIT" dx1="55.555553" />
-          <Connection Source="space23.INITO" Destination="PreTTConv.INIT" dx1="55.555553" />
-          <Connection Source="PostTTConv.INITO" Destination="TurnTable.INIT" dx1="55.555553" />
-        </EventConnections>
-      </FBNetwork>
-    </Resource>
-  </Device>
   <Device Name="HMI_LAYER" Type="FRAME_DEVICE" x="600.0" y="1216.6666" >
     <Parameter Name="BOUNDS" Value="[0,0,200,200]" />
     <Resource Name="HMI_1" Type="PANEL_RESOURCE" x="588.88885" y="677.7778" >
       <Parameter Name="COLS" Value="1" />
+      <Parameter Name="ROWS" Value="0" />
       <FBNetwork >
         <FB Name="MAbutton" Type="RADIO_BOOL" x="661.1111" y="94.44444" >
           <Parameter Name="QI" Value="1" />
@@ -105,6 +25,11 @@
         <FB Name="COLOR" Type="IN_CHOICE" x="1444.4443" y="866.6666" >
           <Parameter Name="CHOICES" Value="&#34;RED, ORANGE, BLUE&#34;" />
         </FB>
+        <FB Name="position" Type="IN_ANY" x="3583.3333" y="1094.4445" >
+          <Parameter Name="W" Value="3" />
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="IVAL" Value="&#34;0&#34;" />
+        </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="MAbutton.INIT" dx1="55.555553" />
           <Connection Source="COLOR.INITO" Destination="LOAD.INIT" dx1="483.3333" />
@@ -115,6 +40,153 @@
           <Connection Source="MAbutton.OUT" Destination="COLOR.QI" dx1="144.44444" />
         </DataConnections>
       </FBNetwork>
+    </Resource>
+  </Device>
+  <Device Name="VIEW_LAYER" Type="FRAME_DEVICE" x="600.0" y="666.6666" >
+    <Parameter Name="BOUNDS" Value="[250,0,900,900]" />
+    <Resource Name="VIEW_RES" Type="VIEW_PANEL" x="516.6666" y="427.77777" >
+      <Parameter Name="DIA" Value="85" />
+      <Parameter Name="SIZE" Value="[10,8]" />
+      <Parameter Name="VERTICAL" Value="0" />
+      <FBNetwork >
+        <FB Name="PUSHER3" Type="SOL_VIEWL" x="483.3333" y="11.111111" >
+          <Parameter Name="LEN" Value="1" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space11" Type="XSPACE" x="977.7777" y="16.666666" >
+          <Parameter Name="DIMS" Value="[1,1]" />
+        </FB>
+        <FB Name="PUSHER2" Type="SOL_VIEWL" x="1427.7777" y="116.666664" >
+          <Parameter Name="LEN" Value="1" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space12" Type="XSPACE" x="1888.8888" y="1088.8888" >
+          <Parameter Name="DIMS" Value="[1,1]" />
+        </FB>
+        <FB Name="PUSHER1" Type="SOL_VIEWL" x="2055.5554" y="0.0" >
+          <Parameter Name="LEN" Value="1" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+        </FB>
+        <FB Name="space13" Type="XSPACE" x="2583.3333" y="88.888885" >
+          <Parameter Name="DIMS" Value="[4,1]" />
+        </FB>
+        <FB Name="space21" Type="XSPACE" x="5016.6665" y="11.111111" >
+          <Parameter Name="DIMS" Value="[1,3]" />
+        </FB>
+        <FB Name="space22" Type="XSPACE" x="6050.0" y="16.666666" >
+          <Parameter Name="DIMS" Value="[1,3]" />
+        </FB>
+        <FB Name="space23" Type="XSPACE" x="7094.4443" y="961.1111" >
+          <Parameter Name="DIMS" Value="[4,1]" />
+        </FB>
+        <FB Name="POST_P1_CNV" Type="MECH_VIEW" x="6516.6665" y="255.55554" >
+          <Parameter Name="LEN" Value="3" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+          <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
+          <Parameter Name="POS" Value="500" />
+          <Parameter Name="WKPC" Value="[255,0,0]" />
+        </FB>
+        <FB Name="POST_P2_CNV" Type="MECH_VIEW" x="5483.333" y="222.22221" >
+          <Parameter Name="LEN" Value="3" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+          <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
+        </FB>
+        <FB Name="POST_P3_CNV" Type="MECH_VIEW" x="4433.333" y="11.111111" >
+          <Parameter Name="LEN" Value="3" />
+          <Parameter Name="DIR" Value="VDIR#DOWN" />
+          <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
+        </FB>
+        <FB Name="POST_TT_CNV" Type="MECH_VIEW" x="3449.9998" y="16.666666" >
+          <Parameter Name="LEN" Value="9" />
+          <Parameter Name="DIR" Value="VDIR#LEFT" />
+          <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
+          <Parameter Name="POS" Value="500" />
+          <Parameter Name="WKPC" Value="[255,0,0]" />
+        </FB>
+        <FB Name="TT_TRYOUT" Type="OUT_EVENT" x="3227.7776" y="1561.1111" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="DT" Value="t#100ms" />
+          <Parameter Name="LABEL" Value="&#34;LEFT&#34;" />
+        </FB>
+        <FB Name="TT_TRYOUT_1" Type="OUT_EVENT" x="2494.4443" y="1227.7777" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="DT" Value="t#100ms" />
+          <Parameter Name="LABEL" Value="&#34;PART ON&#34;" />
+        </FB>
+        <FB Name="TT_TRYOUT_2" Type="OUT_EVENT" x="3933.3333" y="1577.7777" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="DT" Value="t#100ms" />
+          <Parameter Name="LABEL" Value="&#34;UP&#34;" />
+        </FB>
+        <FB Name="CONVTRYOUT" Type="MECH_VIEW" x="538.88885" y="1377.7777" >
+          <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
+          <Parameter Name="LEN" Value="6" />
+          <Parameter Name="DIR" Value="VDIR#UP" />
+          <Parameter Name="WKPC" Value="[255,0,0]" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="PUSHER3.INIT" dx1="55.555553" />
+          <Connection Source="PUSHER3.INITO" Destination="space11.INIT" dx1="55.555553" />
+          <Connection Source="space11.INITO" Destination="PUSHER2.INIT" dx1="55.555553" />
+          <Connection Source="PUSHER2.INITO" Destination="space12.INIT" dx1="77.77777" dx2="55.555553" dy="1294.4443" />
+          <Connection Source="space12.INITO" Destination="PUSHER1.INIT" dx1="38.888885" dx2="55.555553" dy="-188.88889" />
+          <Connection Source="PUSHER1.INITO" Destination="space13.INIT" dx1="55.555553" />
+          <Connection Source="space22.INITO" Destination="POST_P1_CNV.INIT" dx1="55.555553" />
+          <Connection Source="POST_P1_CNV.INITO" Destination="space23.INIT" dx1="55.555553" />
+          <Connection Source="space21.INITO" Destination="POST_P2_CNV.INIT" dx1="55.555553" />
+          <Connection Source="POST_P2_CNV.INITO" Destination="space22.INIT" dx1="55.555553" />
+          <Connection Source="POST_P3_CNV.INITO" Destination="space21.INIT" dx1="55.555553" />
+          <Connection Source="POST_TT_CNV.INITO" Destination="TT_TRYOUT.INIT" dx1="55.555553" dx2="55.555553" dy="1366.6666" />
+          <Connection Source="space13.INITO" Destination="TT_TRYOUT_1.INIT" dx1="55.555553" dx2="55.555553" dy="805.55554" />
+          <Connection Source="TT_TRYOUT_1.INITO" Destination="POST_TT_CNV.INIT" dx1="283.3333" />
+          <Connection Source="TT_TRYOUT.INITO" Destination="TT_TRYOUT_2.INIT" dx1="55.555553" />
+          <Connection Source="TT_TRYOUT_2.INITO" Destination="POST_P3_CNV.INIT" dx1="55.555553" dx2="55.555553" dy="-505.55554" />
+          <Connection Source="space23.INITO" Destination="CONVTRYOUT.INIT" dx1="55.555553" dx2="55.555553" dy="194.44444" />
+        </EventConnections>
+      </FBNetwork>
+    </Resource>
+  </Device>
+  <Device Name="MODEL_LAYER" Type="FRAME_DEVICE" x="555.55554" y="1811.1111" >
+    <Resource Name="MODEL_CLOCK" Type="PANEL_RESOURCE" x="488.88885" y="227.77777" >
+      <FBNetwork >
+        <FB Name="METRONOME" Type="E_CYCLE" x="1144.4445" y="988.88885" >
+          <Parameter Name="DT" Value="t#100ms" />
+        </FB>
+        <FB Name="METR_PUB" Type="PUBL_0" x="2211.111" y="572.2222" >
+          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="METRONOME.START" dx1="366.66666" />
+          <Connection Source="START.COLD" Destination="METR_PUB.INIT" dx1="983.3333" />
+          <Connection Source="METRONOME.EO" Destination="METR_PUB.REQ" dx1="211.1111" />
+          <Connection Source="START.STOP" Destination="METRONOME.STOP" dx1="55.555553" />
+        </EventConnections>
+      </FBNetwork>
+    </Resource>
+    <Resource Name="CNV_1_MODEL" Type="PANEL_RESOURCE" x="1227.7777" y="216.66666" >
+      <FBNetwork >
+        <FB Name="CNV1_PUB" Type="PUBL_2" x="2333.3333" y="716.6666" >
+          <Parameter Name="SD_1" Value="50" />
+          <Parameter Name="ID" Value="&#34;CNV1_PUB&#34;" />
+          <Parameter Name="SD_2" Value="[255,0,0]" />
+        </FB>
+        <FB Name="METR_PUB" Type="SUBL_0" x="1483.3333" y="2838.8887" >
+          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
+        </FB>
+        <EventConnections>
+          <Connection Source="START.COLD" Destination="CNV1_PUB.INIT" dx1="55.555553" />
+        </EventConnections>
+      </FBNetwork>
+    </Resource>
+    <Resource Name="TT_MODEL" Type="PANEL_RESOURCE" x="1955.5554" y="200.0" >
+    </Resource>
+    <Resource Name="CNV_2_MODEL" Type="PANEL_RESOURCE" x="2794.4443" y="194.44444" >
+    </Resource>
+    <Resource Name="PUSHER1_MODEL" Type="PANEL_RESOURCE" x="499.99997" y="949.99994" >
+    </Resource>
+    <Resource Name="PUSHER_2_MODEL" Type="PANEL_RESOURCE" x="1261.1111" y="927.7778" >
+    </Resource>
+    <Resource Name="PUSHER3_MODEL" Type="PANEL_RESOURCE" x="2011.1111" y="922.22217" >
     </Resource>
   </Device>
 </System>
