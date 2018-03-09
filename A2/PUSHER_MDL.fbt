@@ -17,6 +17,7 @@
         <With Var="ACT_ID" />
         <With Var="VF" />
         <With Var="VR" />
+        <With Var="AUTO_ID" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -37,6 +38,8 @@
       <VarDeclaration Name="ACT_ID" Type="WSTRING" />
       <VarDeclaration Name="VF" Type="UINT" />
       <VarDeclaration Name="VR" Type="UINT" />
+      <VarDeclaration Name="AUTO_ID" Type="WSTRING" Comment="AUTO_ID" />
+      <VarDeclaration Name="ACT_MAN_ID" Type="WSTRING" Comment="Manual act publisher id" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="HOME" Type="BOOL" />
@@ -56,6 +59,18 @@
     </FB>
     <FB Name="UI" Type="SUBL_1" x="288.8889" y="266.66666" >
     </FB>
+    <FB Name="AUTO_SUBL" Type="SUBL_1" x="499.99997" y="1661.1111" >
+    </FB>
+    <FB Name="AUTO_MAN_SELECT" Type="FB_SEL_BOOL" x="1461.1111" y="1827.7777" >
+    </FB>
+    <FB Name="testievent" Type="OUT_EVENT" x="3088.8887" y="1638.8888" >
+      <Parameter Name="QI" Value="1" />
+      <Parameter Name="DT" Value="t#3000ms" />
+      <Parameter Name="LABEL" Value="&#34;t&#34;" />
+      <Parameter Name="FLASH" Value="[0,0,255]" />
+    </FB>
+    <FB Name="ACT_MAN" Type="SUBL_1" x="483.3333" y="2444.4443" >
+    </FB>
     <EventConnections>
       <Connection Source="INIT" Destination="UI.INIT" />
       <Connection Source="UI.INITO" Destination="ACT.INIT" dx1="55.555553" />
@@ -67,6 +82,13 @@
       <Connection Source="CLK.IND" Destination="MDL.CLK" dx1="55.555553" />
       <Connection Source="SENS_PUB.INITO" Destination="INITO" />
       <Connection Source="SENS_PUB.CNF" Destination="IND" />
+      <Connection Source="INIT" Destination="AUTO_SUBL.INIT" />
+      <Connection Source="ACT.IND" Destination="AUTO_MAN_SELECT.REQ" dx1="83.33333" />
+      <Connection Source="AUTO_SUBL.IND" Destination="AUTO_MAN_SELECT.REQ" dx1="55.555553" />
+      <Connection Source="AUTO_SUBL.INITO" Destination="testievent.INIT" dx1="55.555553" />
+      <Connection Source="AUTO_MAN_SELECT.CNF" Destination="testievent.REQ" dx1="227.77777" />
+      <Connection Source="INIT" Destination="ACT_MAN.INIT" />
+      <Connection Source="ACT_MAN.IND" Destination="AUTO_MAN_SELECT.REQ" dx1="55.555553" />
     </EventConnections>
     <DataConnections>
       <Connection Source="MDL.POS" Destination="REND_PUB.SD_1" dx1="183.33333" />
@@ -74,7 +96,6 @@
       <Connection Source="MDL.END" Destination="END" />
       <Connection Source="MDL.HOME" Destination="SENS_PUB.SD_1" dx1="777.7778" />
       <Connection Source="MDL.END" Destination="SENS_PUB.SD_2" dx1="666.6666" />
-      <Connection Source="ACT.RD_1" Destination="MDL.FWD" dx1="55.555553" />
       <Connection Source="UI.RD_1" Destination="MDL.FAULT" dx1="55.555553" />
       <Connection Source="UI_ID" Destination="UI.ID" />
       <Connection Source="ACT_ID" Destination="ACT.ID" />
@@ -83,6 +104,12 @@
       <Connection Source="SENSE_ID" Destination="SENS_PUB.ID" />
       <Connection Source="VF" Destination="MDL.VF" />
       <Connection Source="VR" Destination="MDL.VR" />
+      <Connection Source="AUTO_ID" Destination="AUTO_SUBL.ID" />
+      <Connection Source="AUTO_SUBL.RD_1" Destination="AUTO_MAN_SELECT.G" dx1="55.555553" />
+      <Connection Source="ACT.RD_1" Destination="AUTO_MAN_SELECT.IN1" dx1="27.777777" />
+      <Connection Source="AUTO_MAN_SELECT.OUT" Destination="MDL.FWD" dx1="66.666664" />
+      <Connection Source="ACT_MAN_ID" Destination="ACT_MAN.ID" />
+      <Connection Source="ACT_MAN.RD_1" Destination="AUTO_MAN_SELECT.IN0" dx1="205.55554" />
     </DataConnections>
   </FBNetwork>
 </FBType>

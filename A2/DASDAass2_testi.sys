@@ -13,34 +13,44 @@
       <Parameter Name="COLS" Value="1" />
       <Parameter Name="ROWS" Value="0" />
       <FBNetwork >
-        <FB Name="MAbutton" Type="RADIO_BOOL" x="561.1111" y="88.888885" >
+        <FB Name="MAbutton" Type="RADIO_BOOL" x="1283.3333" y="55.555553" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL1" Value="&#34;AUTO&#34;" />
           <Parameter Name="LABEL0" Value="&#34;MANUAL&#34;" />
           <Parameter Name="IN" Value="1" />
         </FB>
-        <FB Name="LOAD" Type="IN_EVENT" x="2705.5554" y="711.1111" >
+        <FB Name="LOAD" Type="IN_EVENT" x="3183.3333" y="361.11108" >
           <Parameter Name="LABEL" Value="&#34;LOAD&#34;" />
         </FB>
-        <FB Name="COLOR" Type="IN_CHOICE" x="1616.6666" y="611.1111" >
+        <FB Name="COLOR" Type="IN_CHOICE" x="2311.111" y="394.44443" >
           <Parameter Name="CHOICES" Value="&#34;RED, ORANGE, BLUE&#34;" />
         </FB>
-        <FB Name="LOADEVENT" Type="PUBL_0" x="3522.2222" y="733.3333" >
+        <FB Name="LOADEVENT" Type="PUBL_0" x="4066.6665" y="361.11108" >
         </FB>
-        <FB Name="MAPUBL" Type="PUBL_1" x="1866.6666" y="1916.6666" >
+        <FB Name="MAPUBL" Type="PUBL_1" x="1211.1111" y="2250.0" >
         </FB>
-        <FB Name="tes" Type="IN_BOOL" x="899.99994" y="1899.9999" >
+        <FB Name="tes" Type="IN_BOOL" x="394.44443" y="2250.0" >
           <Parameter Name="LABEL" Value="&#34;motoron&#34;" />
           <Parameter Name="QI" Value="1" />
           <Parameter Name="IN" Value="0" />
         </FB>
-        <FB Name="METR_PUB" Type="SUBL_0" x="161.1111" y="1600.0" >
+        <FB Name="METR_PUB" Type="SUBL_0" x="527.7778" y="44.444443" >
         </FB>
-        <FB Name="PUSHER1" Type="PUSHER_CTRL" x="2555.5554" y="2177.7776" >
-          <Parameter Name="ACT_ID" Value="&#34;P1_ACT&#34;" />
+        <FB Name="PUSHER_1" Type="PUBL_1" x="3055.5554" y="2400.0" >
+          <Parameter Name="ID" Value="&#34;P1_ACT&#34;" />
         </FB>
-        <FB Name="PUSHER2" Type="PUSHER_CTRL" x="3422.2222" y="2283.3333" >
-          <Parameter Name="ACT_ID" Value="&#34;P2_ACT&#34;" />
+        <FB Name="AutoPub" Type="PUBL_1" x="3299.9998" y="1333.3333" >
+        </FB>
+        <FB Name="ColdStartDelay" Type="E_DELAY" x="883.3333" y="1438.8888" >
+          <Parameter Name="DT" Value="t#1000ms" />
+        </FB>
+        <FB Name="manpush" Type="IN_BOOL" x="511.11108" y="3394.4443" >
+          <Parameter Name="LABEL" Value="&#34;ManPush&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="IN" Value="0" />
+        </FB>
+        <FB Name="Pusher1Man" Type="PUBL_1" x="3483.3333" y="3388.8887" >
+          <Parameter Name="ID" Value="P1_ActMan" />
         </FB>
         <EventConnections>
           <Connection Source="COLOR.INITO" Destination="LOAD.INIT" dx1="483.3333" />
@@ -50,19 +60,25 @@
           <Connection Source="START.COLD" Destination="METR_PUB.INIT" dx1="55.555553" dx2="55.555553" dy="1672.2222" />
           <Connection Source="METR_PUB.INITO" Destination="MAbutton.INIT" dx1="27.777777" />
           <Connection Source="tes.INITO" Destination="MAPUBL.INIT" dx1="55.555553" />
-          <Connection Source="LOADEVENT.INITO" Destination="tes.INIT" dx1="55.555553" dx2="55.555553" dy="961.1111" />
-          <Connection Source="MAPUBL.INITO" Destination="PUSHER1.INIT" dx1="211.1111" />
           <Connection Source="tes.IND" Destination="MAPUBL.REQ" dx1="55.555553" />
-          <Connection Source="MAPUBL.CNF" Destination="PUSHER1.REQ" dx1="55.555553" />
-          <Connection Source="PUSHER1.INITO" Destination="PUSHER2.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER1.CNF" Destination="PUSHER2.REQ" dx1="55.555553" />
+          <Connection Source="MAPUBL.INITO" Destination="PUSHER_1.INIT" dx1="238.88889" />
+          <Connection Source="MAPUBL.CNF" Destination="PUSHER_1.REQ" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="ColdStartDelay.START" dx1="55.555553" />
+          <Connection Source="ColdStartDelay.EO" Destination="AutoPub.REQ" dx1="55.555553" />
+          <Connection Source="MAbutton.IND" Destination="AutoPub.REQ" dx1="88.888885" />
+          <Connection Source="LOADEVENT.INITO" Destination="AutoPub.INIT" dx1="55.555553" dx2="55.555553" dy="716.6666" />
+          <Connection Source="AutoPub.INITO" Destination="tes.INIT" dx1="55.555553" dx2="55.555553" dy="700.0" />
+          <Connection Source="PUSHER_1.INITO" Destination="manpush.INIT" dx1="55.555553" dx2="55.555553" dy="750.0" />
+          <Connection Source="manpush.INITO" Destination="Pusher1Man.INIT" dx1="55.555553" />
+          <Connection Source="manpush.IND" Destination="Pusher1Man.REQ" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="COLOR.QO" Destination="LOAD.QI" dx1="55.555553" />
           <Connection Source="MAbutton.OUT" Destination="COLOR.QI" dx1="144.44444" />
           <Connection Source="tes.OUT" Destination="MAPUBL.SD_1" dx1="55.555553" />
-          <Connection Source="tes.OUT" Destination="PUSHER1.FWD" dx1="55.555553" />
-          <Connection Source="tes.OUT" Destination="PUSHER2.FWD" dx1="55.555553" />
+          <Connection Source="tes.OUT" Destination="PUSHER_1.SD_1" dx1="55.555553" />
+          <Connection Source="MAbutton.OUT" Destination="AutoPub.SD_1" dx1="55.555553" />
+          <Connection Source="manpush.OUT" Destination="Pusher1Man.SD_1" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
@@ -198,6 +214,7 @@
     </Resource>
   </Device>
   <Device Name="MODEL_LAYER" Type="FRAME_DEVICE" x="555.55554" y="1811.1111" >
+    <Parameter Name="BOUNDS" Value="[0,200,200,200]" />
     <Resource Name="MODEL_CLOCK" Type="PANEL_RESOURCE" x="488.88885" y="227.77777" >
       <FBNetwork >
         <FB Name="METR_PUB" Type="PUBL_0" x="2211.111" y="572.2222" >
@@ -229,22 +246,12 @@
         </FB>
         <FB Name="MOTOR_START_STOP" Type="E_TOGGLE" x="1133.3333" y="1550.0" >
         </FB>
-        <FB Name="CNV_1_CONTROL" Type="CNV_1_CONTROL" x="2555.5554" y="472.2222" >
-          <Parameter Name="QI" Value="1" />
-        </FB>
         <FB Name="PULSE_BIT" Type="E_TOGGLE" x="1266.6666" y="2266.6665" >
         </FB>
         <EventConnections>
           <Connection Source="MOTOR_ON.INITO" Destination="MOTOR_START_STOP.REQ" dx1="55.555553" />
-          <Connection Source="LOAD_PALLET.INITO" Destination="CNV_1_CONTROL.LOAD" dx1="55.555553" />
           <Connection Source="METR_PUB.INITO" Destination="PULSE_BIT.REQ" dx1="55.555553" />
-          <Connection Source="START.COLD" Destination="CNV_1_CONTROL.INIT" dx1="55.555553" />
         </EventConnections>
-        <DataConnections>
-          <Connection Source="MOTOR_START_STOP.OUT" Destination="CNV_1_CONTROL.MOTOR_ON" dx1="227.77777" />
-          <Connection Source="LOAD_PALLET.RD_1" Destination="CNV_1_CONTROL.COLOR_IN" dx1="55.555553" />
-          <Connection Source="PULSE_BIT.OUT" Destination="CNV_1_CONTROL.PULSE_INPUT" dx1="333.3333" />
-        </DataConnections>
       </FBNetwork>
     </Resource>
     <Resource Name="TT_MODEL" Type="PANEL_RESOURCE" x="1955.5554" y="200.0" >
@@ -255,17 +262,59 @@
       <Parameter Name="ROWS" Value="0" />
       <Parameter Name="COLS" Value="1" />
       <FBNetwork >
-        <FB Name="PUSHER1" Type="PUSHER_MDL" x="1383.3333" y="88.888885" >
+        <FB Name="PUSHER1" Type="PUSHER_MDL" x="2016.6666" y="16.666666" >
           <Parameter Name="ACT_ID" Value="&#34;P1_ACT&#34;" />
           <Parameter Name="CLK_ID" Value="&#34;METR_PUB&#34;" />
           <Parameter Name="UI_ID" Value="&#34;P1_UI&#34;" />
           <Parameter Name="REND_ID" Value="&#34;P1_REND&#34;" />
           <Parameter Name="VF" Value="15" />
           <Parameter Name="VR" Value="10" />
+          <Parameter Name="AUTO_ID" Value="&#34;AutoPub&#34;" />
+          <Parameter Name="ACT_MAN_ID" Value="&#34;P1_ActMan&#34;" />
+          <Parameter Name="SENSE_ID" Value="&#34;P1_SensPub&#34;" />
+        </FB>
+        <FB Name="Pusher1Sensor" Type="COLORSENSOR_MDL" x="1861.1111" y="1705.5555" >
+          <Parameter Name="colorToRecognize" Value="4" />
+          <Parameter Name="sensorPosition" Value="20" />
+          <Parameter Name="boxColor" Value="5" />
+        </FB>
+        <FB Name="color1" Type="IN_COLOR" x="822.22217" y="2538.8887" >
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="dsa" Type="IN_ANY" x="238.88889" y="1183.3333" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
+          <Parameter Name="W" Value="3" />
+          <Parameter Name="IVAL" Value="&#34;10&#34;" />
+        </FB>
+        <FB Name="boxrec" Type="OUT_BOOL" x="3822.2222" y="1266.6666" >
+          <Parameter Name="LABEL" Value="&#34;boxrec&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="C1" Value="[0,0,255]" />
+          <Parameter Name="C0" Value="[0,0,0]" />
+        </FB>
+        <FB Name="dsaa" Type="OUT_EVENT" x="3866.6665" y="2566.6665" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="DT" Value="t#1000ms" />
+          <Parameter Name="LABEL" Value="&#34;event&#34;" />
+          <Parameter Name="FLASH" Value="[0,255,0]" />
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="PUSHER1.INIT" dx1="55.555553" />
+          <Connection Source="PUSHER1.INITO" Destination="dsa.INIT" dx1="55.555553" dx2="55.555553" dy="1394.4443" />
+          <Connection Source="color1.INITO" Destination="Pusher1Sensor.INIT" dx1="55.555553" />
+          <Connection Source="dsa.IND" Destination="Pusher1Sensor.REQ" dx1="55.555553" />
+          <Connection Source="color1.IND" Destination="Pusher1Sensor.REQ" dx1="55.555553" />
+          <Connection Source="Pusher1Sensor.INITO" Destination="boxrec.INIT" dx1="55.555553" />
+          <Connection Source="Pusher1Sensor.CNF" Destination="boxrec.REQ" dx1="55.555553" />
+          <Connection Source="dsa.INITO" Destination="color1.INIT" dx1="55.555553" />
+          <Connection Source="boxrec.INITO" Destination="dsaa.INIT" dx1="55.555553" dx2="55.555553" dy="1383.3333" />
+          <Connection Source="boxrec.CNF" Destination="dsaa.REQ" dx1="55.555553" dx2="55.555553" dy="1383.3333" />
         </EventConnections>
+        <DataConnections>
+          <Connection Source="dsa.OUT" Destination="Pusher1Sensor.boxPosition" dx1="233.33333" />
+          <Connection Source="Pusher1Sensor.boxRecognized" Destination="boxrec.IN" dx1="55.555553" />
+        </DataConnections>
       </FBNetwork>
     </Resource>
     <Resource Name="PUSHER_2_MODEL" Type="PANEL_RESOURCE" x="1261.1111" y="927.7778" >
