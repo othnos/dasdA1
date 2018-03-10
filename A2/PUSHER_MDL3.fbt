@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="PUSHER_MDL" Comment="Pusher Model" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+<CompilerInfo header="package fb.rt.dasdA1.A2;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="CLK_ID" />
+        <With Var="UI_ID" />
+        <With Var="REND_ID" />
+        <With Var="SENSE_ID" />
+        <With Var="ACT_ID" />
+        <With Var="VF" />
+        <With Var="VR" />
+        <With Var="AUTO" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="HOME" />
+        <With Var="END" />
+      </Event>
+      <Event Name="IND" >
+        <With Var="HOME" />
+        <With Var="END" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="CLK_ID" Type="WSTRING" />
+      <VarDeclaration Name="UI_ID" Type="WSTRING" />
+      <VarDeclaration Name="REND_ID" Type="WSTRING" />
+      <VarDeclaration Name="SENSE_ID" Type="WSTRING" />
+      <VarDeclaration Name="ACT_ID" Type="WSTRING" />
+      <VarDeclaration Name="VF" Type="UINT" />
+      <VarDeclaration Name="VR" Type="UINT" />
+      <VarDeclaration Name="AUTO" Type="WSTRING" Comment="AUTO_ID" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="HOME" Type="BOOL" />
+      <VarDeclaration Name="END" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="SENS_PUB" Type="PUBL_2" x="3755.5554" y="755.55554" >
+    </FB>
+    <FB Name="MDL" Type="SOL_MDL" x="2061.111" y="755.55554" >
+    </FB>
+    <FB Name="REND_PUB" Type="PUBL_1" x="2977.7776" y="200.0" >
+    </FB>
+    <FB Name="CLK" Type="SUBL_0" x="1622.2222" y="283.3333" >
+    </FB>
+    <FB Name="ACT" Type="SUBL_1" x="938.88885" y="266.66666" >
+    </FB>
+    <FB Name="UI" Type="SUBL_1" x="288.8889" y="266.66666" >
+    </FB>
+    <FB Name="AUTO_MAN_SELECT" Type="E_SELECT" x="1105.5555" y="1555.5555" >
+    </FB>
+    <EventConnections>
+      <Connection Source="INIT" Destination="UI.INIT" />
+      <Connection Source="UI.INITO" Destination="ACT.INIT" dx1="55.555553" />
+      <Connection Source="ACT.INITO" Destination="CLK.INIT" dx1="55.555553" />
+      <Connection Source="CLK.INITO" Destination="REND_PUB.INIT" dx1="55.555553" />
+      <Connection Source="REND_PUB.INITO" Destination="SENS_PUB.INIT" dx1="55.555553" />
+      <Connection Source="MDL.INDR" Destination="REND_PUB.REQ" dx1="55.555553" />
+      <Connection Source="MDL.INDS" Destination="SENS_PUB.REQ" dx1="233.33333" />
+      <Connection Source="CLK.IND" Destination="MDL.CLK" dx1="55.555553" />
+      <Connection Source="SENS_PUB.INITO" Destination="INITO" />
+      <Connection Source="SENS_PUB.CNF" Destination="IND" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="MDL.POS" Destination="REND_PUB.SD_1" dx1="183.33333" />
+      <Connection Source="MDL.HOME" Destination="HOME" />
+      <Connection Source="MDL.END" Destination="END" />
+      <Connection Source="MDL.HOME" Destination="SENS_PUB.SD_1" dx1="777.7778" />
+      <Connection Source="MDL.END" Destination="SENS_PUB.SD_2" dx1="666.6666" />
+      <Connection Source="UI.RD_1" Destination="MDL.FAULT" dx1="55.555553" />
+      <Connection Source="UI_ID" Destination="UI.ID" />
+      <Connection Source="ACT_ID" Destination="ACT.ID" />
+      <Connection Source="CLK_ID" Destination="CLK.ID" />
+      <Connection Source="REND_ID" Destination="REND_PUB.ID" />
+      <Connection Source="SENSE_ID" Destination="SENS_PUB.ID" />
+      <Connection Source="VF" Destination="MDL.VF" />
+      <Connection Source="VR" Destination="MDL.VR" />
+      <Connection Source="ACT.RD_1" Destination="AUTO_MAN_SELECT.EI0" />
+      <Connection Source="ACT.RD_1" Destination="AUTO_MAN_SELECT.EI0" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -52,13 +52,13 @@
         <FB Name="BOXCOLOR" Type="IN_ENUM" x="2477.7776" y="344.44443" >
           <Parameter Name="TYPE" Value="&#34;BOXCOLOR&#34;" />
         </FB>
-        <FB Name="bcToColor" Type="BOXCOLOR_TO_COLOR" x="1027.7777" y="4855.555" >
+        <FB Name="bcToColor" Type="BOXCOLOR_TO_COLOR" x="722.22217" y="4755.555" >
         </FB>
         <FB Name="cfff" Type="OUT_COLOR" x="3483.3333" y="4694.4443" >
           <Parameter Name="LABEL" Value="&#34;dsa&#34;" />
           <Parameter Name="QI" Value="1" />
         </FB>
-        <FB Name="boxColorPub" Type="PUBL_1" x="2566.6665" y="4738.8887" >
+        <FB Name="boxColorPub" Type="PUBL_1" x="2322.2222" y="4616.6665" >
         </FB>
         <EventConnections>
           <Connection Source="LOAD.INITO" Destination="LOADEVENT.INIT" dx1="55.555553" />
@@ -80,12 +80,11 @@
           <Connection Source="MAbutton.INITO" Destination="BOXCOLOR.INIT" dx1="55.555553" />
           <Connection Source="BOXCOLOR.INITO" Destination="LOAD.INIT" dx1="55.555553" />
           <Connection Source="Pusher1Man.INITO" Destination="bcToColor.INIT" dx1="55.555553" dx2="55.555553" dy="966.6666" />
+          <Connection Source="bcToColor.INITO" Destination="cfff.INIT" dx1="55.555553" />
+          <Connection Source="bcToColor.CNF" Destination="cfff.REQ" dx1="55.555553" />
           <Connection Source="BOXCOLOR.IND" Destination="bcToColor.REQ" dx1="55.555553" dx2="55.555553" dy="2538.8887" />
           <Connection Source="bcToColor.INITO" Destination="boxColorPub.INIT" dx1="55.555553" />
           <Connection Source="bcToColor.CNF" Destination="boxColorPub.REQ" dx1="55.555553" />
-          <Connection Source="boxColorPub.INITO" Destination="cfff.INIT" dx1="55.555553" />
-          <Connection Source="boxColorPub.CNF" Destination="cfff.REQ" dx1="55.555553" />
-          <Connection Source="ColdStartDelay.EO" Destination="bcToColor.REQ" dx1="55.555553" dx2="55.555553" dy="3511.111" />
         </EventConnections>
         <DataConnections>
           <Connection Source="tes.OUT" Destination="MAPUBL.SD_1" dx1="55.555553" />
@@ -185,7 +184,7 @@
           <Parameter Name="LEN" Value="6" />
           <Parameter Name="DIR" Value="VDIR#UP" />
         </FB>
-        <FB Name="cnv1" Type="CNV_MDL" x="1655.5555" y="2772.2222" >
+        <FB Name="cnv1" Type="CNV_MDL" x="1600.0" y="2044.4443" >
           <Parameter Name="VF" Value="1" />
           <Parameter Name="LPOS" Value="0" />
           <Parameter Name="STYLE" Value="VSTYLE#DISC" />
@@ -197,7 +196,7 @@
         </FB>
         <FB Name="METR_PUB" Type="SUBL_0" x="1044.4445" y="1883.3333" >
         </FB>
-        <FB Name="boxColorPub" Type="SUBL_1" x="2600.0" y="2561.111" >
+        <FB Name="boxColorPub" Type="SUBL_1" x="2577.7776" y="2994.4443" >
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="PUSHER3.INIT" dx1="55.555553" />
@@ -223,6 +222,7 @@
           <Connection Source="MAPUBL.INITO" Destination="METR_PUB.INIT" dx1="55.555553" />
           <Connection Source="METR_PUB.IND" Destination="cnv1.CLK" dx1="55.555553" dx2="55.555553" dy="83.33333" />
           <Connection Source="cnv1.INDR" Destination="CONVTRYOUT.REQ" dx1="55.555553" />
+          <Connection Source="boxColorPub.INITO" Destination="CONVTRYOUT.INIT" dx1="55.555553" />
           <Connection Source="boxColorPub.IND" Destination="CONVTRYOUT.REQ" dx1="55.555553" />
           <Connection Source="METR_PUB.INITO" Destination="boxColorPub.INIT" dx1="55.555553" />
         </EventConnections>
