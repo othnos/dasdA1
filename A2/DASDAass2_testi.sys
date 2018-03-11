@@ -315,14 +315,6 @@
           <Parameter Name="QI" Value="1" />
           <Parameter Name="TYPE" Value="&#34;BOXCOLOR&#34;" />
         </FB>
-        <FB Name="pCIPub" Type="PusherControllerIPub" x="2838.8887" y="1861.1111" >
-          <Parameter Name="pushId" Value="&#34;P1_pushId&#34;" />
-          <Parameter Name="colorSensorId" Value="&#34;P1_colorSensorId&#34;" />
-        </FB>
-        <FB Name="pCISub" Type="PusherControllerISub" x="2211.111" y="3249.9998" >
-          <Parameter Name="pushId" Value="&#34;P1_pushId&#34;" />
-          <Parameter Name="colorSensorId" Value="&#34;P1_colorSensorId&#34;" />
-        </FB>
         <FB Name="pushrec" Type="OUT_BOOL" x="4027.7776" y="1905.5555" >
           <Parameter Name="LABEL" Value="&#34;pushrec&#34;" />
           <Parameter Name="QI" Value="1" />
@@ -333,6 +325,14 @@
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;PUSH P1&#34;" />
         </FB>
+        <FB Name="pCIProv" Type="PusherControllerIProv" x="2866.6665" y="1838.8888" >
+          <Parameter Name="pushId" Value="&#34;P1_pushId&#34;" />
+          <Parameter Name="colorSensorId" Value="&#34;P1_colorSensorId&#34;" />
+        </FB>
+        <FB Name="pCIReq" Type="PusherControllerIReq" x="2594.4443" y="3255.5554" >
+          <Parameter Name="pushId" Value="&#34;P1_pushId&#34;" />
+          <Parameter Name="colorSensorId" Value="&#34;P1_colorSensorId&#34;" />
+        </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="PUSHER1.INIT" dx1="55.555553" />
           <Connection Source="PUSHER1.INITO" Destination="dsa.INIT" dx1="55.555553" dx2="55.555553" dy="1394.4443" />
@@ -340,23 +340,23 @@
           <Connection Source="BOXCOLOR.INITO" Destination="Pusher1Sensor.INIT" dx1="55.555553" />
           <Connection Source="dsa.INITO" Destination="BOXCOLOR.INIT" dx1="55.555553" dx2="55.555553" dy="1233.3333" />
           <Connection Source="BOXCOLOR.IND" Destination="Pusher1Sensor.REQ" dx1="55.555553" />
-          <Connection Source="Pusher1Sensor.INITO" Destination="pCIPub.INIT" dx1="55.555553" />
-          <Connection Source="Pusher1Sensor.CNF" Destination="pCIPub.REQ" dx1="55.555553" />
-          <Connection Source="pCISub.INITO" Destination="boxrec.INIT" dx1="55.555553" />
-          <Connection Source="pCISub.IND" Destination="boxrec.REQ" dx1="55.555553" />
-          <Connection Source="pCIPub.IND" Destination="pushrec.REQ" dx1="55.555553" />
-          <Connection Source="pCIPub.INITO" Destination="pushrec.INIT" dx1="55.555553" />
           <Connection Source="pushrec.INITO" Destination="pusherintest.INIT" dx1="55.555553" dx2="55.555553" dy="999.99994" />
-          <Connection Source="pusherintest.INITO" Destination="pCISub.INIT" dx1="55.555553" />
-          <Connection Source="pusherintest.IND" Destination="pCISub.REQ" dx1="55.555553" />
+          <Connection Source="Pusher1Sensor.INITO" Destination="pCIProv.INIT" dx1="55.555553" />
+          <Connection Source="Pusher1Sensor.CNF" Destination="pCIProv.REQ" dx1="55.555553" />
+          <Connection Source="pCIProv.INITO" Destination="pushrec.INIT" dx1="55.555553" />
+          <Connection Source="pCIProv.IND" Destination="pushrec.REQ" dx1="55.555553" />
+          <Connection Source="pusherintest.INITO" Destination="pCIReq.INIT" dx1="55.555553" />
+          <Connection Source="pusherintest.IND" Destination="pCIReq.REQ" dx1="55.555553" />
+          <Connection Source="pCIReq.INITO" Destination="boxrec.INIT" dx1="55.555553" />
+          <Connection Source="pCIReq.IND" Destination="boxrec.REQ" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="dsa.OUT" Destination="Pusher1Sensor.boxPosition" dx1="233.33333" />
           <Connection Source="BOXCOLOR.OUT" Destination="Pusher1Sensor.colorToRecognize" dx1="55.555553" />
-          <Connection Source="Pusher1Sensor.boxRecognized" Destination="pCIPub.colorSensor" dx1="55.555553" />
-          <Connection Source="pCISub.colorSensor" Destination="boxrec.IN" dx1="55.555553" />
-          <Connection Source="pCIPub.push" Destination="pushrec.IN" dx1="55.555553" />
-          <Connection Source="pusherintest.OUT" Destination="pCISub.push" dx1="55.555553" />
+          <Connection Source="Pusher1Sensor.boxRecognized" Destination="pCIProv.colorSensor" dx1="55.555553" />
+          <Connection Source="pCIProv.push" Destination="pushrec.IN" dx1="55.555553" />
+          <Connection Source="pusherintest.OUT" Destination="pCIReq.push" dx1="55.555553" />
+          <Connection Source="pCIReq.colorSensor" Destination="boxrec.IN" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>

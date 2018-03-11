@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
-<FBType Name="PusherControllerIPub" Comment="Pusher Controller Interface publish" >
+<FBType Name="PusherControllerIReq" Comment="Pusher Controller Interface Requier" >
   <Identification Standard="61499-2" />
   <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
   <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
@@ -10,51 +10,52 @@
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" >
-        <With Var="colorSensor" />
         <With Var="pushId" />
         <With Var="colorSensorId" />
+        <With Var="push" />
       </Event>
       <Event Name="REQ" Comment="Normal Execution Request" >
-        <With Var="colorSensor" />
+        <With Var="push" />
       </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="INITO" Comment="Initialization Confirm" >
-        <With Var="push" />
+        <With Var="colorSensor" />
       </Event>
       <Event Name="CNF" Comment="Execution Confirmation" >
       </Event>
       <Event Name="IND" >
-        <With Var="push" />
+        <With Var="colorSensor" />
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="colorSensor" Type="BOOL" Comment="Status of Color sensor" />
       <VarDeclaration Name="pushId" Type="WSTRING" Comment="Push event id" />
       <VarDeclaration Name="colorSensorId" Type="WSTRING" Comment="Id of the color sensor" />
+      <VarDeclaration Name="push" Type="BOOL" />
     </InputVars>
     <OutputVars>
-      <VarDeclaration Name="push" Type="BOOL" />
+      <VarDeclaration Name="colorSensor" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <FBNetwork >
-    <FB Name="pusherColorSensor" Type="PUBL_1" x="2344.4443" y="644.4444" >
+    <FB Name="pusherColorSensor" Type="SUBL_1" x="2350.0" y="1555.5555" >
     </FB>
-    <FB Name="pusherPush" Type="SUBL_1" x="1272.2222" y="644.4444" >
+    <FB Name="pusherPush" Type="PUBL_1" x="1316.6666" y="1555.5555" >
     </FB>
     <EventConnections>
-      <Connection Source="REQ" Destination="pusherColorSensor.REQ" />
       <Connection Source="pusherColorSensor.INITO" Destination="INITO" />
-      <Connection Source="pusherPush.INITO" Destination="pusherColorSensor.INIT" dx1="55.555553" />
+      <Connection Source="pusherColorSensor.IND" Destination="CNF" />
       <Connection Source="INIT" Destination="pusherPush.INIT" />
-      <Connection Source="pusherColorSensor.CNF" Destination="CNF" />
-      <Connection Source="pusherPush.IND" Destination="IND" />
+      <Connection Source="REQ" Destination="pusherPush.REQ" />
+      <Connection Source="pusherPush.INITO" Destination="pusherColorSensor.INIT" dx1="55.555553" />
+      <Connection Source="pusherPush.CNF" Destination="CNF" />
+      <Connection Source="pusherColorSensor.IND" Destination="IND" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="colorSensor" Destination="pusherColorSensor.SD_1" />
       <Connection Source="colorSensorId" Destination="pusherColorSensor.ID" />
+      <Connection Source="pusherColorSensor.RD_1" Destination="colorSensor" />
+      <Connection Source="push" Destination="pusherPush.SD_1" />
       <Connection Source="pushId" Destination="pusherPush.ID" />
-      <Connection Source="pusherPush.RD_1" Destination="push" />
     </DataConnections>
   </FBNetwork>
 </FBType>

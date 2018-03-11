@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="PusherManualIProv" Comment="Pusher Manual Interface Provider" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+<CompilerInfo header="package fb.rt.dasdA1.A2.Pusher;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="pushId" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="push" />
+      </Event>
+      <Event Name="IND" >
+        <With Var="push" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="pushId" Type="WSTRING" Comment="Push event id" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="push" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="pusherPush" Type="SUBL_1" x="1272.2222" y="644.4444" >
+    </FB>
+    <EventConnections>
+      <Connection Source="INIT" Destination="pusherPush.INIT" />
+      <Connection Source="pusherPush.IND" Destination="IND" />
+      <Connection Source="pusherPush.INITO" Destination="INITO" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="pushId" Destination="pusherPush.ID" />
+      <Connection Source="pusherPush.RD_1" Destination="push" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>
