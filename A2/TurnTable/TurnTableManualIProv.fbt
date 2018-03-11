@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="TurnTableManualIProv" Comment="Turn Table Manual Interface Provider" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+<CompilerInfo header="package fb.rt.dasdA1.A2.TurnTable;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="dataId" />
+        <With Var="loadBoxId" />
+        <With Var="unloadBoxId" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="boxProximitySensor" />
+      </Event>
+      <Event Name="IND" >
+        <With Var="boxProximitySensor" />
+      </Event>
+      <Event Name="loadBox" >
+      </Event>
+      <Event Name="unloadBox" >
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="dataId" Type="WSTRING" />
+      <VarDeclaration Name="loadBoxId" Type="WSTRING" />
+      <VarDeclaration Name="unloadBoxId" Type="WSTRING" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="boxProximitySensor" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="loadBoxSub" Type="SUBL_0" x="1855.5555" y="422.2222" >
+    </FB>
+    <FB Name="data" Type="SUBL_1" x="550.0" y="427.77777" >
+    </FB>
+    <FB Name="unloadBoxProv" Type="SUBL_0" x="2644.4443" y="422.2222" >
+    </FB>
+    <EventConnections>
+      <Connection Source="loadBoxSub.IND" Destination="loadBox" />
+      <Connection Source="INIT" Destination="data.INIT" />
+      <Connection Source="data.IND" Destination="IND" />
+      <Connection Source="data.INITO" Destination="loadBoxSub.INIT" dx1="55.555553" />
+      <Connection Source="loadBoxSub.INITO" Destination="unloadBoxProv.INIT" dx1="55.555553" />
+      <Connection Source="unloadBoxProv.INITO" Destination="INITO" />
+      <Connection Source="unloadBoxProv.IND" Destination="unloadBox" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="loadBoxId" Destination="loadBoxSub.ID" />
+      <Connection Source="dataId" Destination="data.ID" />
+      <Connection Source="data.RD_1" Destination="boxProximitySensor" />
+      <Connection Source="unloadBoxId" Destination="unloadBoxProv.ID" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>
