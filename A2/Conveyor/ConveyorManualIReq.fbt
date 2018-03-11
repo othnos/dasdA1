@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
-<FBType Name="ConveyorManualIPub" Comment="Conveyor Manual Interface publish" >
+<FBType Name="ConveyorManualIReq" Comment="Conveyor Manual Interface Requier" >
   <Identification Standard="61499-2" />
   <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
   <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
@@ -14,13 +14,7 @@
         <With Var="loadBoxId" />
         <With Var="unloadBoxId" />
       </Event>
-    </EventInputs>
-    <EventOutputs>
-      <Event Name="INITO" Comment="Initialization Confirm" >
-        <With Var="motorOn" />
-        <With Var="boxColor" />
-      </Event>
-      <Event Name="IND" >
+      <Event Name="REQ" >
         <With Var="motorOn" />
         <With Var="boxColor" />
       </Event>
@@ -28,39 +22,41 @@
       </Event>
       <Event Name="unloadBox" >
       </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="dataId" Type="WSTRING" />
       <VarDeclaration Name="loadBoxId" Type="WSTRING" />
       <VarDeclaration Name="unloadBoxId" Type="WSTRING" />
-    </InputVars>
-    <OutputVars>
       <VarDeclaration Name="motorOn" Type="BOOL" />
-      <VarDeclaration Name="boxColor" Type="BOOL" />
-    </OutputVars>
+      <VarDeclaration Name="boxColor" Type="COLOR" />
+    </InputVars>
   </InterfaceList>
   <FBNetwork >
-    <FB Name="unloadBoxSub" Type="SUBL_0" x="2411.111" y="427.77777" >
+    <FB Name="data" Type="PUBL_2" x="750.0" y="1383.3333" >
     </FB>
-    <FB Name="loadBoxSub" Type="SUBL_0" x="1577.7777" y="427.77777" >
+    <FB Name="loadBoxSub" Type="PUBL_0" x="1588.8888" y="1377.7777" >
     </FB>
-    <FB Name="data" Type="SUBL_2" x="555.55554" y="433.3333" >
+    <FB Name="unloadBoxSub" Type="PUBL_0" x="2605.5554" y="1383.3333" >
     </FB>
     <EventConnections>
       <Connection Source="INIT" Destination="data.INIT" />
-      <Connection Source="loadBoxSub.IND" Destination="loadBox" />
-      <Connection Source="unloadBoxSub.IND" Destination="unloadBox" />
-      <Connection Source="loadBoxSub.INITO" Destination="unloadBoxSub.INIT" dx1="55.555553" />
+      <Connection Source="REQ" Destination="data.REQ" />
       <Connection Source="data.INITO" Destination="loadBoxSub.INIT" dx1="55.555553" />
-      <Connection Source="data.IND" Destination="IND" />
+      <Connection Source="loadBox" Destination="loadBoxSub.REQ" />
+      <Connection Source="loadBoxSub.INITO" Destination="unloadBoxSub.INIT" dx1="55.555553" />
+      <Connection Source="unloadBox" Destination="unloadBoxSub.REQ" />
       <Connection Source="unloadBoxSub.INITO" Destination="INITO" />
     </EventConnections>
     <DataConnections>
+      <Connection Source="dataId" Destination="data.ID" />
+      <Connection Source="motorOn" Destination="data.SD_1" />
+      <Connection Source="boxColor" Destination="data.SD_2" />
       <Connection Source="loadBoxId" Destination="loadBoxSub.ID" />
       <Connection Source="unloadBoxId" Destination="unloadBoxSub.ID" />
-      <Connection Source="dataId" Destination="data.ID" />
-      <Connection Source="data.RD_1" Destination="motorOn" />
-      <Connection Source="data.RD_2" Destination="boxColor" />
     </DataConnections>
   </FBNetwork>
 </FBType>
