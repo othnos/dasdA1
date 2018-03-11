@@ -299,7 +299,7 @@
           <Parameter Name="sensorPosition" Value="20" />
           <Parameter Name="boxColor" Value="BLUE" />
         </FB>
-        <FB Name="dsa" Type="IN_ANY" x="366.66666" y="1200.0" >
+        <FB Name="dsa" Type="IN_ANY" x="238.88889" y="1183.3333" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
           <Parameter Name="W" Value="3" />
@@ -311,11 +311,11 @@
           <Parameter Name="C1" Value="[0,0,255]" />
           <Parameter Name="C0" Value="[0,0,0]" />
         </FB>
-        <FB Name="BOXCOLOR" Type="IN_ENUM" x="427.77777" y="2350.0" >
+        <FB Name="BOXCOLOR" Type="IN_ENUM" x="655.55554" y="2394.4443" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="TYPE" Value="&#34;BOXCOLOR&#34;" />
         </FB>
-        <FB Name="pCIPub" Type="PusherControllerIPub" x="2838.8887" y="1861.1111" >
+        <FB Name="pCIPub" Type="PusherControllerIPub" x="2605.5554" y="1827.7777" >
           <Parameter Name="pushId" Value="&#34;P1_pushId&#34;" />
           <Parameter Name="colorSensorId" Value="&#34;P1_colorSensorId&#34;" />
         </FB>
@@ -338,7 +338,7 @@
           <Connection Source="PUSHER1.INITO" Destination="dsa.INIT" dx1="55.555553" dx2="55.555553" dy="1394.4443" />
           <Connection Source="dsa.IND" Destination="Pusher1Sensor.REQ" dx1="55.555553" />
           <Connection Source="BOXCOLOR.INITO" Destination="Pusher1Sensor.INIT" dx1="55.555553" />
-          <Connection Source="dsa.INITO" Destination="BOXCOLOR.INIT" dx1="55.555553" dx2="55.555553" dy="1233.3333" />
+          <Connection Source="dsa.INITO" Destination="BOXCOLOR.INIT" dx1="55.555553" />
           <Connection Source="BOXCOLOR.IND" Destination="Pusher1Sensor.REQ" dx1="55.555553" />
           <Connection Source="Pusher1Sensor.INITO" Destination="pCIPub.INIT" dx1="55.555553" />
           <Connection Source="Pusher1Sensor.CNF" Destination="pCIPub.REQ" dx1="55.555553" />
