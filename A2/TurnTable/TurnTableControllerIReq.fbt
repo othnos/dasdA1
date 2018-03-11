@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="TurnTableControllerIReq" Comment="Turn Table Controller Interface Requier" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+<CompilerInfo header="package fb.rt.dasdA1.A2.TurnTable;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="dataId" />
+        <With Var="data2Id" />
+        <With Var="turnToUnload" />
+      </Event>
+      <Event Name="REQ" >
+        <With Var="turnToUnload" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="boxProximitySensor" />
+        <With Var="positionLoad" />
+        <With Var="positionUnload" />
+      </Event>
+      <Event Name="IND" >
+        <With Var="boxProximitySensor" />
+        <With Var="positionLoad" />
+        <With Var="positionUnload" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="dataId" Type="WSTRING" />
+      <VarDeclaration Name="data2Id" Type="WSTRING" />
+      <VarDeclaration Name="turnToUnload" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="boxProximitySensor" Type="BOOL" />
+      <VarDeclaration Name="positionLoad" Type="BOOL" />
+      <VarDeclaration Name="positionUnload" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="data" Type="PUBL_1" x="600.0" y="1677.7777" >
+    </FB>
+    <FB Name="data2" Type="SUBL_3" x="1688.8888" y="1694.4443" >
+    </FB>
+    <EventConnections>
+      <Connection Source="INIT" Destination="data.INIT" />
+      <Connection Source="REQ" Destination="data.REQ" />
+      <Connection Source="data.INITO" Destination="data2.INIT" dx1="55.555553" />
+      <Connection Source="data2.INITO" Destination="INITO" />
+      <Connection Source="data2.IND" Destination="IND" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="dataId" Destination="data.ID" />
+      <Connection Source="turnToUnload" Destination="data.SD_1" />
+      <Connection Source="data2Id" Destination="data2.ID" />
+      <Connection Source="data2.RD_1" Destination="boxProximitySensor" />
+      <Connection Source="data2.RD_2" Destination="positionLoad" />
+      <Connection Source="data2.RD_3" Destination="positionUnload" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>
