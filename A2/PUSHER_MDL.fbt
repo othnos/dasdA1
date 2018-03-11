@@ -63,8 +63,8 @@
     </FB>
     <FB Name="AUTO_MAN_SELECT" Type="FB_SEL_BOOL" x="1461.1111" y="1827.7777" >
     </FB>
-    <FB Name="testievent" Type="OUT_EVENT" x="3088.8887" y="1638.8888" >
-      <Parameter Name="QI" Value="1" />
+    <FB Name="testievent" Type="OUT_EVENT" x="3294.4443" y="1672.2222" >
+      <Parameter Name="QI" Value="0" />
       <Parameter Name="DT" Value="t#3000ms" />
       <Parameter Name="LABEL" Value="&#34;t&#34;" />
       <Parameter Name="FLASH" Value="[0,0,255]" />
