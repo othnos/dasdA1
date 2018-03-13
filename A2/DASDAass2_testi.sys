@@ -378,4 +378,58 @@
     <Resource Name="PUSHER3_MODEL" Type="PANEL_RESOURCE" x="2011.1111" y="922.22217" >
     </Resource>
   </Device>
+  <Device Name="CONTROLLER_LAYER" Type="FRAME_DEVICE" x="616.6666" y="2311.111" >
+    <Parameter Name="BOUNDS" Value="[0,400,200,200]" />
+    <Resource Name="BOXSORTING_CONTROLLER" Type="PANEL_RESOURCE" x="499.99997" y="949.99994" >
+      <Parameter Name="ROWS" Value="0" />
+      <Parameter Name="COLS" Value="1" />
+      <FBNetwork >
+        <FB Name="bsController" Type="BoxSortingController" x="2250.0" y="100.0" >
+        </FB>
+        <FB Name="cnvIReq" Type="ConveyorControllerIReq" x="877.7778" y="1194.4445" >
+          <Parameter Name="motorOnId" Value="&#34;cvn1_ctrl_motorOnId&#34;" />
+          <Parameter Name="boxLoadedId" Value="&#34;cvn1_ctrl_boxLoadedId&#34;" />
+        </FB>
+        <FB Name="ttCtrlReq" Type="TurnTableControllerIReq" x="861.1111" y="2238.889" >
+          <Parameter Name="dataId" Value="&#34;tt_ctrl_dataId&#34;" />
+          <Parameter Name="data2Id" Value="&#34;tt_ctrl_data2Id&#34;" />
+        </FB>
+        <FB Name="LOADEVENT" Type="SUBL_0" x="872.22217" y="100.0" >
+        </FB>
+        <FB Name="OBOOL" Type="OUT_BOOL" x="3844.4443" y="1205.5555" >
+          <Parameter Name="C0" Value="[0,0,0]" />
+          <Parameter Name="C1" Value="[255,0,0]" />
+          <Parameter Name="LABEL" Value="&#34;B&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="gf" Type="OUT_EVENT" x="3661.111" y="188.88889" >
+          <Parameter Name="FLASH" Value="[0,0,255]" />
+          <Parameter Name="LABEL" Value="&#34;event&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="DT" Value="t#1000ms" />
+        </FB>
+        <EventConnections>
+          <Connection Source="bsController.INITO" Destination="cnvIReq.INIT" dx1="55.555553" dx2="55.555553" dy="949.99994" />
+          <Connection Source="cnvIReq.IND" Destination="bsController.REQ" dx1="55.555553" />
+          <Connection Source="bsController.CNF" Destination="cnvIReq.REQ" dx1="55.555553" dx2="55.555553" dy="1766.6666" />
+          <Connection Source="cnvIReq.INITO" Destination="ttCtrlReq.INIT" dx1="55.555553" dx2="55.555553" dy="1183.3333" />
+          <Connection Source="bsController.CNF" Destination="ttCtrlReq.REQ" dx1="55.555553" dx2="55.555553" dy="2277.7776" />
+          <Connection Source="ttCtrlReq.IND" Destination="bsController.REQ" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="LOADEVENT.INIT" dx1="55.555553" />
+          <Connection Source="LOADEVENT.INITO" Destination="bsController.INIT" dx1="55.555553" />
+          <Connection Source="LOADEVENT.IND" Destination="bsController.loadBox" dx1="55.555553" />
+          <Connection Source="ttCtrlReq.INITO" Destination="OBOOL.INIT" dx1="55.555553" />
+          <Connection Source="bsController.CNF" Destination="OBOOL.REQ" dx1="55.555553" />
+          <Connection Source="bsController.INITO" Destination="gf.INIT" dx1="55.555553" />
+          <Connection Source="bsController.CNF" Destination="gf.REQ" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="bsController.cnv1_motorOn" Destination="cnvIReq.motorOn" dx1="55.555553" dx2="55.555553" dy="1022.22217" />
+          <Connection Source="ttCtrlReq.positionUnload" Destination="bsController.tt_positionUnload" dx1="55.555553" />
+          <Connection Source="ttCtrlReq.boxProximitySensor" Destination="bsController.tt_boxProximitySensor" dx1="55.555553" />
+          <Connection Source="bsController.cnv1_motorOn" Destination="OBOOL.IN" dx1="55.555553" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+  </Device>
 </System>
