@@ -17,10 +17,10 @@
     </EventInputs>
     <EventOutputs>
       <Event Name="INITO" Comment="Initialization Confirm" >
-        <With Var="boxProximitySensor" />
+        <With Var="turnToUnload" />
       </Event>
       <Event Name="IND" >
-        <With Var="boxProximitySensor" />
+        <With Var="turnToUnload" />
       </Event>
       <Event Name="loadBox" >
       </Event>
@@ -33,7 +33,7 @@
       <VarDeclaration Name="unloadBoxId" Type="WSTRING" />
     </InputVars>
     <OutputVars>
-      <VarDeclaration Name="boxProximitySensor" Type="BOOL" />
+      <VarDeclaration Name="turnToUnload" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <FBNetwork >
@@ -55,7 +55,7 @@
     <DataConnections>
       <Connection Source="loadBoxId" Destination="loadBoxSub.ID" />
       <Connection Source="dataId" Destination="data.ID" />
-      <Connection Source="data.RD_1" Destination="boxProximitySensor" />
+      <Connection Source="data.RD_1" Destination="turnToUnload" />
       <Connection Source="unloadBoxId" Destination="unloadBoxProv.ID" />
     </DataConnections>
   </FBNetwork>

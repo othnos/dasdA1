@@ -15,7 +15,7 @@
         <With Var="unloadBoxId" />
       </Event>
       <Event Name="REQ" >
-        <With Var="boxProximitySensor" />
+        <With Var="turnToUnload" />
       </Event>
       <Event Name="loadBox" >
       </Event>
@@ -30,7 +30,7 @@
       <VarDeclaration Name="dataId" Type="WSTRING" />
       <VarDeclaration Name="loadBoxId" Type="WSTRING" />
       <VarDeclaration Name="unloadBoxId" Type="WSTRING" />
-      <VarDeclaration Name="boxProximitySensor" Type="BOOL" />
+      <VarDeclaration Name="turnToUnload" Type="BOOL" />
     </InputVars>
   </InterfaceList>
   <FBNetwork >
@@ -52,7 +52,7 @@
     <DataConnections>
       <Connection Source="loadBoxId" Destination="loadBoxSub.ID" />
       <Connection Source="dataId" Destination="data.ID" />
-      <Connection Source="boxProximitySensor" Destination="data.SD_1" />
+      <Connection Source="turnToUnload" Destination="data.SD_1" />
       <Connection Source="unloadBoxId" Destination="unloadBoxReq.ID" />
     </DataConnections>
   </FBNetwork>
