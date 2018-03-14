@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="Conveyor1Controller" Comment="Controller of Conveyor 1" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Holobloc Inc" Version="0.3" Author="JHC" Date="2009-09-15" Remarks="Changed transition priorities." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-30" />
+<CompilerInfo header="package fb.rt.dasdA1.A2.Conveyor1;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="tt_positionLoad" />
+        <With Var="tt_boxProximitySensor" />
+      </Event>
+      <Event Name="loadBox" >
+        <With Var="tt_boxProximitySensor" />
+        <With Var="tt_positionLoad" />
+      </Event>
+      <Event Name="REQ" >
+        <With Var="tt_positionLoad" />
+        <With Var="tt_boxProximitySensor" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="cnv1_motorOn" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="cnv1_motorOn" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="tt_positionLoad" Type="BOOL" />
+      <VarDeclaration Name="tt_boxProximitySensor" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="cnv1_motorOn" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Name="boxMoved" Type="BOOL" />
+      <VarDeclaration Name="tt_boxProximitySensorLC" Type="BOOL" />
+    </InternalVars>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="922.22217" y="138.88889" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="runCnv1" x="2977.7776" y="999.99994" >
+        <ECAction Algorithm="cnv1_run" Output="CNF" />
+      </ECState>
+      <ECState Name="initBoxMoved" x="2483.3333" y="661.1111" >
+        <ECAction Algorithm="initBoxMoved" />
+      </ECState>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="555.55554" y="138.88889" />
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="805.55554" y="316.66666" />
+      <ECTransition Source="START" Destination="initBoxMoved" Condition="loadBox" x="2483.3333" y="427.77777" />
+      <ECTransition Source="initBoxMoved" Destination="runCnv1" Condition="1" x="2977.7776" y="661.1111" />
+      <ECTransition Source="runCnv1" Destination="START" Condition="REQ [boxMoved = TRUE]" x="555.55554" y="999.99994" />
+      <ECTransition Source="runCnv1" Destination="runCnv1" Condition="REQ" x="2977.7776" y="1200.0" />
+    </ECC>
+  <Algorithm Name="INIT" Comment="Initialization algorithm" >
+<ST><![CDATA[// tt_positionLoad := FALSE;
+// tt_boxProximitySensor := FALSE;
+cnv1_motorOn := FALSE;
+boxMoved := FALSE;
+tt_boxProximitySensorLC := FALSE;]]></ST>
+  </Algorithm>
+  <Algorithm Name="cnv1_run" >
+<ST><![CDATA[// Control the motor depending of states of the
+// turn table´s box proximity sensor and turn table´s
+// position
+IF tt_boxProximitySensor = FALSE 
+	AND tt_positionLoad = TRUE
+THEN
+	cnv1_motorOn := TRUE;
+ELSE
+	cnv1_motorOn := FALSE;
+END_IF;
+
+// On positive edge of boxProximitySensor the box
+// has been moved
+IF tt_boxProximitySensor = TRUE
+	AND tt_boxProximitySensorLC = FALSE
+	AND tt_positionLoad = TRUE
+THEN
+	boxMoved := TRUE;
+END_IF;
+
+tt_boxProximitySensorLC := tt_boxProximitySensor;]]></ST>
+  </Algorithm>
+  <Algorithm Name="initBoxMoved" >
+<ST><![CDATA[tt_boxProximitySensorLC := tt_boxProximitySensor;
+boxMoved := FALSE;]]></ST>
+  </Algorithm>
+  </BasicFB>
+</FBType>

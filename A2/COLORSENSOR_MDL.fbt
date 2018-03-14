@@ -71,8 +71,7 @@ ELSE
 END_IF;]]></ST>
   </Algorithm>
   <Algorithm Name="REQ" Comment="Normally executed algorithm" >
-<ST><![CDATA[window := 5;
-IF boxPosition >= windowMin
+<ST><![CDATA[IF boxPosition >= windowMin
 	AND boxPosition <= windowMax
 	AND boxColor = colorToRecognize
 THEN
