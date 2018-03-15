@@ -22,6 +22,10 @@
         <With Var="tt_positionLoad" />
         <With Var="tt_boxProximitySensor" />
       </Event>
+      <Event Name="tt_boxProximitySensorTrig" >
+        <With Var="tt_positionLoad" />
+        <With Var="tt_boxProximitySensor" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="INITO" Comment="Initialization Confirm" >
@@ -40,10 +44,6 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB>
-    <InternalVars>
-      <VarDeclaration Name="boxMoved" Type="BOOL" />
-      <VarDeclaration Name="tt_boxProximitySensorLC" Type="BOOL" />
-    </InternalVars>
     <ECC >
       <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
       </ECState>
@@ -53,22 +53,20 @@
       <ECState Name="runCnv1" x="2977.7776" y="999.99994" >
         <ECAction Algorithm="cnv1_run" Output="CNF" />
       </ECState>
-      <ECState Name="initBoxMoved" x="2483.3333" y="661.1111" >
-        <ECAction Algorithm="initBoxMoved" />
+      <ECState Name="stopCnv1" x="1255.5555" y="1588.8888" >
+        <ECAction Algorithm="cnv1_stop" Output="CNF" />
       </ECState>
       <ECTransition Source="INIT" Destination="START" Condition="1" x="555.55554" y="138.88889" />
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="805.55554" y="316.66666" />
-      <ECTransition Source="START" Destination="initBoxMoved" Condition="loadBox" x="2483.3333" y="427.77777" />
-      <ECTransition Source="initBoxMoved" Destination="runCnv1" Condition="1" x="2977.7776" y="661.1111" />
-      <ECTransition Source="runCnv1" Destination="START" Condition="REQ [boxMoved = TRUE]" x="555.55554" y="999.99994" />
-      <ECTransition Source="runCnv1" Destination="runCnv1" Condition="REQ" x="2977.7776" y="1200.0" />
+      <ECTransition Source="runCnv1" Destination="stopCnv1" Condition="tt_boxProximitySensorTrig [tt_positionLoad = TRUE]" x="2977.7776" y="1588.8888" />
+      <ECTransition Source="stopCnv1" Destination="START" Condition="1" x="555.55554" y="1588.8888" />
+      <ECTransition Source="runCnv1" Destination="runCnv1" Condition="REQ" x="3216.6665" y="1200.0" />
+      <ECTransition Source="START" Destination="runCnv1" Condition="loadBox" x="2977.7776" y="427.77777" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
 <ST><![CDATA[// tt_positionLoad := FALSE;
 // tt_boxProximitySensor := FALSE;
-cnv1_motorOn := FALSE;
-boxMoved := FALSE;
-tt_boxProximitySensorLC := FALSE;]]></ST>
+cnv1_motorOn := FALSE;]]></ST>
   </Algorithm>
   <Algorithm Name="cnv1_run" >
 <ST><![CDATA[// Control the motor depending of states of the
@@ -80,22 +78,10 @@ THEN
 	cnv1_motorOn := TRUE;
 ELSE
 	cnv1_motorOn := FALSE;
-END_IF;
-
-// On positive edge of boxProximitySensor the box
-// has been moved
-IF tt_boxProximitySensor = TRUE
-	AND tt_boxProximitySensorLC = FALSE
-	AND tt_positionLoad = TRUE
-THEN
-	boxMoved := TRUE;
-END_IF;
-
-tt_boxProximitySensorLC := tt_boxProximitySensor;]]></ST>
+END_IF;]]></ST>
   </Algorithm>
-  <Algorithm Name="initBoxMoved" >
-<ST><![CDATA[tt_boxProximitySensorLC := tt_boxProximitySensor;
-boxMoved := FALSE;]]></ST>
+  <Algorithm Name="cnv1_stop" >
+<ST><![CDATA[cnv1_motorOn := FALSE;]]></ST>
   </Algorithm>
   </BasicFB>
 </FBType>

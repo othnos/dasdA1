@@ -380,7 +380,7 @@
   </Device>
   <Device Name="CONTROLLER_LAYER" Type="FRAME_DEVICE" x="616.6666" y="2311.111" >
     <Parameter Name="BOUNDS" Value="[0,400,200,200]" />
-    <Resource Name="BOXSORTING_CONTROLLER" Type="PANEL_RESOURCE" x="499.99997" y="949.99994" >
+    <Resource Name="Conveyor1Controller" Type="PANEL_RESOURCE" x="499.99997" y="949.99994" >
       <Parameter Name="ROWS" Value="0" />
       <Parameter Name="COLS" Value="1" />
       <FBNetwork >
@@ -388,7 +388,7 @@
           <Parameter Name="motorOnId" Value="&#34;cvn1_ctrl_motorOnId&#34;" />
           <Parameter Name="boxLoadedId" Value="&#34;cvn1_ctrl_boxLoadedId&#34;" />
         </FB>
-        <FB Name="ttCtrlReq" Type="TurnTableControllerIReq" x="483.3333" y="1205.5555" >
+        <FB Name="ttCtrlReq" Type="TurnTableControllerIReq" x="505.55554" y="1194.4445" >
           <Parameter Name="dataId" Value="&#34;tt_ctrl_dataId&#34;" />
           <Parameter Name="data2Id" Value="&#34;tt_ctrl_data2Id&#34;" />
         </FB>
@@ -400,21 +400,20 @@
           <Parameter Name="LABEL" Value="&#34;B&#34;" />
           <Parameter Name="QI" Value="1" />
         </FB>
-        <FB Name="gf" Type="OUT_EVENT" x="3672.2222" y="66.666664" >
+        <FB Name="gf" Type="OUT_EVENT" x="4072.2222" y="0.0" >
           <Parameter Name="FLASH" Value="[0,0,255]" />
-          <Parameter Name="LABEL" Value="&#34;event&#34;" />
+          <Parameter Name="LABEL" Value="&#34;cnf&#34;" />
           <Parameter Name="QI" Value="1" />
           <Parameter Name="DT" Value="t#1000ms" />
         </FB>
-        <FB Name="cnvCntrl" Type="Conveyor1Controller" x="2300.0" y="144.44444" >
+        <FB Name="cnvCntrl" Type="Conveyor1Controller" x="1883.3333" y="144.44444" >
         </FB>
-        <FB Name="boxProxTrig" Type="E_TRIG" x="2411.111" y="1088.8888" >
-          <Parameter Name="QI" Value="1" />
+        <FB Name="boxProxTrig" Type="E_TRIG" x="1777.7777" y="1194.4445" >
         </FB>
         <FB Name="fdsa" Type="OUT_EVENT" x="3244.4443" y="3566.6665" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="DT" Value="t#1000ms" />
-          <Parameter Name="LABEL" Value="&#34;cnf&#34;" />
+          <Parameter Name="LABEL" Value="&#34;testevent&#34;" />
           <Parameter Name="FLASH" Value="[0,0,255]" />
         </FB>
         <FB Name="ttCntrlProv" Type="TurnTableControllerIProv" x="1544.4443" y="2294.4443" >
@@ -441,14 +440,14 @@
           <Connection Source="cnvCntrl.CNF" Destination="cnvIReq.REQ" dx1="55.555553" dx2="55.555553" dy="2166.6665" />
           <Connection Source="ttCtrlReq.IND" Destination="boxProxTrig.EI" dx1="144.44444" dx2="55.555553" dy="83.33333" />
           <Connection Source="ttCtrlReq.IND" Destination="cnvCntrl.REQ" dx1="100.0" />
-          <Connection Source="cnvCntrl.INITO" Destination="gf.INIT" dx1="55.555553" />
-          <Connection Source="cnvCntrl.CNF" Destination="gf.REQ" dx1="55.555553" />
           <Connection Source="LOADEVENT.IND" Destination="cnvCntrl.loadBox" dx1="55.555553" />
           <Connection Source="ttCtrlReq.INITO" Destination="ttCntrlProv.INIT" dx1="55.555553" dx2="55.555553" dy="1200.0" />
           <Connection Source="ttCntrlProv.INITO" Destination="posLoad.INIT" dx1="55.555553" dx2="55.555553" dy="-216.66666" />
           <Connection Source="posLoad.IND" Destination="ttCntrlProv.REQ" dx1="55.555553" />
           <Connection Source="posLoad.INITO" Destination="boxProx.INIT" dx1="55.555553" dx2="55.555553" dy="1327.7777" />
           <Connection Source="boxProx.IND" Destination="ttCntrlProv.REQ" dx1="55.555553" />
+          <Connection Source="boxProx.INITO" Destination="fdsa.INIT" dx1="55.555553" />
+          <Connection Source="boxProxTrig.ER" Destination="cnvCntrl.tt_boxProximitySensorTrig" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="cnvCntrl.cnv1_motorOn" Destination="OBOOL.IN" dx1="361.11108" />
@@ -457,6 +456,7 @@
           <Connection Source="ttCtrlReq.boxProximitySensor" Destination="cnvCntrl.tt_boxProximitySensor" dx1="333.3333" />
           <Connection Source="posLoad.OUT" Destination="ttCntrlProv.positionLoad" dx1="55.555553" />
           <Connection Source="boxProx.OUT" Destination="ttCntrlProv.boxProximitySensor" dx1="55.555553" />
+          <Connection Source="ttCtrlReq.boxProximitySensor" Destination="boxProxTrig.QI" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
