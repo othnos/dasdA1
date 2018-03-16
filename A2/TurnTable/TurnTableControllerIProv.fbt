@@ -10,8 +10,8 @@
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" >
-        <With Var="dataId" />
-        <With Var="data2Id" />
+        <With Var="subId" />
+        <With Var="pubId" />
       </Event>
       <Event Name="REQ" >
         <With Var="boxProximitySensor" />
@@ -28,8 +28,8 @@
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="dataId" Type="WSTRING" />
-      <VarDeclaration Name="data2Id" Type="WSTRING" />
+      <VarDeclaration Name="subId" Type="WSTRING" />
+      <VarDeclaration Name="pubId" Type="WSTRING" />
       <VarDeclaration Name="boxProximitySensor" Type="BOOL" />
       <VarDeclaration Name="positionLoad" Type="BOOL" />
       <VarDeclaration Name="positionUnload" Type="BOOL" />
@@ -51,9 +51,9 @@
       <Connection Source="data2.INITO" Destination="INITO" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="dataId" Destination="data.ID" />
+      <Connection Source="subId" Destination="data.ID" />
       <Connection Source="data.RD_1" Destination="turnToUnload" />
-      <Connection Source="data2Id" Destination="data2.ID" />
+      <Connection Source="pubId" Destination="data2.ID" />
       <Connection Source="boxProximitySensor" Destination="data2.SD_1" />
       <Connection Source="positionLoad" Destination="data2.SD_2" />
       <Connection Source="positionUnload" Destination="data2.SD_3" />
