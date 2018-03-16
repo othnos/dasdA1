@@ -384,10 +384,6 @@
       <Parameter Name="ROWS" Value="0" />
       <Parameter Name="COLS" Value="1" />
       <FBNetwork >
-        <FB Name="cnvIReq" Type="ConveyorControllerIReq" x="3449.9998" y="2350.0" >
-          <Parameter Name="motorOnId" Value="&#34;cvn1_ctrl_motorOnId&#34;" />
-          <Parameter Name="boxLoadedId" Value="&#34;cvn1_ctrl_boxLoadedId&#34;" />
-        </FB>
         <FB Name="ttCtrlReq" Type="TurnTableControllerIReq" x="505.55554" y="1194.4445" >
           <Parameter Name="dataId" Value="&#34;tt_ctrl_dataId&#34;" />
           <Parameter Name="data2Id" Value="&#34;tt_ctrl_data2Id&#34;" />
@@ -430,14 +426,16 @@
           <Parameter Name="IN" Value="0" />
           <Parameter Name="LABEL" Value="&#34;boxProx&#34;" />
         </FB>
+        <FB Name="cnv1_Ctrl_Req" Type="ConveyorControllerIReq" x="3511.111" y="2366.6665" >
+          <Parameter Name="dataId" Value="&#34;cnv1_ctrl_dataId&#34;" />
+          <Parameter Name="boxLoadedId" Value="&#34;cnv1_ctrl_boxLoadedId&#34;" />
+          <Parameter Name="boxUnloadedId" Value="&#34;cnv1_ctrl_boxUnloadedId&#34;" />
+        </FB>
         <EventConnections>
-          <Connection Source="cnvIReq.INITO" Destination="ttCtrlReq.INIT" dx1="55.555553" dx2="55.555553" dy="949.99994" />
           <Connection Source="START.COLD" Destination="LOADEVENT.INIT" dx1="55.555553" />
           <Connection Source="ttCtrlReq.INITO" Destination="OBOOL.INIT" dx1="55.555553" />
           <Connection Source="LOADEVENT.INITO" Destination="cnvCntrl.INIT" dx1="55.555553" />
           <Connection Source="cnvCntrl.CNF" Destination="OBOOL.REQ" dx1="161.1111" />
-          <Connection Source="cnvCntrl.INITO" Destination="cnvIReq.INIT" dx1="111.11111" dx2="55.555553" dy="2166.6665" />
-          <Connection Source="cnvCntrl.CNF" Destination="cnvIReq.REQ" dx1="55.555553" dx2="55.555553" dy="2166.6665" />
           <Connection Source="ttCtrlReq.IND" Destination="boxProxTrig.EI" dx1="144.44444" dx2="55.555553" dy="83.33333" />
           <Connection Source="ttCtrlReq.IND" Destination="cnvCntrl.REQ" dx1="100.0" />
           <Connection Source="LOADEVENT.IND" Destination="cnvCntrl.loadBox" dx1="55.555553" />
@@ -448,15 +446,20 @@
           <Connection Source="boxProx.IND" Destination="ttCntrlProv.REQ" dx1="55.555553" />
           <Connection Source="boxProx.INITO" Destination="fdsa.INIT" dx1="55.555553" />
           <Connection Source="boxProxTrig.ER" Destination="cnvCntrl.tt_boxProximitySensorTrig" dx1="55.555553" />
+          <Connection Source="cnvCntrl.INITO" Destination="cnv1_Ctrl_Req.INIT" dx1="55.555553" />
+          <Connection Source="cnvCntrl.CNF" Destination="cnv1_Ctrl_Req.REQ" dx1="55.555553" />
+          <Connection Source="cnvCntrl.boxLoaded" Destination="cnv1_Ctrl_Req.boxLoaded" dx1="55.555553" />
+          <Connection Source="cnvCntrl.boxUnloaded" Destination="cnv1_Ctrl_Req.boxUnloaded" dx1="55.555553" />
+          <Connection Source="cnv1_Ctrl_Req.INITO" Destination="ttCtrlReq.INIT" dx1="55.555553" dx2="55.555553" dy="83.33333" />
         </EventConnections>
         <DataConnections>
           <Connection Source="cnvCntrl.cnv1_motorOn" Destination="OBOOL.IN" dx1="361.11108" />
-          <Connection Source="cnvCntrl.cnv1_motorOn" Destination="cnvIReq.motorOn" dx1="238.88889" dx2="55.555553" dy="2388.889" />
           <Connection Source="ttCtrlReq.positionLoad" Destination="cnvCntrl.tt_positionLoad" dx1="244.44443" dx2="55.555553" dy="83.33333" />
           <Connection Source="ttCtrlReq.boxProximitySensor" Destination="cnvCntrl.tt_boxProximitySensor" dx1="333.3333" />
           <Connection Source="posLoad.OUT" Destination="ttCntrlProv.positionLoad" dx1="55.555553" />
           <Connection Source="boxProx.OUT" Destination="ttCntrlProv.boxProximitySensor" dx1="55.555553" />
           <Connection Source="ttCtrlReq.boxProximitySensor" Destination="boxProxTrig.QI" dx1="55.555553" />
+          <Connection Source="cnvCntrl.cnv1_motorOn" Destination="cnv1_Ctrl_Req.motorOn" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>

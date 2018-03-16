@@ -34,6 +34,10 @@
       <Event Name="CNF" Comment="Execution Confirmation" >
         <With Var="cnv1_motorOn" />
       </Event>
+      <Event Name="boxLoaded" >
+      </Event>
+      <Event Name="boxUnloaded" >
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="tt_positionLoad" Type="BOOL" />
@@ -55,13 +59,18 @@
       </ECState>
       <ECState Name="stopCnv1" x="1255.5555" y="1588.8888" >
         <ECAction Algorithm="cnv1_stop" Output="CNF" />
+        <ECAction Output="boxUnloaded" />
+      </ECState>
+      <ECState Name="boxLoaded" x="2005.5554" y="427.77777" >
+        <ECAction Output="boxLoaded" />
       </ECState>
       <ECTransition Source="INIT" Destination="START" Condition="1" x="555.55554" y="138.88889" />
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="805.55554" y="316.66666" />
       <ECTransition Source="runCnv1" Destination="stopCnv1" Condition="tt_boxProximitySensorTrig [tt_positionLoad = TRUE]" x="2977.7776" y="1588.8888" />
       <ECTransition Source="stopCnv1" Destination="START" Condition="1" x="555.55554" y="1588.8888" />
       <ECTransition Source="runCnv1" Destination="runCnv1" Condition="REQ" x="3216.6665" y="1200.0" />
-      <ECTransition Source="START" Destination="runCnv1" Condition="loadBox" x="2977.7776" y="427.77777" />
+      <ECTransition Source="START" Destination="boxLoaded" Condition="loadBox" x="1222.2222" y="427.77777" />
+      <ECTransition Source="boxLoaded" Destination="runCnv1" Condition="1" x="2977.7776" y="427.77777" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
 <ST><![CDATA[// tt_positionLoad := FALSE;

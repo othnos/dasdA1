@@ -10,51 +10,53 @@
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" >
-        <With Var="colorSensor" />
-        <With Var="pushId" />
-        <With Var="colorSensorId" />
-      </Event>
-      <Event Name="REQ" Comment="Normal Execution Request" >
-        <With Var="colorSensor" />
+        <With Var="dataId" />
+        <With Var="boxLoadedId" />
+        <With Var="boxUnloadedId" />
       </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="INITO" Comment="Initialization Confirm" >
-        <With Var="push" />
-      </Event>
-      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="motorOn" />
       </Event>
       <Event Name="IND" >
-        <With Var="push" />
+        <With Var="motorOn" />
+      </Event>
+      <Event Name="boxLoaded" >
+      </Event>
+      <Event Name="boxUnloaded" >
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="colorSensor" Type="BOOL" Comment="Status of Color sensor" />
-      <VarDeclaration Name="pushId" Type="WSTRING" Comment="Push event id" />
-      <VarDeclaration Name="colorSensorId" Type="WSTRING" Comment="Id of the color sensor" />
+      <VarDeclaration Name="dataId" Type="WSTRING" />
+      <VarDeclaration Name="boxLoadedId" Type="WSTRING" />
+      <VarDeclaration Name="boxUnloadedId" Type="WSTRING" />
     </InputVars>
     <OutputVars>
-      <VarDeclaration Name="push" Type="BOOL" />
+      <VarDeclaration Name="motorOn" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <FBNetwork >
-    <FB Name="pusherColorSensor" Type="PUBL_1" x="2344.4443" y="644.4444" >
+    <FB Name="data" Type="SUBL_1" x="833.3333" y="449.99997" >
     </FB>
-    <FB Name="pusherPush" Type="SUBL_1" x="1272.2222" y="644.4444" >
+    <FB Name="boxLoadedPubl" Type="SUBL_0" x="1861.1111" y="433.3333" >
+    </FB>
+    <FB Name="boxUnloadedPub" Type="SUBL_0" x="2838.8887" y="427.77777" >
     </FB>
     <EventConnections>
-      <Connection Source="REQ" Destination="pusherColorSensor.REQ" />
-      <Connection Source="pusherColorSensor.INITO" Destination="INITO" />
-      <Connection Source="pusherPush.INITO" Destination="pusherColorSensor.INIT" dx1="55.555553" />
-      <Connection Source="INIT" Destination="pusherPush.INIT" />
-      <Connection Source="pusherColorSensor.CNF" Destination="CNF" />
-      <Connection Source="pusherPush.IND" Destination="IND" />
+      <Connection Source="INIT" Destination="data.INIT" />
+      <Connection Source="data.IND" Destination="IND" />
+      <Connection Source="data.INITO" Destination="boxLoadedPubl.INIT" dx1="55.555553" />
+      <Connection Source="boxLoadedPubl.IND" Destination="boxLoaded" />
+      <Connection Source="boxLoadedPubl.INITO" Destination="boxUnloadedPub.INIT" dx1="55.555553" />
+      <Connection Source="boxUnloadedPub.INITO" Destination="INITO" />
+      <Connection Source="boxUnloadedPub.IND" Destination="boxUnloaded" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="colorSensor" Destination="pusherColorSensor.SD_1" />
-      <Connection Source="colorSensorId" Destination="pusherColorSensor.ID" />
-      <Connection Source="pushId" Destination="pusherPush.ID" />
-      <Connection Source="pusherPush.RD_1" Destination="push" />
+      <Connection Source="dataId" Destination="data.ID" />
+      <Connection Source="boxLoadedId" Destination="boxLoadedPubl.ID" />
+      <Connection Source="data.RD_1" Destination="motorOn" />
+      <Connection Source="boxUnloadedId" Destination="boxUnloadedPub.ID" />
     </DataConnections>
   </FBNetwork>
 </FBType>
