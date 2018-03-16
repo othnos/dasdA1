@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="TT_model" Comment="Basic Function Block Type" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Holobloc Inc" Version="0.3" Author="JHC" Date="2009-09-15" Remarks="Changed transition priorities." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-30" />
+<CompilerInfo header="package fb.rt.dasdA1.A2.TurnTable;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="rotateToUNL" />
+      </Event>
+      <Event Name="klick" >
+      </Event>
+      <Event Name="load" >
+      </Event>
+      <Event Name="unload" >
+      </Event>
+      <Event Name="REQ" >
+        <With Var="rotateToUNL" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="LD_posLED" />
+        <With Var="UNL_posLED" />
+        <With Var="palletOnLED" />
+        <With Var="turnTimeDISP" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="LD_posLED" />
+        <With Var="UNL_posLED" />
+        <With Var="palletOnLED" />
+        <With Var="turnTimeDISP" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="rotateToUNL" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="LD_posLED" Type="BOOL" />
+      <VarDeclaration Name="UNL_posLED" Type="BOOL" />
+      <VarDeclaration Name="palletOnLED" Type="BOOL" />
+      <VarDeclaration Name="turnTimeDISP" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Name="position" Type="UINT" InitialValue="1" />
+      <VarDeclaration Name="palletON" Type="BOOL" InitialValue="FALSE" />
+      <VarDeclaration Name="turnOnProgress" Type="BOOL" InitialValue="FALSE" />
+    </InternalVars>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="922.22217" y="138.88889" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="loadState" x="494.44443" y="2516.6665" >
+        <ECAction Algorithm="load" Output="CNF" />
+      </ECState>
+      <ECState Name="unload" x="1533.3333" y="2461.111" >
+        <ECAction Algorithm="Unload" Output="CNF" />
+      </ECState>
+      <ECState Name="turnThatShit" x="2572.2222" y="2494.4443" >
+        <ECAction Algorithm="rotateToUNL_START" Output="CNF" />
+      </ECState>
+      <ECState Name="turntoUNL" x="4066.6665" y="2494.4443" >
+        <ECAction Algorithm="turningToUNL" Output="CNF" />
+      </ECState>
+      <ECState Name="cnfForce" x="483.3333" y="138.88889" >
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="922.22217" y="427.77777" />
+      <ECTransition Source="START" Destination="loadState" Condition="load [position = 1]" x="288.8889" y="2161.111" />
+      <ECTransition Source="loadState" Destination="START" Condition="1" x="694.4444" y="2138.889" />
+      <ECTransition Source="START" Destination="unload" Condition="unload [position = 2]" x="1088.8888" y="2177.7776" />
+      <ECTransition Source="unload" Destination="START" Condition="1" x="1427.7777" y="2100.0" />
+      <ECTransition Source="START" Destination="turnThatShit" Condition="REQ [position = 1]" x="1955.5554" y="2133.3333" />
+      <ECTransition Source="turnThatShit" Destination="START" Condition="1" x="2466.6665" y="2133.3333" />
+      <ECTransition Source="START" Destination="turntoUNL" Condition="klick [turnOnProgress = TRUE]" x="3255.5554" y="2127.7776" />
+      <ECTransition Source="turntoUNL" Destination="START" Condition="1" x="4066.6665" y="2066.6665" />
+      <ECTransition Source="INIT" Destination="cnfForce" Condition="1" x="705.55554" y="138.88889" />
+      <ECTransition Source="cnfForce" Destination="START" Condition="1" x="516.6666" y="283.3333" />
+    </ECC>
+  <Algorithm Name="INIT" Comment="Initialization algorithm" >
+<ST><![CDATA[LD_posLED := TRUE;
+UNL_posLED := FALSE;
+palletON := FALSE;]]></ST>
+  </Algorithm>
+  <Algorithm Name="load" >
+<ST><![CDATA[IF (palletON = FALSE) THEN
+	palletON := TRUE;
+	palletOnLED := TRUE;
+END_IF;]]></ST>
+  </Algorithm>
+  <Algorithm Name="rotateToUNL_START" >
+<ST><![CDATA[turnOnProgress := TRUE;]]></ST>
+  </Algorithm>
+  <Algorithm Name="Unload" >
+<ST><![CDATA[IF (palletON = TRUE) THEN
+	palletON := FALSE;
+	palletOnLED := FALSE;
+END_IF;]]></ST>
+  </Algorithm>
+  <Algorithm Name="turningToUNL" >
+<ST><![CDATA[IF (rotateToUNL = TRUE)THEN
+	IF (position < 6) THEN
+		IF (position MOD 2 = 0) THEN
+			UNL_posLED := TRUE;
+			position := position + 1;
+			turnTimeDISP := position;
+		ELSE
+			UNL_posLED := FALSE;
+			position := position + 1;
+			turnTimeDISP := position;
+		END_IF;
+	ELSE
+		turnOnProgress := FALSE;
+		UNL_posLED := TRUE;
+	END_IF;
+END_IF;]]></ST>
+  </Algorithm>
+  </BasicFB>
+</FBType>

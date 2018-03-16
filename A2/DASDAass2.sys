@@ -19,7 +19,7 @@
           <Parameter Name="LABEL0" Value="&#34;MANUAL&#34;" />
           <Parameter Name="IN" Value="1" />
         </FB>
-        <FB Name="LoadPub" Type="PUBL_1" x="3138.8887" y="583.3333" >
+        <FB Name="LoadPub" Type="PUBL_1" x="3172.2222" y="533.3333" >
           <Parameter Name="ID" Value="&#34;LoadPub&#34;" />
         </FB>
         <FB Name="ColorConverter" Type="BOXCOLOR_TO_COLOR" x="1666.6666" y="477.77777" >
@@ -28,7 +28,7 @@
           <Parameter Name="QI" Value="1" />
           <Parameter Name="TYPE" Value="&#34;BOXCOLOR&#34;" />
         </FB>
-        <FB Name="LoadBTN" Type="IN_EVENT" x="2694.4443" y="255.55554" >
+        <FB Name="LoadBTN" Type="IN_EVENT" x="2650.0" y="227.77777" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;LOAD&#34;" />
         </FB>
@@ -42,14 +42,14 @@
         <FB Name="METR_PUB" Type="SUBL_0" x="361.11108" y="1211.1111" >
           <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
         </FB>
-        <FB Name="MotorOn" Type="IN_EVENT" x="911.1111" y="1233.3333" >
+        <FB Name="MotorOn" Type="IN_EVENT" x="866.6666" y="1238.8888" >
           <Parameter Name="LABEL" Value="&#34;Motor ON/OFF&#34;" />
           <Parameter Name="QI" Value="1" />
         </FB>
-        <FB Name="MotorPub" Type="PUBL_0" x="1355.5555" y="1488.8888" >
+        <FB Name="MotorPub" Type="PUBL_0" x="1316.6666" y="1533.3333" >
           <Parameter Name="ID" Value="&#34;MotorPub&#34;" />
         </FB>
-        <FB Name="MotorBitOn" Type="SUBL_1" x="2050.0" y="1272.2222" >
+        <FB Name="MotorBitOn" Type="SUBL_1" x="2088.889" y="1261.1111" >
           <Parameter Name="ID" Value="&#34;MotorBitPub&#34;" />
         </FB>
         <FB Name="MotorOnIndicator" Type="OUT_BOOL" x="2622.2222" y="1333.3333" >
@@ -65,30 +65,36 @@
         <FB Name="UnloadPub" Type="PUBL_0" x="4027.7776" y="44.444443" >
           <Parameter Name="ID" Value="&#34;UnloadPub&#34;" />
         </FB>
-        <FB Name="TT_ToLeft" Type="IN_EVENT" x="366.66666" y="2294.4443" >
+        <FB Name="TT_palletld" Type="IN_EVENT" x="4488.8887" y="1177.7777" >
           <Parameter Name="QI" Value="1" />
-          <Parameter Name="LABEL" Value="&#34;TT to left&#34;" />
+          <Parameter Name="LABEL" Value="&#34;TT_load&#34;" />
         </FB>
-        <FB Name="TT_ToLeftPROV" Type="PUBL_0" x="1033.3333" y="2372.2222" >
-          <Parameter Name="ID" Value="&#34;TT_ToL&#34;" />
+        <FB Name="TT_palledLD_PUB" Type="PUBL_0" x="5138.8887" y="1500.0" >
+          <Parameter Name="ID" Value="&#34;TT_loadPub&#34;" />
         </FB>
-        <FB Name="TT_ToUp" Type="IN_EVENT" x="1511.1111" y="2388.889" >
+        <FB Name="displayPub" Type="SUBL_1" x="2583.3333" y="2905.5554" >
+          <Parameter Name="ID" Value="&#34;counterVAL&#34;" />
+        </FB>
+        <FB Name="counterVAL" Type="OUT_ANY" x="3244.4443" y="2950.0" >
           <Parameter Name="QI" Value="1" />
-          <Parameter Name="LABEL" Value="&#34;TT_ToUp&#34;" />
+          <Parameter Name="W" Value="3" />
+          <Parameter Name="TYPE" Value="&#34;UINT&#34;" />
         </FB>
-        <FB Name="TT_toUnload" Type="IN_EVENT" x="1994.4443" y="2550.0" >
+        <FB Name="loadCheckPub" Type="SUBL_0" x="4088.8887" y="3055.5554" >
+          <Parameter Name="ID" Value="&#34;loadCheck&#34;" />
+        </FB>
+        <FB Name="loadCheck" Type="OUT_EVENT" x="4688.8887" y="3055.5554" >
           <Parameter Name="QI" Value="1" />
-          <Parameter Name="LABEL" Value="&#34;TT to Unl&#34;" />
+          <Parameter Name="LABEL" Value="&#34;OutEventCheck&#34;" />
         </FB>
-        <FB Name="TT_toUnloadPROV" Type="PUBL_0" x="2494.4443" y="2783.3333" >
-          <Parameter Name="ID" Value="&#34;TT_toUnload&#34;" />
-        </FB>
-        <FB Name="TT_toLoad" Type="IN_EVENT" x="3105.5554" y="2455.5554" >
+        <FB Name="rotateToUNL" Type="IN_EVENT" x="5733.333" y="1783.3333" >
           <Parameter Name="QI" Value="1" />
-          <Parameter Name="LABEL" Value="&#34;TT to Ld&#34;" />
+          <Parameter Name="LABEL" Value="&#34;rotateToUnl&#34;" />
         </FB>
-        <FB Name="TT_toLdPROV" Type="PUBL_0" x="3777.7776" y="2438.889" >
-          <Parameter Name="ID" Value="&#34;TT_toLd&#34;" />
+        <FB Name="turnbit" Type="E_TOGGLE" x="5438.8887" y="2961.111" >
+        </FB>
+        <FB Name="rotatrON" Type="PUBL_1" x="6449.9995" y="2416.6665" >
+          <Parameter Name="ID" Value="&#34;rotateON&#34;" />
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="MAbutton.INIT" dx1="55.555553" />
@@ -112,22 +118,27 @@
           <Connection Source="UnloadBTN.IND" Destination="UnloadPub.REQ" dx1="88.888885" />
           <Connection Source="MotorOnIndicator.INITO" Destination="Loadi.INIT" dx1="55.555553" />
           <Connection Source="UnloadPub.INITO" Destination="METR_PUB.INIT" dx1="55.555553" dx2="55.555553" dy="1011.1111" />
-          <Connection Source="vari.INITO" Destination="TT_ToLeft.INIT" dx1="55.555553" dx2="55.555553" dy="494.44443" />
-          <Connection Source="TT_ToLeft.INITO" Destination="TT_ToLeftPROV.INIT" dx1="55.555553" />
-          <Connection Source="TT_ToLeft.IND" Destination="TT_ToLeftPROV.REQ" dx1="55.555553" />
-          <Connection Source="TT_ToLeftPROV.INITO" Destination="TT_ToUp.INIT" dx1="55.555553" />
-          <Connection Source="TT_ToUp.INITO" Destination="TT_toUnload.INIT" dx1="55.555553" />
-          <Connection Source="TT_toUnload.INITO" Destination="TT_toUnloadPROV.INIT" dx1="105.55555" />
-          <Connection Source="TT_toUnload.IND" Destination="TT_toUnloadPROV.REQ" dx1="55.555553" />
-          <Connection Source="TT_toUnloadPROV.INITO" Destination="TT_toLoad.INIT" dx1="55.555553" />
-          <Connection Source="TT_toLoad.INITO" Destination="TT_toLdPROV.INIT" dx1="55.555553" />
-          <Connection Source="TT_toLoad.IND" Destination="TT_toLdPROV.REQ" dx1="55.555553" />
+          <Connection Source="TT_palletld.INITO" Destination="TT_palledLD_PUB.INIT" dx1="105.55555" />
+          <Connection Source="TT_palletld.IND" Destination="TT_palledLD_PUB.REQ" dx1="55.555553" />
+          <Connection Source="vari.INITO" Destination="TT_palletld.INIT" dx1="55.555553" />
+          <Connection Source="displayPub.INITO" Destination="counterVAL.INIT" dx1="55.555553" />
+          <Connection Source="displayPub.IND" Destination="counterVAL.REQ" dx1="133.33333" />
+          <Connection Source="counterVAL.INITO" Destination="loadCheckPub.INIT" dx1="55.555553" />
+          <Connection Source="loadCheckPub.INITO" Destination="loadCheck.INIT" dx1="55.555553" />
+          <Connection Source="loadCheckPub.IND" Destination="loadCheck.REQ" dx1="55.555553" />
+          <Connection Source="TT_palledLD_PUB.INITO" Destination="rotateToUNL.INIT" dx1="55.555553" />
+          <Connection Source="rotateToUNL.IND" Destination="turnbit.REQ" dx1="55.555553" dx2="55.555553" dy="872.22217" />
+          <Connection Source="rotateToUNL.INITO" Destination="rotatrON.INIT" dx1="211.1111" />
+          <Connection Source="rotatrON.INITO" Destination="displayPub.INIT" dx1="55.555553" dx2="55.555553" dy="194.44444" />
+          <Connection Source="turnbit.CNF" Destination="rotatrON.REQ" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="BoxColor.OUT" Destination="ColorConverter.boxColor" dx1="55.555553" />
           <Connection Source="ColorConverter.COLOR2" Destination="LoadPub.SD_1" dx1="55.555553" />
           <Connection Source="Loadi.RD_1" Destination="vari.IN" dx1="55.555553" />
           <Connection Source="MotorBitOn.RD_1" Destination="MotorOnIndicator.IN" dx1="55.555553" />
+          <Connection Source="displayPub.RD_1" Destination="counterVAL.IN" dx1="166.66666" />
+          <Connection Source="turnbit.OUT" Destination="rotatrON.SD_1" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
@@ -193,14 +204,6 @@
           <Parameter Name="POS" Value="500" />
           <Parameter Name="WKPC" Value="[255,0,0]" />
         </FB>
-        <FB Name="TT_TRYOUT" Type="OUT_EVENT" x="3194.4443" y="1944.4443" >
-          <Parameter Name="QI" Value="1" />
-          <Parameter Name="LABEL" Value="&#34;LEFT&#34;" />
-        </FB>
-        <FB Name="TT_TRYOUT_2" Type="OUT_EVENT" x="3977.7776" y="1844.4443" >
-          <Parameter Name="QI" Value="1" />
-          <Parameter Name="LABEL" Value="&#34;UP&#34;" />
-        </FB>
         <FB Name="CONVTRYOUT" Type="MECH_VIEW" x="816.6666" y="1555.5555" >
           <Parameter Name="LEN" Value="6" />
           <Parameter Name="DIR" Value="VDIR#UP" />
@@ -208,20 +211,32 @@
         <FB Name="CNV1_Pub" Type="SUBL_3" x="394.44443" y="1600.0" >
           <Parameter Name="ID" Value="&#34;CNV1_Pub&#34;" />
         </FB>
-        <FB Name="TT_L_REQ" Type="SUBL_0" x="2400.0" y="3061.111" >
-          <Parameter Name="ID" Value="&#34;TT_L_REQ&#34;" />
-        </FB>
-        <FB Name="TT_UP_REQ" Type="SUBL_0" x="3211.111" y="3055.5554" >
-          <Parameter Name="ID" Value="&#34;TT_UP_REQ&#34;" />
-        </FB>
-        <FB Name="PartOnREQ" Type="SUBL_1" x="1466.6666" y="2027.7777" >
+        <FB Name="PartOnREQ" Type="SUBL_1" x="1627.7777" y="2027.7777" >
           <Parameter Name="ID" Value="&#34;PartOnREQ&#34;" />
         </FB>
-        <FB Name="PartOn" Type="OUT_BOOL" x="2366.6665" y="1788.8888" >
+        <FB Name="PartOn" Type="OUT_BOOL" x="2427.7776" y="1766.6666" >
           <Parameter Name="LABEL" Value="&#34;Part On&#34;" />
           <Parameter Name="QI" Value="1" />
           <Parameter Name="C1" Value="[0,255,0]" />
           <Parameter Name="C0" Value="[0,0,0]" />
+        </FB>
+        <FB Name="TT_UNL" Type="OUT_BOOL" x="3261.111" y="1816.6666" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;left&#34;" />
+          <Parameter Name="C0" Value="[0,0,0]" />
+          <Parameter Name="C1" Value="[0,255,0]" />
+        </FB>
+        <FB Name="TT_LD" Type="OUT_BOOL" x="3988.8887" y="1861.1111" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;up&#34;" />
+          <Parameter Name="C0" Value="[0,0,0]" />
+          <Parameter Name="C1" Value="[0,255,0]" />
+        </FB>
+        <FB Name="TTL" Type="SUBL_1" x="2294.4443" y="3066.6665" >
+          <Parameter Name="ID" Value="&#34;TT_L_REQ&#34;" />
+        </FB>
+        <FB Name="TTUP" Type="SUBL_1" x="3272.2222" y="3155.5554" >
+          <Parameter Name="ID" Value="&#34;TT_UP_REQ&#34;" />
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="PUSHER3.INIT" dx1="55.555553" />
@@ -235,25 +250,28 @@
           <Connection Source="space21.INITO" Destination="POST_P2_CNV.INIT" dx1="55.555553" />
           <Connection Source="POST_P2_CNV.INITO" Destination="space22.INIT" dx1="55.555553" />
           <Connection Source="POST_P3_CNV.INITO" Destination="space21.INIT" dx1="55.555553" />
-          <Connection Source="POST_TT_CNV.INITO" Destination="TT_TRYOUT.INIT" dx1="55.555553" dx2="55.555553" dy="1366.6666" />
-          <Connection Source="TT_TRYOUT.INITO" Destination="TT_TRYOUT_2.INIT" dx1="55.555553" />
-          <Connection Source="TT_TRYOUT_2.INITO" Destination="POST_P3_CNV.INIT" dx1="55.555553" dx2="55.555553" dy="-505.55554" />
           <Connection Source="CNV1_Pub.IND" Destination="CONVTRYOUT.REQ" dx1="55.555553" />
           <Connection Source="space23.INITO" Destination="CNV1_Pub.INIT" dx1="55.555553" dx2="55.555553" dy="211.1111" />
           <Connection Source="CNV1_Pub.INITO" Destination="CONVTRYOUT.INIT" dx1="55.555553" />
-          <Connection Source="TT_L_REQ.INITO" Destination="TT_UP_REQ.INIT" dx1="55.555553" />
-          <Connection Source="TT_L_REQ.IND" Destination="TT_TRYOUT.REQ" dx1="122.22221" />
-          <Connection Source="TT_UP_REQ.IND" Destination="TT_TRYOUT_2.REQ" dx1="138.88889" />
           <Connection Source="CONVTRYOUT.INITO" Destination="PartOnREQ.INIT" dx1="55.555553" />
           <Connection Source="space13.INITO" Destination="PartOn.INIT" dx1="55.555553" dx2="55.555553" dy="849.99994" />
           <Connection Source="PartOn.INITO" Destination="POST_TT_CNV.INIT" dx1="333.3333" />
-          <Connection Source="PartOnREQ.INITO" Destination="TT_L_REQ.INIT" dx1="55.555553" />
+          <Connection Source="PartOnREQ.IND" Destination="PartOn.REQ" dx1="155.55554" />
+          <Connection Source="POST_TT_CNV.INITO" Destination="TT_UNL.INIT" dx1="55.555553" dx2="55.555553" dy="1377.7777" />
+          <Connection Source="TT_UNL.INITO" Destination="TT_LD.INIT" dx1="55.555553" />
+          <Connection Source="TT_LD.INITO" Destination="POST_P3_CNV.INIT" dx1="55.555553" />
+          <Connection Source="PartOnREQ.INITO" Destination="TTL.INIT" dx1="55.555553" />
+          <Connection Source="TTL.INITO" Destination="TTUP.INIT" dx1="55.555553" />
+          <Connection Source="TTL.IND" Destination="TT_UNL.REQ" dx1="294.44443" />
+          <Connection Source="TTUP.IND" Destination="TT_LD.REQ" dx1="116.666664" />
         </EventConnections>
         <DataConnections>
           <Connection Source="CNV1_Pub.RD_1" Destination="CONVTRYOUT.POS" dx1="55.555553" />
           <Connection Source="CNV1_Pub.RD_2" Destination="CONVTRYOUT.STYLE" dx1="55.555553" />
           <Connection Source="CNV1_Pub.RD_3" Destination="CONVTRYOUT.WKPC" dx1="55.555553" />
           <Connection Source="PartOnREQ.RD_1" Destination="PartOn.IN" dx1="55.555553" />
+          <Connection Source="TTL.RD_1" Destination="TT_UNL.IN" dx1="366.66666" />
+          <Connection Source="TTUP.RD_1" Destination="TT_LD.IN" dx1="216.66666" />
         </DataConnections>
       </FBNetwork>
     </Resource>
@@ -283,12 +301,12 @@
         <FB Name="MOTOR_ON" Type="SUBL_0" x="2922.2222" y="161.1111" >
           <Parameter Name="ID" Value="&#34;MotorPub&#34;" />
         </FB>
-        <FB Name="LOAD_PALLET" Type="SUBL_1" x="1677.7777" y="577.7778" >
+        <FB Name="LOAD_PALLET" Type="SUBL_1" x="1555.5555" y="727.7778" >
           <Parameter Name="ID" Value="&#34;LoadPub&#34;" />
         </FB>
         <FB Name="MOTOR_START_STOP" Type="E_TOGGLE" x="3933.3333" y="577.7778" >
         </FB>
-        <FB Name="CNV1_Model" Type="CNV_MDL" x="2727.7776" y="2083.3333" >
+        <FB Name="CNV1_Model" Type="CNV_MDL" x="2688.8887" y="1361.1111" >
           <Parameter Name="LPOS" Value="0" />
           <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
           <Parameter Name="VF" Value="2" />
@@ -300,14 +318,13 @@
         <FB Name="MotorBitPub" Type="PUBL_1" x="5216.6665" y="438.8889" >
           <Parameter Name="ID" Value="&#34;MotorBitPub&#34;" />
         </FB>
-        <FB Name="MotorOn" Type="SUBL_1" x="1044.4445" y="2344.4443" >
-          <Parameter Name="ID" Value="&#34;MotorBitPub&#34;" />
-        </FB>
-        <FB Name="UnloadPub" Type="SUBL_0" x="1588.8888" y="2405.5554" >
-          <Parameter Name="ID" Value="&#34;UnloadPub&#34;" />
-        </FB>
-        <FB Name="endPosPROV" Type="PUBL_1" x="3961.1108" y="2583.3333" >
+        <FB Name="endPosPROV" Type="PUBL_1" x="4049.9998" y="2744.4443" >
           <Parameter Name="ID" Value="&#34;CNV1_endPos&#34;" />
+        </FB>
+        <FB Name="CNV1_PROV" Type="ConveyorControllerIProv" x="783.3333" y="1738.8888" >
+          <Parameter Name="boxLoadedId" Value="&#34;cnv1_ctrl_boxLoadedId&#34;" />
+          <Parameter Name="boxUnloadedId" Value="&#34;cnv1_ctrl_boxUnloadedId&#34;" />
+          <Parameter Name="dataId" Value="&#34;cnv1_ctrl_dataId&#34;" />
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="METR_PUB.INIT" dx1="55.555553" />
@@ -315,42 +332,95 @@
           <Connection Source="LOAD_PALLET.INITO" Destination="MOTOR_ON.INIT" dx1="177.77777" />
           <Connection Source="MOTOR_ON.IND" Destination="MOTOR_START_STOP.REQ" dx1="55.555553" />
           <Connection Source="METR_PUB.IND" Destination="CNV1_Model.CLK" dx1="55.555553" />
-          <Connection Source="LOAD_PALLET.IND" Destination="CNV1_Model.LOAD" dx1="338.8889" />
-          <Connection Source="MOTOR_ON.INITO" Destination="CNV1_Pub.INIT" dx1="311.11108" />
-          <Connection Source="CNV1_Model.INDR" Destination="CNV1_Pub.REQ" dx1="55.555553" />
+          <Connection Source="MOTOR_ON.INITO" Destination="CNV1_Pub.INIT" dx1="477.77777" />
+          <Connection Source="CNV1_Model.INDR" Destination="CNV1_Pub.REQ" dx1="538.88885" />
           <Connection Source="CNV1_Pub.INITO" Destination="MotorBitPub.INIT" dx1="272.2222" />
-          <Connection Source="METR_PUB.INITO" Destination="MotorOn.INIT" dx1="27.777777" />
           <Connection Source="MOTOR_START_STOP.CNF" Destination="MotorBitPub.REQ" dx1="55.555553" />
-          <Connection Source="MotorOn.INITO" Destination="UnloadPub.INIT" dx1="55.555553" />
-          <Connection Source="UnloadPub.IND" Destination="CNV1_Model.UNLD" dx1="161.1111" />
-          <Connection Source="UnloadPub.INITO" Destination="endPosPROV.INIT" dx1="55.555553" />
           <Connection Source="CNV1_Model.INDR" Destination="endPosPROV.REQ" dx1="183.33333" />
+          <Connection Source="CNV1_PROV.boxLoaded" Destination="CNV1_Model.LOAD" dx1="311.11108" />
+          <Connection Source="CNV1_PROV.boxUnloaded" Destination="CNV1_Model.UNLD" dx1="461.11108" />
+          <Connection Source="START.COLD" Destination="CNV1_PROV.INIT" dx1="55.555553" />
+          <Connection Source="CNV1_PROV.INITO" Destination="endPosPROV.INIT" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
-          <Connection Source="LOAD_PALLET.RD_1" Destination="CNV1_Model.WKPC" dx1="172.22221" />
           <Connection Source="CNV1_Model.POS" Destination="CNV1_Pub.SD_1" dx1="55.555553" />
-          <Connection Source="CNV1_Model.STYLO" Destination="CNV1_Pub.SD_2" dx1="305.55554" />
-          <Connection Source="CNV1_Model.WKPO" Destination="CNV1_Pub.SD_3" dx1="583.3333" />
+          <Connection Source="CNV1_Model.STYLO" Destination="CNV1_Pub.SD_2" dx1="249.99998" />
+          <Connection Source="CNV1_Model.WKPO" Destination="CNV1_Pub.SD_3" dx1="405.55554" />
           <Connection Source="MOTOR_START_STOP.OUT" Destination="MotorBitPub.SD_1" dx1="55.555553" />
-          <Connection Source="MotorOn.RD_1" Destination="CNV1_Model.MTR_ON" dx1="55.555553" />
-          <Connection Source="CNV1_Model.END" Destination="endPosPROV.SD_1" dx1="433.3333" />
+          <Connection Source="CNV1_Model.END" Destination="endPosPROV.SD_1" dx1="483.3333" />
+          <Connection Source="CNV1_PROV.motorOn" Destination="CNV1_Model.MTR_ON" dx1="588.88885" />
+          <Connection Source="LOAD_PALLET.RD_1" Destination="CNV1_Model.WKPC" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
     <Resource Name="TT_MODEL" Type="PANEL_RESOURCE" x="1955.5554" y="200.0" >
       <FBNetwork >
-        <FB Name="METR_REQ" Type="SUBL_0" x="483.3333" y="194.44444" >
-          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
-        </FB>
-        <FB Name="CNV1_endPosREQ" Type="SUBL_1" x="983.3333" y="372.2222" >
+        <FB Name="CNV1_endPosREQ" Type="SUBL_1" x="2005.5554" y="205.55554" >
           <Parameter Name="ID" Value="&#34;CNV1_endPos&#34;" />
         </FB>
-        <FB Name="whichOne" Type="E_SELECT" x="1944.4443" y="705.55554" >
+        <FB Name="clock" Type="E_CYCLE" x="700.0" y="383.3333" >
+          <Parameter Name="DT" Value="t#1000ms" />
+        </FB>
+        <FB Name="ControllerProv" Type="TurnTableControllerIProv" x="544.4444" y="1316.6666" >
+          <Parameter Name="subId" Value="&#34;tt_ctrl_subId&#34;" />
+          <Parameter Name="pubId" Value="&#34;tt_ctrl_pubId&#34;" />
+        </FB>
+        <FB Name="TTinUNL" Type="PUBL_1" x="3499.9998" y="1716.6666" >
+          <Parameter Name="ID" Value="&#34;TT_L_REQ&#34;" />
+        </FB>
+        <FB Name="tt_to_unload" Type="SUBL_0" x="1738.8888" y="1016.6666" >
+          <Parameter Name="ID" Value="&#34;TT_loadPub&#34;" />
+        </FB>
+        <FB Name="counterValDISP" Type="PUBL_1" x="4605.555" y="1616.6666" >
+          <Parameter Name="ID" Value="&#34;counterVAL&#34;" />
+        </FB>
+        <FB Name="LOADeVENT" Type="PUBL_0" x="4688.8887" y="805.55554" >
+          <Parameter Name="ID" Value="&#34;loadCheck&#34;" />
+        </FB>
+        <FB Name="TTinLoad" Type="PUBL_1" x="5133.333" y="2100.0" >
+          <Parameter Name="ID" Value="&#34;TT_UP_REQ&#34;" />
+        </FB>
+        <FB Name="TTpalletOn" Type="PUBL_1" x="5716.6665" y="2350.0" >
+          <Parameter Name="ID" Value="&#34;PartOnREQ&#34;" />
+        </FB>
+        <FB Name="rotateON" Type="SUBL_1" x="877.7778" y="2561.111" >
+          <Parameter Name="ID" Value="&#34;rotateON&#34;" />
+        </FB>
+        <FB Name="TT_modelBlock" Type="TT_model" x="2194.4443" y="1555.5555" >
         </FB>
         <EventConnections>
-          <Connection Source="START.COLD" Destination="METR_REQ.INIT" dx1="55.555553" />
-          <Connection Source="METR_REQ.INITO" Destination="CNV1_endPosREQ.INIT" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="clock.START" dx1="249.99998" />
+          <Connection Source="START.STOP" Destination="clock.STOP" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="ControllerProv.INIT" dx1="116.666664" />
+          <Connection Source="ControllerProv.INITO" Destination="CNV1_endPosREQ.INIT" dx1="127.77777" />
+          <Connection Source="CNV1_endPosREQ.INITO" Destination="tt_to_unload.INIT" dx1="55.555553" dx2="55.555553" dy="627.7778" />
+          <Connection Source="TTinUNL.INITO" Destination="counterValDISP.INIT" dx1="177.77777" />
+          <Connection Source="TTinUNL.CNF" Destination="counterValDISP.REQ" dx1="55.555553" />
+          <Connection Source="counterValDISP.INITO" Destination="LOADeVENT.INIT" dx1="238.88889" dx2="55.555553" dy="-1133.3333" />
+          <Connection Source="tt_to_unload.IND" Destination="LOADeVENT.REQ" dx1="166.66666" />
+          <Connection Source="counterValDISP.INITO" Destination="TTinLoad.INIT" dx1="116.666664" />
+          <Connection Source="counterValDISP.CNF" Destination="TTinLoad.REQ" dx1="55.555553" />
+          <Connection Source="TTinLoad.INITO" Destination="TTpalletOn.INIT" dx1="172.22221" />
+          <Connection Source="TTinLoad.CNF" Destination="TTpalletOn.REQ" dx1="55.555553" />
+          <Connection Source="TTpalletOn.INITO" Destination="rotateON.INIT" dx1="55.555553" dx2="55.555553" dy="711.1111" />
+          <Connection Source="tt_to_unload.INITO" Destination="TT_modelBlock.INIT" dx1="55.555553" />
+          <Connection Source="TT_modelBlock.INITO" Destination="TTinUNL.INIT" dx1="144.44444" />
+          <Connection Source="TT_modelBlock.CNF" Destination="TTinUNL.REQ" dx1="55.555553" />
+          <Connection Source="ControllerProv.IND" Destination="TT_modelBlock.REQ" dx1="133.33333" />
+          <Connection Source="clock.EO" Destination="ControllerProv.REQ" dx1="55.555553" dx2="55.555553" dy="1127.7777" />
+          <Connection Source="clock.EO" Destination="TT_modelBlock.klick" dx1="55.555553" />
+          <Connection Source="tt_to_unload.IND" Destination="TT_modelBlock.load" dx1="55.555553" />
         </EventConnections>
+        <DataConnections>
+          <Connection Source="ControllerProv.turnToUnload" Destination="TT_modelBlock.rotateToUNL" dx1="55.555553" />
+          <Connection Source="TT_modelBlock.UNL_posLED" Destination="TTinUNL.SD_1" dx1="216.66666" />
+          <Connection Source="TT_modelBlock.palletOnLED" Destination="TTpalletOn.SD_1" dx1="283.3333" />
+          <Connection Source="TT_modelBlock.LD_posLED" Destination="TTinLoad.SD_1" dx1="55.555553" />
+          <Connection Source="TT_modelBlock.turnTimeDISP" Destination="counterValDISP.SD_1" dx1="400.0" />
+          <Connection Source="TT_modelBlock.UNL_posLED" Destination="ControllerProv.positionUnload" dx1="594.4444" dx2="55.555553" dy="922.22217" />
+          <Connection Source="TT_modelBlock.palletOnLED" Destination="ControllerProv.boxProximitySensor" dx1="216.66666" dx2="383.3333" dy="683.3333" />
+          <Connection Source="TT_modelBlock.LD_posLED" Destination="ControllerProv.positionLoad" dx1="144.44444" dx2="238.88889" dy="1211.1111" />
+        </DataConnections>
       </FBNetwork>
     </Resource>
     <Resource Name="CNV_2_MODEL" Type="PANEL_RESOURCE" x="2794.4443" y="194.44444" >
@@ -360,6 +430,84 @@
     <Resource Name="PUSHER_2_MODEL" Type="PANEL_RESOURCE" x="1261.1111" y="927.7778" >
     </Resource>
     <Resource Name="PUSHER3_MODEL" Type="PANEL_RESOURCE" x="2011.1111" y="922.22217" >
+    </Resource>
+  </Device>
+  <Device Name="CONTROLLER_LAYER" Type="FRAME_DEVICE" x="572.2222" y="2533.3333" >
+    <Parameter Name="BOUNDS" Value="[0,400,200,200]" />
+    <Resource Name="Conveyor1Controller" Type="PANEL_RESOURCE" x="499.99997" y="949.99994" >
+      <Parameter Name="ROWS" Value="0" />
+      <Parameter Name="COLS" Value="1" />
+      <FBNetwork >
+        <FB Name="OBOOL" Type="OUT_BOOL" x="3844.4443" y="1205.5555" >
+          <Parameter Name="C0" Value="[0,0,0]" />
+          <Parameter Name="C1" Value="[255,0,0]" />
+          <Parameter Name="LABEL" Value="&#34;B&#34;" />
+          <Parameter Name="QI" Value="1" />
+        </FB>
+        <FB Name="gf" Type="OUT_EVENT" x="4072.2222" y="0.0" >
+          <Parameter Name="FLASH" Value="[0,0,255]" />
+          <Parameter Name="LABEL" Value="&#34;cnf&#34;" />
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="DT" Value="t#1000ms" />
+        </FB>
+        <FB Name="cnvCntrl" Type="Conveyor1Controller" x="1883.3333" y="144.44444" >
+        </FB>
+        <FB Name="boxProxTrig" Type="E_TRIG" x="2327.7776" y="1538.8888" >
+        </FB>
+        <FB Name="fdsa" Type="OUT_EVENT" x="3244.4443" y="3566.6665" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="DT" Value="t#1000ms" />
+          <Parameter Name="LABEL" Value="&#34;testevent&#34;" />
+          <Parameter Name="FLASH" Value="[0,0,255]" />
+        </FB>
+        <FB Name="posLoad" Type="IN_BOOL" x="727.7778" y="2255.5554" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;posLoad&#34;" />
+          <Parameter Name="IN" Value="0" />
+        </FB>
+        <FB Name="boxProx" Type="IN_BOOL" x="716.6666" y="3499.9998" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="IN" Value="0" />
+          <Parameter Name="LABEL" Value="&#34;boxProx&#34;" />
+        </FB>
+        <FB Name="cnv1_Ctrl_Req" Type="ConveyorControllerIReq" x="4600.0" y="2350.0" >
+          <Parameter Name="dataId" Value="&#34;cnv1_ctrl_dataId&#34;" />
+          <Parameter Name="boxLoadedId" Value="&#34;cnv1_ctrl_boxLoadedId&#34;" />
+          <Parameter Name="boxUnloadedId" Value="&#34;cnv1_ctrl_boxUnloadedId&#34;" />
+        </FB>
+        <FB Name="LOAD_EVENT" Type="SUBL_1" x="733.3333" y="183.33333" >
+          <Parameter Name="ID" Value="&#34;LoadPub&#34;" />
+        </FB>
+        <FB Name="tt_cntr_req" Type="TurnTableControllerIReq" x="455.55554" y="1216.6666" >
+          <Parameter Name="pubId" Value="&#34;tt_ctrl_pubId&#34;" />
+          <Parameter Name="subId" Value="&#34;tt_ctrl_subId&#34;" />
+        </FB>
+        <EventConnections>
+          <Connection Source="cnvCntrl.CNF" Destination="OBOOL.REQ" dx1="161.1111" />
+          <Connection Source="posLoad.INITO" Destination="boxProx.INIT" dx1="55.555553" dx2="55.555553" dy="1027.7777" />
+          <Connection Source="boxProx.INITO" Destination="fdsa.INIT" dx1="55.555553" />
+          <Connection Source="boxProxTrig.ER" Destination="cnvCntrl.tt_boxProximitySensorTrig" dx1="55.555553" dx2="55.555553" dy="83.33333" />
+          <Connection Source="cnvCntrl.INITO" Destination="cnv1_Ctrl_Req.INIT" dx1="55.555553" />
+          <Connection Source="cnvCntrl.CNF" Destination="cnv1_Ctrl_Req.REQ" dx1="55.555553" />
+          <Connection Source="cnvCntrl.boxLoaded" Destination="cnv1_Ctrl_Req.boxLoaded" dx1="55.555553" />
+          <Connection Source="cnvCntrl.boxUnloaded" Destination="cnv1_Ctrl_Req.boxUnloaded" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="LOAD_EVENT.INIT" dx1="55.555553" />
+          <Connection Source="LOAD_EVENT.INITO" Destination="cnvCntrl.INIT" dx1="55.555553" />
+          <Connection Source="LOAD_EVENT.IND" Destination="cnvCntrl.loadBox" dx1="55.555553" />
+          <Connection Source="START.COLD" Destination="tt_cntr_req.INIT" dx1="55.555553" />
+          <Connection Source="tt_cntr_req.INITO" Destination="OBOOL.INIT" dx1="55.555553" />
+          <Connection Source="OBOOL.INITO" Destination="posLoad.INIT" dx1="55.555553" dx2="55.555553" dy="1133.3333" />
+          <Connection Source="tt_cntr_req.IND" Destination="cnvCntrl.REQ" dx1="338.8889" />
+          <Connection Source="tt_cntr_req.IND" Destination="boxProxTrig.EI" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="cnvCntrl.cnv1_motorOn" Destination="OBOOL.IN" dx1="361.11108" />
+          <Connection Source="cnvCntrl.cnv1_motorOn" Destination="cnv1_Ctrl_Req.motorOn" dx1="55.555553" />
+          <Connection Source="tt_cntr_req.boxProximitySensor" Destination="cnvCntrl.tt_boxProximitySensor" dx1="194.44444" />
+          <Connection Source="tt_cntr_req.boxProximitySensor" Destination="boxProxTrig.QI" dx1="55.555553" />
+          <Connection Source="tt_cntr_req.positionLoad" Destination="cnvCntrl.tt_positionLoad" dx1="116.666664" />
+        </DataConnections>
+      </FBNetwork>
     </Resource>
   </Device>
 </System>
