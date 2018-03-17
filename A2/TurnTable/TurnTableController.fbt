@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="TurnTableController" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Holobloc Inc" Version="0.3" Author="JHC" Date="2009-09-15" Remarks="Changed transition priorities." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-30" />
+<CompilerInfo header="package fb.rt.dasdA1.A2.TurnTable;" >
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="tt_boxProximitySensor" />
+      </Event>
+      <Event Name="REQ" >
+        <With Var="tt_boxProximitySensor" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="tt_turnTable" />
+      </Event>
+      <Event Name="IND" Comment="Execution Confirmation" >
+        <With Var="tt_turnTable" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="tt_boxProximitySensor" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="tt_turnTable" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="922.22217" y="138.88889" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="turnLoad" x="2977.7776" y="999.99994" >
+        <ECAction Algorithm="TurnTable_turnLoad" Output="IND" />
+      </ECState>
+      <ECState Name="turnUnload" x="955.55554" y="1433.3333" >
+        <ECAction Algorithm="TurnTable_turnUnload" Output="IND" />
+      </ECState>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="555.55554" y="138.88889" />
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="805.55554" y="316.66666" />
+      <ECTransition Source="START" Destination="turnLoad" Condition="REQ [tt_boxProximitySensor = FALSE]" x="2977.7776" y="427.77777" />
+      <ECTransition Source="turnLoad" Destination="START" Condition="1" x="1766.6666" y="716.6666" />
+      <ECTransition Source="START" Destination="turnUnload" Condition="REQ [tt_boxProximitySensor = TRUE]" x="1105.5555" y="883.3333" />
+      <ECTransition Source="turnUnload" Destination="START" Condition="1" x="555.55554" y="1433.3333" />
+    </ECC>
+  <Algorithm Name="INIT" Comment="Initialization algorithm" >
+<ST><![CDATA[tt_turnTable := FALSE;]]></ST>
+  </Algorithm>
+  <Algorithm Name="TurnTable_turnLoad" >
+<ST><![CDATA[tt_turnTable := FALSE;]]></ST>
+  </Algorithm>
+  <Algorithm Name="TurnTable_turnUnload" >
+<ST><![CDATA[tt_turnTable := TRUE;]]></ST>
+  </Algorithm>
+  </BasicFB>
+</FBType>
