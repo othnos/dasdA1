@@ -13,15 +13,18 @@
       <Event Name="INIT" Comment="Initialization Request" >
         <With Var="rotateToUNL" />
         <With Var="cnv1_endPos" />
+        <With Var="boxColorInput" />
       </Event>
       <Event Name="klick" >
       </Event>
       <Event Name="load" >
+        <With Var="boxColorInput" />
       </Event>
-      <Event Name="unload" >
+      <Event Name="CNV_2_free" >
       </Event>
       <Event Name="REQ" >
         <With Var="rotateToUNL" />
+        <With Var="boxColorInput" />
         <With Var="cnv1_endPos" />
       </Event>
     </EventInputs>
@@ -33,6 +36,7 @@
         <With Var="turnTimeDISP" />
         <With Var="TT_LD" />
         <With Var="TT_UNL" />
+        <With Var="boxColorOutput" />
       </Event>
       <Event Name="CNF" Comment="Execution Confirmation" >
         <With Var="LD_posLED" />
@@ -41,11 +45,22 @@
         <With Var="turnTimeDISP" />
         <With Var="TT_LD" />
         <With Var="TT_UNL" />
+        <With Var="boxColorOutput" />
+      </Event>
+      <Event Name="boc2CNV_2" >
+        <With Var="LD_posLED" />
+        <With Var="UNL_posLED" />
+        <With Var="palletOnLED" />
+        <With Var="turnTimeDISP" />
+        <With Var="TT_LD" />
+        <With Var="TT_UNL" />
+        <With Var="boxColorOutput" />
       </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="rotateToUNL" Type="BOOL" />
       <VarDeclaration Name="cnv1_endPos" Type="BOOL" />
+      <VarDeclaration Name="boxColorInput" Type="COLOR" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="LD_posLED" Type="BOOL" />
@@ -54,6 +69,7 @@
       <VarDeclaration Name="turnTimeDISP" Type="UINT" />
       <VarDeclaration Name="TT_LD" Type="BOOL" />
       <VarDeclaration Name="TT_UNL" Type="BOOL" />
+      <VarDeclaration Name="boxColorOutput" Type="COLOR" />
     </OutputVars>
   </InterfaceList>
   <BasicFB>
@@ -61,6 +77,8 @@
       <VarDeclaration Name="position" Type="UINT" InitialValue="1" />
       <VarDeclaration Name="palletON" Type="BOOL" InitialValue="FALSE" />
       <VarDeclaration Name="turnOnProgress" Type="BOOL" InitialValue="FALSE" />
+      <VarDeclaration Name="boxColor" Type="COLOR" />
+      <VarDeclaration Name="cnv2Available" Type="BOOL" InitialValue="TRUE" />
     </InternalVars>
     <ECC >
       <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
@@ -73,6 +91,7 @@
       </ECState>
       <ECState Name="unload" x="1961.1111" y="3038.8887" >
         <ECAction Algorithm="Unload" Output="CNF" />
+        <ECAction Output="boc2CNV_2" />
       </ECState>
       <ECState Name="turnThatShit" x="2572.2222" y="2494.4443" >
         <ECAction Algorithm="rotateToUNL_START" Output="CNF" />
@@ -83,10 +102,13 @@
       <ECState Name="cnfForce" x="483.3333" y="138.88889" >
         <ECAction Output="CNF" />
       </ECState>
+      <ECState Name="cnv_2_free" x="2605.5554" y="883.3333" >
+        <ECAction Algorithm="setCNV_2Free" />
+      </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="922.22217" y="427.77777" />
       <ECTransition Source="START" Destination="loadState" Condition="load [position = 1]" x="288.8889" y="2161.111" />
       <ECTransition Source="loadState" Destination="START" Condition="1" x="694.4444" y="2138.889" />
-      <ECTransition Source="START" Destination="unload" Condition="unload [position = 10]" x="1194.4445" y="2816.6665" />
+      <ECTransition Source="START" Destination="unload" Condition="klick [position = 10 AND cnv2Available = TRUE]" x="1194.4445" y="2816.6665" />
       <ECTransition Source="unload" Destination="START" Condition="1" x="1855.5555" y="2583.3333" />
       <ECTransition Source="START" Destination="turnThatShit" Condition="REQ [position = 1]" x="1955.5554" y="2133.3333" />
       <ECTransition Source="turnThatShit" Destination="START" Condition="1" x="2466.6665" y="2133.3333" />
@@ -94,18 +116,22 @@
       <ECTransition Source="turntoUNL" Destination="START" Condition="1" x="4066.6665" y="2066.6665" />
       <ECTransition Source="INIT" Destination="cnfForce" Condition="1" x="705.55554" y="138.88889" />
       <ECTransition Source="cnfForce" Destination="START" Condition="1" x="516.6666" y="283.3333" />
+      <ECTransition Source="START" Destination="cnv_2_free" Condition="CNV_2_free" x="1838.8888" y="883.3333" />
+      <ECTransition Source="cnv_2_free" Destination="START" Condition="1" x="1933.3333" y="677.7778" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
 <ST><![CDATA[LD_posLED := TRUE;
 TT_LD := TRUE;
 UNL_posLED := FALSE;
 TT_UNL := FALSE;
-palletON := FALSE;]]></ST>
+palletON := FALSE;
+palletOnLED := FALSE;]]></ST>
   </Algorithm>
   <Algorithm Name="load" >
 <ST><![CDATA[IF (palletON = FALSE AND cnv1_endPos = TRUE) THEN
 	palletON := TRUE;
 	palletOnLED := TRUE;
+	boxColor := boxColorInput;
 END_IF;]]></ST>
   </Algorithm>
   <Algorithm Name="rotateToUNL_START" >
@@ -115,12 +141,15 @@ END_IF;]]></ST>
 <ST><![CDATA[IF (palletON = TRUE) THEN
 	palletON := FALSE;
 	palletOnLED := FALSE;
+	boxColorOutput := boxColor;
+	cnv2Available := FALSE;
 END_IF;]]></ST>
   </Algorithm>
   <Algorithm Name="turningToUNL" >
 <ST><![CDATA[IF (rotateToUNL = TRUE) THEN
 	IF (position < 10) THEN
 		TT_LD := FALSE;
+		LD_posLED := FALSE;
 		IF (position MOD 2 = 0) THEN
 			UNL_posLED := TRUE;
 			position := position + 1;
@@ -139,6 +168,7 @@ END_IF;]]></ST>
 ELSE
 	IF (position > 1) THEN
 		TT_UNL := FALSE;
+		UNL_posLED := FALSE;
 		IF (position MOD 2 = 0) THEN
 			LD_posLED := TRUE;
 			position := position - 1;
@@ -156,6 +186,9 @@ ELSE
 	END_IF;
 		
 END_IF;]]></ST>
+  </Algorithm>
+  <Algorithm Name="setCNV_2Free" >
+<ST><![CDATA[cnv2Available := TRUE;]]></ST>
   </Algorithm>
   </BasicFB>
 </FBType>

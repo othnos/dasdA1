@@ -33,6 +33,11 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB>
+    <InternalVars>
+      <VarDeclaration Name="C2" Type="COLOR" InitialValue="COLOR#YELLOW" />
+      <VarDeclaration Name="C3" Type="COLOR" InitialValue="COLOR#BLUE" />
+      <VarDeclaration Name="C1" Type="COLOR" InitialValue="COLOR#RED" />
+    </InternalVars>
     <ECC >
       <ECState Name="START" Comment="Initial State" x="555.55554" y="427.77777" >
       </ECState>
@@ -51,13 +56,13 @@
 <ST><![CDATA[]]></ST>
   </Algorithm>
   <Algorithm Name="REQ" Comment="Normally executed algorithm" >
-<Other Language="Java"><![CDATA[if( boxColor.value == BOXCOLOR.BLUE ){
-	COLOR2.value = new COLOR("[0,0,255]").value;
-} else if (boxColor.value == BOXCOLOR.RED) {
-	COLOR2.value = new COLOR("[255,0,0]").value;
-} else {
-	COLOR2.value = new COLOR("[255,255,0]").value;
-}]]></Other>
+<ST><![CDATA[IF (boxColor = BOXCOLOR.BLUE ) THEN
+	COLOR2 := C3;
+ELSIF (boxColor = BOXCOLOR.RED) THEN
+	COLOR2 := C1;
+ELSE
+	COLOR2 := C2;
+END_IF;]]></ST>
   </Algorithm>
   </BasicFB>
 </FBType>
