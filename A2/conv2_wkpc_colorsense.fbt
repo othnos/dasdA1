@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="conv2_wkpc_colorsense" Comment="A simple FB with a single algorithm and REQ/CNF pair" >
+  <Identification Standard="61499-1" />
+  <VersionInfo Organization="Holobloc Inc" Version="0.0" Author="JHC" Date="2006-09-03" />
+<CompilerInfo header="package fb.rt.template;" classdef="SimpleFB" >
+  <Compiler Language="Java" Vendor="Sun" Product="JDK" Version="1.5.0" />
+</CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="POS" />
+        <With Var="WKPC" />
+        <With Var="c1" />
+        <With Var="c2" />
+        <With Var="c3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="RED" />
+        <With Var="YELLOW" />
+        <With Var="BLUE" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="POS" Type="UINT" />
+      <VarDeclaration Name="WKPC" Type="COLOR" />
+      <VarDeclaration Name="c1" Type="COLOR" />
+      <VarDeclaration Name="c2" Type="COLOR" />
+      <VarDeclaration Name="c3" Type="COLOR" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="RED" Type="BOOL" />
+      <VarDeclaration Name="YELLOW" Type="BOOL" />
+      <VarDeclaration Name="BLUE" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+  <Algorithm Name="REQ" Comment="Normally executed algorithm" >
+<ST><![CDATA[IF POS = 50 AND WKPC = c1 THEN
+RED := TRUE;
+ELSIF POS = 75 AND WKPC = c2 THEN
+YELLOW := TRUE;
+ELSIF POS = 100 AND WKPC = c3 THEN
+BLUE := TRUE;
+ELSE
+RED := FALSE;
+YELLOW := FALSE;
+BLUE := FALSE;
+END_IF;]]></ST>
+  </Algorithm>
+  </BasicFB>
+</FBType>
