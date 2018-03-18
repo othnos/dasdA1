@@ -47,7 +47,7 @@
           <Parameter Name="QI" Value="1" />
           <Parameter Name="IN" Value="0" />
         </FB>
-        <FB Name="Pusher1Man" Type="PUBL_1" x="3483.3333" y="3388.8887" >
+        <FB Name="Pusher1Man" Type="PUBL_1" x="3005.5554" y="3599.9998" >
           <Parameter Name="ID" Value="P1_ActMan" />
         </FB>
         <FB Name="BOXCOLOR" Type="IN_ENUM" x="2477.7776" y="344.44443" >
@@ -408,9 +408,9 @@
       <Parameter Name="ROWS" Value="0" />
       <Parameter Name="COLS" Value="1" />
       <FBNetwork >
-        <FB Name="turnTableController" Type="TurnTableController" x="1666.6666" y="827.7778" >
+        <FB Name="turnTableController" Type="TurnTableController" x="1961.1111" y="827.7778" >
         </FB>
-        <FB Name="tt_req" Type="TurnTableControllerIReq" x="677.7778" y="827.7778" >
+        <FB Name="tt_req" Type="TurnTableControllerIReq" x="1050.0" y="827.7778" >
           <Parameter Name="subId" Value="&#34;tt_ctrl_subId&#34;" />
           <Parameter Name="pubId" Value="&#34;tt_ctrl_pubId&#34;" />
         </FB>
