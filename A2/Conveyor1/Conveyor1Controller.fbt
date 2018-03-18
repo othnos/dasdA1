@@ -71,6 +71,7 @@
       <ECTransition Source="runCnv1" Destination="runCnv1" Condition="REQ" x="3216.6665" y="1200.0" />
       <ECTransition Source="START" Destination="boxLoaded" Condition="loadBox" x="1222.2222" y="427.77777" />
       <ECTransition Source="boxLoaded" Destination="runCnv1" Condition="1" x="2977.7776" y="427.77777" />
+      <ECTransition Source="runCnv1" Destination="INIT" Condition="INIT" x="922.22217" y="999.99994" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
 <ST><![CDATA[// tt_positionLoad := FALSE;
