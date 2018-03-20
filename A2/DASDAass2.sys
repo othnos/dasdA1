@@ -93,41 +93,53 @@
         <FB Name="startDelay" Type="SUBL_0" x="522.2222" y="2555.5554" >
           <Parameter Name="ID" Value="&#34;start_delay&#34;" />
         </FB>
-        <FB Name="pusher1SetManual" Type="IN_EVENT" x="427.77777" y="3638.8887" >
+        <FB Name="pusher1SetManual" Type="IN_EVENT" x="2238.889" y="4338.8887" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;Push P1&#34;" />
         </FB>
-        <FB Name="setP1" Type="PUBL_0" x="1050.0" y="3616.6665" >
+        <FB Name="setP1" Type="PUBL_0" x="2727.7776" y="4322.222" >
         </FB>
-        <FB Name="pusher1ResetManual" Type="IN_EVENT" x="1866.6666" y="3772.2222" >
+        <FB Name="pusher1ResetManual" Type="IN_EVENT" x="3127.7776" y="4333.333" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;Retract P1&#34;" />
         </FB>
-        <FB Name="resetP1" Type="PUBL_0" x="2455.5554" y="3988.8887" >
+        <FB Name="resetP1" Type="PUBL_0" x="3483.3333" y="4316.6665" >
         </FB>
-        <FB Name="pusher2SetManual" Type="IN_EVENT" x="394.44443" y="4838.8887" >
+        <FB Name="pusher2SetManual" Type="IN_EVENT" x="3883.3333" y="4288.8887" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;Push P2&#34;" />
         </FB>
-        <FB Name="setP2" Type="PUBL_0" x="988.88885" y="4844.4443" >
+        <FB Name="setP2" Type="PUBL_0" x="4294.4443" y="4238.8887" >
         </FB>
-        <FB Name="pusher2ResetManual" Type="IN_EVENT" x="1838.8888" y="4844.4443" >
+        <FB Name="pusher2ResetManual" Type="IN_EVENT" x="4683.333" y="4216.6665" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;Retract P2&#34;" />
         </FB>
-        <FB Name="resetP2" Type="PUBL_0" x="2466.6665" y="4850.0" >
+        <FB Name="resetP2" Type="PUBL_0" x="5100.0" y="4194.4443" >
         </FB>
-        <FB Name="pusher3SetManual" Type="IN_EVENT" x="433.3333" y="5750.0" >
+        <FB Name="pusher3SetManual" Type="IN_EVENT" x="5516.6665" y="4188.8887" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;Push P2&#34;" />
         </FB>
-        <FB Name="setP3" Type="PUBL_0" x="1016.6666" y="5777.7773" >
+        <FB Name="setP3" Type="PUBL_0" x="5916.6665" y="4144.4443" >
         </FB>
-        <FB Name="pusher3ResetManual" Type="IN_EVENT" x="1811.1111" y="5783.333" >
+        <FB Name="pusher3ResetManual" Type="IN_EVENT" x="6361.111" y="4161.111" >
           <Parameter Name="QI" Value="1" />
           <Parameter Name="LABEL" Value="&#34;Retract P2&#34;" />
         </FB>
-        <FB Name="resetP3" Type="PUBL_0" x="2444.4443" y="5772.222" >
+        <FB Name="resetP3" Type="PUBL_0" x="6755.555" y="4144.4443" >
+        </FB>
+        <FB Name="ineventcnv2m2on" Type="IN_EVENT" x="522.2222" y="3427.7776" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;CNV2 motor ON&#34;" />
+        </FB>
+        <FB Name="ineventcnv2m2off" Type="IN_EVENT" x="1311.1111" y="3438.8887" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;CNV2 motor OFF&#34;" />
+        </FB>
+        <FB Name="CNV2ON" Type="PUBL_0" x="911.1111" y="3433.3333" >
+        </FB>
+        <FB Name="CNV2OFF" Type="PUBL_0" x="1716.6666" y="3444.4443" >
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="MAbutton.INIT" dx1="55.555553" />
@@ -166,12 +178,11 @@
           <Connection Source="startDelay.IND" Destination="MAPub.REQ" dx1="55.555553" />
           <Connection Source="pusher1SetManual.INITO" Destination="setP1.INIT" dx1="55.555553" />
           <Connection Source="pusher1SetManual.IND" Destination="setP1.REQ" dx1="55.555553" />
-          <Connection Source="MAPub.INITO" Destination="pusher1SetManual.INIT" dx1="55.555553" dx2="55.555553" dy="1166.6666" />
           <Connection Source="setP1.INITO" Destination="pusher1ResetManual.INIT" dx1="55.555553" />
           <Connection Source="pusher1ResetManual.INITO" Destination="resetP1.INIT" dx1="55.555553" />
           <Connection Source="pusher1ResetManual.IND" Destination="resetP1.REQ" dx1="55.555553" />
           <Connection Source="resetP1.INITO" Destination="pusher2SetManual.INIT" dx1="55.555553" dx2="55.555553" dy="588.88885" />
-          <Connection Source="pusher2SetManual.INITO" Destination="setP2.INIT" dx1="55.555553" />
+          <Connection Source="pusher2SetManual.INITO" Destination="setP2.INIT" dx1="72.22222" />
           <Connection Source="pusher2SetManual.IND" Destination="setP2.REQ" dx1="55.555553" />
           <Connection Source="setP2.INITO" Destination="pusher2ResetManual.INIT" dx1="55.555553" />
           <Connection Source="pusher2ResetManual.INITO" Destination="resetP2.INIT" dx1="55.555553" />
@@ -182,6 +193,13 @@
           <Connection Source="setP3.INITO" Destination="pusher3ResetManual.INIT" dx1="55.555553" />
           <Connection Source="pusher3ResetManual.IND" Destination="resetP3.REQ" dx1="55.555553" />
           <Connection Source="pusher3ResetManual.INITO" Destination="resetP3.INIT" dx1="55.555553" />
+          <Connection Source="MAPub.INITO" Destination="ineventcnv2m2on.INIT" dx1="55.555553" dx2="55.555553" dy="933.3333" />
+          <Connection Source="ineventcnv2m2on.INITO" Destination="CNV2ON.INIT" dx1="55.555553" />
+          <Connection Source="ineventcnv2m2on.IND" Destination="CNV2ON.REQ" dx1="55.555553" />
+          <Connection Source="CNV2ON.INITO" Destination="ineventcnv2m2off.INIT" dx1="55.555553" />
+          <Connection Source="ineventcnv2m2off.INITO" Destination="CNV2OFF.INIT" dx1="55.555553" />
+          <Connection Source="ineventcnv2m2off.IND" Destination="CNV2OFF.REQ" dx1="55.555553" />
+          <Connection Source="CNV2OFF.INITO" Destination="pusher1SetManual.INIT" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="BoxColor.OUT" Destination="ColorConverter.boxColor" dx1="55.555553" />
@@ -614,7 +632,7 @@
     </Resource>
     <Resource Name="CNV_2_MODEL" Type="PANEL_RESOURCE" x="2683.3333" y="194.44444" >
       <FBNetwork >
-        <FB Name="CNV2_Model" Type="CNV_MDL" x="2072.2222" y="1250.0" >
+        <FB Name="CNV2_Model" Type="CNV_MDL" x="5600.0" y="1283.3333" >
           <Parameter Name="LPOS" Value="0" />
           <Parameter Name="STYLE" Value="VSTYLE#PALLET" />
           <Parameter Name="VF" Value="5" />
@@ -627,41 +645,55 @@
         </FB>
         <FB Name="motor2_on" Type="SUBL_1" x="977.7777" y="200.0" >
         </FB>
-        <FB Name="colorSense" Type="conv2_wkpc_colorsense" x="3122.2222" y="138.88889" >
+        <FB Name="colorSense" Type="conv2_wkpc_colorsense" x="5938.8887" y="72.22222" >
           <Parameter Name="c1" Value="COLOR#RED" />
           <Parameter Name="c2" Value="COLOR#YELLOW" />
           <Parameter Name="c3" Value="COLOR#BLUE" />
         </FB>
-        <FB Name="pusher1command" Type="PUBL_1" x="4622.222" y="400.0" >
+        <FB Name="pusher1command" Type="PUBL_1" x="6738.8887" y="233.33333" >
         </FB>
-        <FB Name="pusher2command" Type="PUBL_1" x="5772.222" y="811.1111" >
+        <FB Name="pusher2command" Type="PUBL_1" x="7005.555" y="627.7778" >
         </FB>
-        <FB Name="pusher3command" Type="PUBL_1" x="6605.555" y="1433.3333" >
+        <FB Name="pusher3command" Type="PUBL_1" x="6988.8887" y="1461.1111" >
         </FB>
         <FB Name="unloadCNV2_1" Type="SUBL_0" x="305.55554" y="1261.1111" >
         </FB>
         <FB Name="merge1" Type="E_MERGE" x="816.6666" y="1572.2222" >
         </FB>
-        <FB Name="merge2" Type="E_MERGE" x="1222.2222" y="2361.111" >
+        <FB Name="merge2" Type="E_MERGE" x="822.22217" y="2344.4443" >
         </FB>
         <FB Name="unloadCNV2_2" Type="SUBL_0" x="361.11108" y="2144.4443" >
         </FB>
         <FB Name="unloadCNV2_3" Type="SUBL_0" x="261.1111" y="3255.5554" >
         </FB>
-        <FB Name="or1" Type="FB_OR" x="4394.4443" y="2966.6665" >
+        <FB Name="or1" Type="FB_OR" x="6266.6665" y="3083.3333" >
         </FB>
-        <FB Name="or2" Type="FB_OR" x="4955.555" y="3105.5554" >
+        <FB Name="or2" Type="FB_OR" x="6716.6665" y="3066.6665" >
         </FB>
-        <FB Name="not1" Type="FB_NOT" x="6583.333" y="3383.3333" >
+        <FB Name="not1" Type="FB_NOT" x="7116.6665" y="3422.2222" >
         </FB>
-        <FB Name="publToViewConv2" Type="PUBL_3" x="2816.6665" y="4144.4443" >
+        <FB Name="publToViewConv2" Type="PUBL_3" x="6549.9995" y="4161.111" >
         </FB>
-        <FB Name="split1" Type="E_SPLIT" x="1144.4445" y="1066.6666" >
+        <FB Name="CNV_2_free" Type="PUBL_0" x="888.88885" y="3205.5554" >
         </FB>
-        <FB Name="CNV_2_free" Type="PUBL_0" x="1427.7777" y="3161.111" >
-        </FB>
-        <FB Name="startDelay" Type="SUBL_0" x="3033.3333" y="2988.8887" >
+        <FB Name="startDelay" Type="SUBL_0" x="5794.4443" y="3083.3333" >
           <Parameter Name="ID" Value="&#34;start_delay&#34;" />
+        </FB>
+        <FB Name="MAPub" Type="SUBL_1" x="1394.4443" y="1722.2222" >
+        </FB>
+        <FB Name="CNV2ON" Type="SUBL_0" x="1400.0" y="4377.778" >
+        </FB>
+        <FB Name="CNV2OFF" Type="SUBL_0" x="1894.4443" y="4377.778" >
+        </FB>
+        <FB Name="and1" Type="FB_AND" x="4822.222" y="1694.4443" >
+        </FB>
+        <FB Name="and2" Type="FB_AND" x="3972.2222" y="1694.4443" >
+        </FB>
+        <FB Name="or3" Type="FB_OR" x="4411.111" y="1694.4443" >
+        </FB>
+        <FB Name="not2" Type="FB_NOT" x="3538.8887" y="1805.5555" >
+        </FB>
+        <FB Name="sr1" Type="E_SR" x="2461.111" y="3333.3333" >
         </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="METR_PUB.INIT" dx1="55.555553" />
@@ -670,10 +702,10 @@
           <Connection Source="motor2_on.INITO" Destination="palletColor.INIT" dx1="55.555553" />
           <Connection Source="palletColor.INITO" Destination="pusher1command.INIT" dx1="55.555553" />
           <Connection Source="pusher1command.INITO" Destination="pusher2command.INIT" dx1="55.555553" />
-          <Connection Source="pusher2command.INITO" Destination="pusher3command.INIT" dx1="55.555553" />
+          <Connection Source="pusher2command.INITO" Destination="pusher3command.INIT" dx1="55.555553" dx2="55.555553" dy="916.6666" />
           <Connection Source="pusher3command.INITO" Destination="unloadCNV2_1.INIT" dx1="116.666664" dx2="55.555553" dy="1388.8888" />
           <Connection Source="unloadCNV2_1.IND" Destination="merge1.EI1" dx1="55.555553" />
-          <Connection Source="merge1.EO" Destination="merge2.EI1" dx1="55.555553" />
+          <Connection Source="merge1.EO" Destination="merge2.EI1" dx1="55.555553" dx2="55.555553" dy="855.55554" />
           <Connection Source="unloadCNV2_1.INITO" Destination="unloadCNV2_2.INIT" dx1="55.555553" dx2="55.555553" dy="588.88885" />
           <Connection Source="unloadCNV2_2.IND" Destination="merge1.EI2" dx1="55.555553" />
           <Connection Source="unloadCNV2_2.INITO" Destination="unloadCNV2_3.INIT" dx1="55.555553" dx2="55.555553" dy="883.3333" />
@@ -683,35 +715,50 @@
           <Connection Source="or1.CNF" Destination="or2.REQ" dx1="55.555553" dx2="55.555553" dy="300.0" />
           <Connection Source="or2.CNF" Destination="not1.REQ" dx1="55.555553" dx2="55.555553" dy="877.7778" />
           <Connection Source="unloadCNV2_3.INITO" Destination="publToViewConv2.INIT" dx1="211.1111" />
-          <Connection Source="CNV2_Model.INDR" Destination="publToViewConv2.REQ" dx1="311.11108" />
+          <Connection Source="CNV2_Model.INDR" Destination="publToViewConv2.REQ" dx1="311.11108" dx2="55.555553" dy="3000.0" />
           <Connection Source="pusher1command.CNF" Destination="pusher2command.REQ" dx1="55.555553" />
-          <Connection Source="pusher2command.CNF" Destination="pusher3command.REQ" dx1="55.555553" />
+          <Connection Source="pusher2command.CNF" Destination="pusher3command.REQ" dx1="55.555553" dx2="55.555553" dy="916.6666" />
           <Connection Source="colorSense.CNF" Destination="pusher1command.REQ" dx1="55.555553" />
-          <Connection Source="METR_PUB.IND" Destination="split1.EI" dx1="55.555553" />
-          <Connection Source="split1.EO1" Destination="colorSense.REQ" dx1="55.555553" />
-          <Connection Source="split1.EO2" Destination="CNV2_Model.CLK" dx1="55.555553" />
-          <Connection Source="publToViewConv2.INITO" Destination="CNV_2_free.INIT" dx1="55.555553" dx2="55.555553" dy="-194.44444" />
-          <Connection Source="merge2.EO" Destination="CNV_2_free.REQ" dx1="55.555553" />
+          <Connection Source="publToViewConv2.INITO" Destination="CNV_2_free.INIT" dx1="55.555553" dx2="116.666664" dy="-194.44444" />
+          <Connection Source="merge2.EO" Destination="CNV_2_free.REQ" dx1="55.555553" dx2="55.555553" dy="999.99994" />
           <Connection Source="START.COLD" Destination="CNV2_Model.UNLD" dx1="55.555553" />
           <Connection Source="CNV_2_free.INITO" Destination="startDelay.INIT" dx1="55.555553" />
           <Connection Source="startDelay.IND" Destination="publToViewConv2.REQ" dx1="55.555553" dx2="55.555553" dy="1238.8888" />
+          <Connection Source="startDelay.INITO" Destination="MAPub.INIT" dx1="55.555553" dx2="100.0" dy="83.33333" />
+          <Connection Source="MAPub.INITO" Destination="CNV2ON.INIT" dx1="55.555553" dx2="50.0" dy="83.33333" />
+          <Connection Source="CNV2ON.INITO" Destination="CNV2OFF.INIT" dx1="55.555553" dx2="55.555553" dy="544.4444" />
+          <Connection Source="METR_PUB.IND" Destination="colorSense.REQ" dx1="55.555553" />
+          <Connection Source="CNV2ON.IND" Destination="sr1.S" dx1="55.555553" />
+          <Connection Source="CNV2OFF.IND" Destination="sr1.R" dx1="55.555553" />
+          <Connection Source="not1.CNF" Destination="not2.REQ" dx1="55.555553" dx2="55.555553" dy="83.33333" />
+          <Connection Source="not2.CNF" Destination="and2.REQ" dx1="55.555553" />
+          <Connection Source="and2.CNF" Destination="or3.REQ" dx1="55.555553" />
+          <Connection Source="or3.CNF" Destination="and1.REQ" dx1="55.555553" />
+          <Connection Source="and1.CNF" Destination="CNV2_Model.CLK" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="palletColor.RD_1" Destination="CNV2_Model.WKPC" dx1="172.22221" />
           <Connection Source="CNV2_Model.POS" Destination="colorSense.POS" dx1="233.33333" />
           <Connection Source="CNV2_Model.WKPO" Destination="colorSense.WKPC" dx1="116.666664" />
-          <Connection Source="colorSense.RED" Destination="or1.IN1" dx1="177.77777" />
-          <Connection Source="colorSense.YELLOW" Destination="or1.IN2" dx1="261.1111" />
+          <Connection Source="colorSense.RED" Destination="or1.IN1" dx1="177.77777" dx2="55.555553" dy="2877.7776" />
+          <Connection Source="colorSense.YELLOW" Destination="or1.IN2" dx1="261.1111" dx2="55.555553" dy="2877.7776" />
           <Connection Source="or1.OUT" Destination="or2.IN1" dx1="55.555553" dx2="55.555553" dy="1400.0" />
           <Connection Source="or2.OUT" Destination="not1.IN" dx1="188.88889" dx2="55.555553" dy="949.99994" />
-          <Connection Source="not1.OUT" Destination="CNV2_Model.MTR_ON" dx1="55.555553" dx2="122.22221" dy="83.33333" />
-          <Connection Source="CNV2_Model.POS" Destination="publToViewConv2.SD_1" dx1="55.555553" />
-          <Connection Source="CNV2_Model.STYLO" Destination="publToViewConv2.SD_2" dx1="55.555553" />
-          <Connection Source="CNV2_Model.WKPO" Destination="publToViewConv2.SD_3" dx1="55.555553" />
-          <Connection Source="colorSense.BLUE" Destination="or2.IN2" dx1="122.22221" />
+          <Connection Source="CNV2_Model.POS" Destination="publToViewConv2.SD_1" dx1="55.555553" dx2="55.555553" dy="2777.7776" />
+          <Connection Source="CNV2_Model.STYLO" Destination="publToViewConv2.SD_2" dx1="55.555553" dx2="55.555553" dy="2777.7776" />
+          <Connection Source="CNV2_Model.WKPO" Destination="publToViewConv2.SD_3" dx1="55.555553" dx2="55.555553" dy="2777.7776" />
+          <Connection Source="colorSense.BLUE" Destination="or2.IN2" dx1="122.22221" dx2="55.555553" dy="2905.5554" />
           <Connection Source="colorSense.RED" Destination="pusher1command.SD_1" dx1="55.555553" />
           <Connection Source="colorSense.YELLOW" Destination="pusher2command.SD_1" dx1="55.555553" />
           <Connection Source="colorSense.BLUE" Destination="pusher3command.SD_1" dx1="55.555553" />
+          <Connection Source="MAPub.RD_1" Destination="and2.IN1" dx1="55.555553" />
+          <Connection Source="sr1.Q" Destination="not2.IN" dx1="55.555553" />
+          <Connection Source="not2.OUT" Destination="and2.IN2" dx1="55.555553" />
+          <Connection Source="and2.OUT" Destination="or3.IN1" dx1="55.555553" />
+          <Connection Source="sr1.Q" Destination="or3.IN2" dx1="55.555553" />
+          <Connection Source="or3.OUT" Destination="and1.IN1" dx1="55.555553" />
+          <Connection Source="not1.OUT" Destination="and1.IN2" dx1="55.555553" dx2="55.555553" dy="83.33333" />
+          <Connection Source="and1.OUT" Destination="CNV2_Model.MTR_ON" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
