@@ -662,159 +662,6 @@
         </DataConnections>
       </FBNetwork>
     </Resource>
-    <Resource Name="PUSHER1_MODEL" Type="PANEL_RESOURCE" x="438.8889" y="905.55554" >
-      <FBNetwork >
-        <FB Name="pusher1command" Type="SUBL_1" x="644.4444" y="138.88889" >
-        </FB>
-        <FB Name="and1" Type="FB_AND" x="3083.3333" y="1522.2222" >
-          <Parameter Name="IN2" Value="1" />
-        </FB>
-        <FB Name="permit1" Type="E_PERMIT" x="3594.4443" y="1244.4443" >
-        </FB>
-        <FB Name="unloadCNV2_1" Type="PUBL_0" x="4533.333" y="894.4444" >
-        </FB>
-        <FB Name="trig1" Type="E_R_TRIG" x="1200.0" y="1844.4443" >
-        </FB>
-        <FB Name="trig2" Type="E_R_TRIG" x="5072.222" y="1994.4443" >
-        </FB>
-        <FB Name="sr1" Type="E_SR" x="1777.7777" y="2216.6665" >
-        </FB>
-        <FB Name="PUSHER1" Type="SOL_MDL" x="2255.5554" y="1188.8888" >
-          <Parameter Name="VF" Value="20" />
-          <Parameter Name="VR" Value="20" />
-        </FB>
-        <FB Name="clock" Type="SUBL_0" x="1472.2222" y="388.8889" >
-          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
-        </FB>
-        <FB Name="REDPUSH" Type="PUBL_1" x="6177.7773" y="694.4444" >
-        </FB>
-        <EventConnections>
-          <Connection Source="and1.CNF" Destination="permit1.EI" dx1="55.555553" />
-          <Connection Source="permit1.EO" Destination="unloadCNV2_1.REQ" dx1="55.555553" />
-          <Connection Source="unloadCNV2_1.CNF" Destination="trig2.EI" dx1="55.555553" />
-          <Connection Source="trig1.EO" Destination="sr1.S" dx1="55.555553" />
-          <Connection Source="trig2.EO" Destination="sr1.R" dx1="55.555553" dx2="55.555553" dy="822.22217" />
-          <Connection Source="START.COLD" Destination="pusher1command.INIT" dx1="55.555553" />
-          <Connection Source="pusher1command.INITO" Destination="clock.INIT" dx1="55.555553" />
-          <Connection Source="clock.IND" Destination="PUSHER1.CLK" dx1="55.555553" />
-          <Connection Source="clock.INITO" Destination="unloadCNV2_1.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER1.INDR" Destination="and1.REQ" dx1="55.555553" />
-          <Connection Source="pusher1command.IND" Destination="trig1.EI" dx1="127.77777" />
-          <Connection Source="PUSHER1.INDR" Destination="REDPUSH.REQ" dx1="55.555553" />
-          <Connection Source="unloadCNV2_1.INITO" Destination="REDPUSH.INIT" dx1="55.555553" dx2="55.555553" dy="83.33333" />
-        </EventConnections>
-        <DataConnections>
-          <Connection Source="and1.OUT" Destination="permit1.PERMIT" dx1="55.555553" />
-          <Connection Source="pusher1command.RD_1" Destination="trig1.QI" dx1="38.888885" dx2="55.555553" dy="1922.2222" />
-          <Connection Source="and1.OUT" Destination="trig2.QI" dx1="55.555553" />
-          <Connection Source="PUSHER1.END" Destination="and1.IN1" dx1="55.555553" />
-          <Connection Source="sr1.Q" Destination="PUSHER1.FWD" dx1="55.555553" />
-          <Connection Source="PUSHER1.POS" Destination="REDPUSH.SD_1" dx1="55.555553" />
-        </DataConnections>
-      </FBNetwork>
-    </Resource>
-    <Resource Name="PUSHER2_MODEL" Type="PANEL_RESOURCE" x="1183.3333" y="911.1111" >
-      <FBNetwork >
-        <FB Name="pusher2command" Type="SUBL_1" x="644.4444" y="138.88889" >
-        </FB>
-        <FB Name="and1" Type="FB_AND" x="3072.2222" y="1300.0" >
-          <Parameter Name="IN2" Value="1" />
-        </FB>
-        <FB Name="permit1" Type="E_PERMIT" x="3594.4443" y="1244.4443" >
-        </FB>
-        <FB Name="unloadCNV2_2" Type="PUBL_0" x="4533.333" y="899.99994" >
-        </FB>
-        <FB Name="trig1" Type="E_R_TRIG" x="1200.0" y="1844.4443" >
-        </FB>
-        <FB Name="trig2" Type="E_R_TRIG" x="5072.222" y="1994.4443" >
-        </FB>
-        <FB Name="sr1" Type="E_SR" x="1777.7777" y="2216.6665" >
-        </FB>
-        <FB Name="PUSHER2" Type="SOL_MDL" x="2255.5554" y="1188.8888" >
-          <Parameter Name="VF" Value="20" />
-          <Parameter Name="VR" Value="20" />
-        </FB>
-        <FB Name="clock" Type="SUBL_0" x="1472.2222" y="388.8889" >
-          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
-        </FB>
-        <FB Name="YELLOWPUSH" Type="PUBL_1" x="5327.7773" y="761.1111" >
-        </FB>
-        <EventConnections>
-          <Connection Source="and1.CNF" Destination="permit1.EI" dx1="55.555553" />
-          <Connection Source="permit1.EO" Destination="unloadCNV2_2.REQ" dx1="55.555553" />
-          <Connection Source="unloadCNV2_2.CNF" Destination="trig2.EI" dx1="55.555553" />
-          <Connection Source="trig1.EO" Destination="sr1.S" dx1="55.555553" />
-          <Connection Source="trig2.EO" Destination="sr1.R" dx1="55.555553" dx2="55.555553" dy="822.22217" />
-          <Connection Source="START.COLD" Destination="pusher2command.INIT" dx1="55.555553" />
-          <Connection Source="pusher2command.INITO" Destination="clock.INIT" dx1="55.555553" />
-          <Connection Source="clock.IND" Destination="PUSHER2.CLK" dx1="55.555553" />
-          <Connection Source="clock.INITO" Destination="unloadCNV2_2.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER2.INDR" Destination="and1.REQ" dx1="55.555553" />
-          <Connection Source="pusher2command.IND" Destination="trig1.EI" dx1="55.555553" />
-          <Connection Source="unloadCNV2_2.INITO" Destination="YELLOWPUSH.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER2.INDR" Destination="YELLOWPUSH.REQ" dx1="55.555553" />
-        </EventConnections>
-        <DataConnections>
-          <Connection Source="and1.OUT" Destination="permit1.PERMIT" dx1="55.555553" />
-          <Connection Source="pusher2command.RD_1" Destination="trig1.QI" dx1="38.888885" dx2="55.555553" dy="1922.2222" />
-          <Connection Source="and1.OUT" Destination="trig2.QI" dx1="55.555553" />
-          <Connection Source="sr1.Q" Destination="PUSHER2.FWD" dx1="55.555553" />
-          <Connection Source="PUSHER2.END" Destination="and1.IN1" dx1="55.555553" />
-          <Connection Source="PUSHER2.POS" Destination="YELLOWPUSH.SD_1" dx1="55.555553" />
-        </DataConnections>
-      </FBNetwork>
-    </Resource>
-    <Resource Name="PUSHER3_MODEL" Type="PANEL_RESOURCE" x="1933.3333" y="927.7778" >
-      <FBNetwork >
-        <FB Name="pusher3command" Type="SUBL_1" x="644.4444" y="138.88889" >
-        </FB>
-        <FB Name="and1" Type="FB_AND" x="3072.2222" y="1300.0" >
-          <Parameter Name="IN2" Value="1" />
-        </FB>
-        <FB Name="permit1" Type="E_PERMIT" x="3594.4443" y="1244.4443" >
-        </FB>
-        <FB Name="unloadCNV2_3" Type="PUBL_0" x="4533.333" y="899.99994" >
-        </FB>
-        <FB Name="trig1" Type="E_R_TRIG" x="1200.0" y="1844.4443" >
-        </FB>
-        <FB Name="trig2" Type="E_R_TRIG" x="5072.222" y="1994.4443" >
-        </FB>
-        <FB Name="sr1" Type="E_SR" x="1777.7777" y="2216.6665" >
-        </FB>
-        <FB Name="PUSHER3" Type="SOL_MDL" x="2244.4443" y="1188.8888" >
-          <Parameter Name="VF" Value="20" />
-          <Parameter Name="VR" Value="20" />
-        </FB>
-        <FB Name="clock" Type="SUBL_0" x="1472.2222" y="388.8889" >
-          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
-        </FB>
-        <FB Name="BLUEPUSH" Type="PUBL_1" x="5555.555" y="705.55554" >
-        </FB>
-        <EventConnections>
-          <Connection Source="and1.CNF" Destination="permit1.EI" dx1="55.555553" />
-          <Connection Source="permit1.EO" Destination="unloadCNV2_3.REQ" dx1="55.555553" />
-          <Connection Source="unloadCNV2_3.CNF" Destination="trig2.EI" dx1="55.555553" />
-          <Connection Source="trig1.EO" Destination="sr1.S" dx1="55.555553" />
-          <Connection Source="trig2.EO" Destination="sr1.R" dx1="55.555553" dx2="55.555553" dy="822.22217" />
-          <Connection Source="START.COLD" Destination="pusher3command.INIT" dx1="55.555553" />
-          <Connection Source="pusher3command.INITO" Destination="clock.INIT" dx1="55.555553" />
-          <Connection Source="clock.IND" Destination="PUSHER3.CLK" dx1="55.555553" />
-          <Connection Source="clock.INITO" Destination="unloadCNV2_3.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER3.INDR" Destination="and1.REQ" dx1="55.555553" />
-          <Connection Source="pusher3command.IND" Destination="trig1.EI" dx1="55.555553" />
-          <Connection Source="unloadCNV2_3.INITO" Destination="BLUEPUSH.INIT" dx1="55.555553" />
-          <Connection Source="PUSHER3.INDR" Destination="BLUEPUSH.REQ" dx1="55.555553" />
-        </EventConnections>
-        <DataConnections>
-          <Connection Source="and1.OUT" Destination="permit1.PERMIT" dx1="55.555553" />
-          <Connection Source="pusher3command.RD_1" Destination="trig1.QI" dx1="38.888885" dx2="55.555553" dy="1922.2222" />
-          <Connection Source="and1.OUT" Destination="trig2.QI" dx1="55.555553" />
-          <Connection Source="sr1.Q" Destination="PUSHER3.FWD" dx1="55.555553" />
-          <Connection Source="PUSHER3.END" Destination="and1.IN1" dx1="55.555553" />
-          <Connection Source="PUSHER3.POS" Destination="BLUEPUSH.SD_1" dx1="55.555553" />
-        </DataConnections>
-      </FBNetwork>
-    </Resource>
     <Resource Name="CONVred_MODEL" Type="PANEL_RESOURCE" x="3238.8887" y="1322.2222" >
       <FBNetwork >
         <FB Name="unloadCNV2_1" Type="SUBL_0" x="1011.1111" y="416.66666" >
@@ -950,6 +797,273 @@
           <Connection Source="CONVblue.POS" Destination="ConvBluePubl.SD_1" dx1="55.555553" />
           <Connection Source="CONVblue.STYLO" Destination="ConvBluePubl.SD_2" dx1="55.555553" />
           <Connection Source="CONVblue.WKPO" Destination="ConvBluePubl.SD_3" dx1="55.555553" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+    <Resource Name="PUSHER1_MODEL" Type="PANEL_RESOURCE" x="444.44443" y="927.7778" >
+      <FBNetwork >
+        <FB Name="pusher1command" Type="SUBL_1" x="477.77777" y="161.1111" >
+        </FB>
+        <FB Name="and1" Type="FB_AND" x="4900.0" y="1744.4443" >
+          <Parameter Name="IN2" Value="1" />
+        </FB>
+        <FB Name="permit1" Type="E_PERMIT" x="5316.6665" y="1488.8888" >
+        </FB>
+        <FB Name="unloadCNV2_1" Type="PUBL_0" x="5716.6665" y="1244.4443" >
+        </FB>
+        <FB Name="trig1" Type="E_R_TRIG" x="983.3333" y="2544.4443" >
+        </FB>
+        <FB Name="trig2" Type="E_R_TRIG" x="6138.8887" y="1661.1111" >
+        </FB>
+        <FB Name="sr1" Type="E_SR" x="3883.3333" y="2116.6665" >
+        </FB>
+        <FB Name="PUSHER1" Type="SOL_MDL" x="4272.222" y="1472.2222" >
+          <Parameter Name="VF" Value="20" />
+          <Parameter Name="VR" Value="20" />
+        </FB>
+        <FB Name="clock" Type="SUBL_0" x="994.4444" y="161.1111" >
+          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
+        </FB>
+        <FB Name="REDPUSH" Type="PUBL_1" x="6188.8887" y="427.77777" >
+        </FB>
+        <FB Name="merge1" Type="E_MERGE" x="3461.111" y="1777.7777" >
+        </FB>
+        <FB Name="merge2" Type="E_MERGE" x="3433.3333" y="2700.0" >
+        </FB>
+        <FB Name="setP1" Type="SUBL_0" x="1838.8888" y="3050.0" >
+        </FB>
+        <FB Name="resetP1" Type="SUBL_0" x="2272.2222" y="3322.2222" >
+        </FB>
+        <FB Name="permit2" Type="E_PERMIT" x="2722.2222" y="1899.9999" >
+        </FB>
+        <FB Name="MAPub" Type="SUBL_1" x="1400.0" y="161.1111" >
+        </FB>
+        <FB Name="and2" Type="FB_AND" x="1899.9999" y="272.2222" >
+          <Parameter Name="IN2" Value="1" />
+        </FB>
+        <FB Name="permit3" Type="E_PERMIT" x="2716.6665" y="2561.111" >
+        </FB>
+        <FB Name="not1" Type="FB_NOT" x="1894.4443" y="972.22217" >
+        </FB>
+        <FB Name="permit4" Type="E_PERMIT" x="2694.4443" y="3172.2222" >
+        </FB>
+        <EventConnections>
+          <Connection Source="and1.CNF" Destination="permit1.EI" dx1="55.555553" />
+          <Connection Source="permit1.EO" Destination="unloadCNV2_1.REQ" dx1="55.555553" />
+          <Connection Source="unloadCNV2_1.CNF" Destination="trig2.EI" dx1="55.555553" dx2="55.555553" dy="722.22217" />
+          <Connection Source="START.COLD" Destination="pusher1command.INIT" dx1="55.555553" />
+          <Connection Source="pusher1command.INITO" Destination="clock.INIT" dx1="55.555553" />
+          <Connection Source="clock.IND" Destination="PUSHER1.CLK" dx1="55.555553" />
+          <Connection Source="PUSHER1.INDR" Destination="and1.REQ" dx1="55.555553" />
+          <Connection Source="pusher1command.IND" Destination="trig1.EI" dx1="127.77777" />
+          <Connection Source="PUSHER1.INDR" Destination="REDPUSH.REQ" dx1="55.555553" />
+          <Connection Source="unloadCNV2_1.INITO" Destination="REDPUSH.INIT" dx1="55.555553" dx2="55.555553" dy="83.33333" />
+          <Connection Source="trig2.EO" Destination="merge2.EI2" dx1="55.555553" dx2="55.555553" dy="1627.7777" />
+          <Connection Source="merge2.EO" Destination="sr1.R" dx1="55.555553" />
+          <Connection Source="merge1.EO" Destination="sr1.S" dx1="55.555553" />
+          <Connection Source="setP1.INITO" Destination="resetP1.INIT" dx1="55.555553" />
+          <Connection Source="resetP1.INITO" Destination="unloadCNV2_1.INIT" dx1="55.555553" />
+          <Connection Source="clock.INITO" Destination="MAPub.INIT" dx1="55.555553" />
+          <Connection Source="MAPub.INITO" Destination="setP1.INIT" dx1="83.33333" dx2="55.555553" dy="2922.2222" />
+          <Connection Source="trig1.EO" Destination="permit2.EI" dx1="55.555553" />
+          <Connection Source="permit2.EO" Destination="merge1.EI2" dx1="55.555553" />
+          <Connection Source="MAPub.IND" Destination="and2.REQ" dx1="55.555553" />
+          <Connection Source="setP1.IND" Destination="permit3.EI" dx1="55.555553" />
+          <Connection Source="and2.CNF" Destination="not1.REQ" dx1="55.555553" dx2="55.555553" dy="811.1111" />
+          <Connection Source="resetP1.IND" Destination="permit4.EI" dx1="55.555553" />
+          <Connection Source="permit4.EO" Destination="merge2.EI1" dx1="55.555553" />
+          <Connection Source="permit3.EO" Destination="merge1.EI1" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="and1.OUT" Destination="permit1.PERMIT" dx1="55.555553" />
+          <Connection Source="pusher1command.RD_1" Destination="trig1.QI" dx1="38.888885" dx2="55.555553" dy="1922.2222" />
+          <Connection Source="and1.OUT" Destination="trig2.QI" dx1="55.555553" />
+          <Connection Source="PUSHER1.END" Destination="and1.IN1" dx1="55.555553" />
+          <Connection Source="sr1.Q" Destination="PUSHER1.FWD" dx1="55.555553" />
+          <Connection Source="PUSHER1.POS" Destination="REDPUSH.SD_1" dx1="55.555553" />
+          <Connection Source="MAPub.RD_1" Destination="and2.IN1" dx1="55.555553" />
+          <Connection Source="and2.OUT" Destination="permit2.PERMIT" dx1="177.77777" />
+          <Connection Source="and2.OUT" Destination="not1.IN" dx1="116.666664" dx2="55.555553" dy="811.1111" />
+          <Connection Source="not1.OUT" Destination="permit3.PERMIT" dx1="216.66666" />
+          <Connection Source="not1.OUT" Destination="permit4.PERMIT" dx1="55.555553" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+    <Resource Name="PUSHER2_MODEL" Type="PANEL_RESOURCE" x="1205.5555" y="905.55554" >
+      <FBNetwork >
+        <FB Name="pusher2command" Type="SUBL_1" x="477.77777" y="161.1111" >
+        </FB>
+        <FB Name="and1" Type="FB_AND" x="4900.0" y="1744.4443" >
+          <Parameter Name="IN2" Value="1" />
+        </FB>
+        <FB Name="permit1" Type="E_PERMIT" x="5316.6665" y="1488.8888" >
+        </FB>
+        <FB Name="unloadCNV2_2" Type="PUBL_0" x="5716.6665" y="1244.4443" >
+        </FB>
+        <FB Name="trig1" Type="E_R_TRIG" x="983.3333" y="2544.4443" >
+        </FB>
+        <FB Name="trig2" Type="E_R_TRIG" x="6138.8887" y="1661.1111" >
+        </FB>
+        <FB Name="sr1" Type="E_SR" x="3883.3333" y="2116.6665" >
+        </FB>
+        <FB Name="PUSHER2" Type="SOL_MDL" x="4272.222" y="1472.2222" >
+          <Parameter Name="VF" Value="20" />
+          <Parameter Name="VR" Value="20" />
+        </FB>
+        <FB Name="clock" Type="SUBL_0" x="994.4444" y="161.1111" >
+          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
+        </FB>
+        <FB Name="YELLOWPUSH" Type="PUBL_1" x="6188.8887" y="427.77777" >
+        </FB>
+        <FB Name="merge1" Type="E_MERGE" x="3461.111" y="1777.7777" >
+        </FB>
+        <FB Name="merge2" Type="E_MERGE" x="3433.3333" y="2700.0" >
+        </FB>
+        <FB Name="setP2" Type="SUBL_0" x="1838.8888" y="3050.0" >
+        </FB>
+        <FB Name="resetP2" Type="SUBL_0" x="2272.2222" y="3322.2222" >
+        </FB>
+        <FB Name="permit2" Type="E_PERMIT" x="2722.2222" y="1899.9999" >
+        </FB>
+        <FB Name="MAPub" Type="SUBL_1" x="1400.0" y="161.1111" >
+        </FB>
+        <FB Name="and2" Type="FB_AND" x="1899.9999" y="272.2222" >
+          <Parameter Name="IN2" Value="1" />
+        </FB>
+        <FB Name="permit3" Type="E_PERMIT" x="2716.6665" y="2561.111" >
+        </FB>
+        <FB Name="not1" Type="FB_NOT" x="1894.4443" y="972.22217" >
+        </FB>
+        <FB Name="permit4" Type="E_PERMIT" x="2694.4443" y="3172.2222" >
+        </FB>
+        <EventConnections>
+          <Connection Source="and1.CNF" Destination="permit1.EI" dx1="55.555553" />
+          <Connection Source="permit1.EO" Destination="unloadCNV2_2.REQ" dx1="55.555553" />
+          <Connection Source="unloadCNV2_2.CNF" Destination="trig2.EI" dx1="55.555553" dx2="55.555553" dy="722.22217" />
+          <Connection Source="START.COLD" Destination="pusher2command.INIT" dx1="55.555553" />
+          <Connection Source="pusher2command.INITO" Destination="clock.INIT" dx1="55.555553" />
+          <Connection Source="clock.IND" Destination="PUSHER2.CLK" dx1="55.555553" />
+          <Connection Source="PUSHER2.INDR" Destination="and1.REQ" dx1="55.555553" />
+          <Connection Source="pusher2command.IND" Destination="trig1.EI" dx1="127.77777" />
+          <Connection Source="PUSHER2.INDR" Destination="YELLOWPUSH.REQ" dx1="55.555553" />
+          <Connection Source="unloadCNV2_2.INITO" Destination="YELLOWPUSH.INIT" dx1="55.555553" dx2="55.555553" dy="83.33333" />
+          <Connection Source="trig2.EO" Destination="merge2.EI2" dx1="55.555553" dx2="55.555553" dy="1627.7777" />
+          <Connection Source="merge2.EO" Destination="sr1.R" dx1="55.555553" />
+          <Connection Source="merge1.EO" Destination="sr1.S" dx1="55.555553" />
+          <Connection Source="setP2.INITO" Destination="resetP2.INIT" dx1="55.555553" />
+          <Connection Source="resetP2.INITO" Destination="unloadCNV2_2.INIT" dx1="55.555553" />
+          <Connection Source="clock.INITO" Destination="MAPub.INIT" dx1="55.555553" />
+          <Connection Source="MAPub.INITO" Destination="setP2.INIT" dx1="83.33333" dx2="55.555553" dy="2922.2222" />
+          <Connection Source="trig1.EO" Destination="permit2.EI" dx1="55.555553" />
+          <Connection Source="permit2.EO" Destination="merge1.EI2" dx1="55.555553" />
+          <Connection Source="MAPub.IND" Destination="and2.REQ" dx1="55.555553" />
+          <Connection Source="setP2.IND" Destination="permit3.EI" dx1="55.555553" />
+          <Connection Source="and2.CNF" Destination="not1.REQ" dx1="55.555553" dx2="55.555553" dy="811.1111" />
+          <Connection Source="resetP2.IND" Destination="permit4.EI" dx1="55.555553" />
+          <Connection Source="permit4.EO" Destination="merge2.EI1" dx1="55.555553" />
+          <Connection Source="permit3.EO" Destination="merge1.EI1" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="and1.OUT" Destination="permit1.PERMIT" dx1="55.555553" />
+          <Connection Source="pusher2command.RD_1" Destination="trig1.QI" dx1="38.888885" dx2="55.555553" dy="1922.2222" />
+          <Connection Source="and1.OUT" Destination="trig2.QI" dx1="55.555553" />
+          <Connection Source="PUSHER2.END" Destination="and1.IN1" dx1="55.555553" />
+          <Connection Source="sr1.Q" Destination="PUSHER2.FWD" dx1="55.555553" />
+          <Connection Source="PUSHER2.POS" Destination="YELLOWPUSH.SD_1" dx1="55.555553" />
+          <Connection Source="MAPub.RD_1" Destination="and2.IN1" dx1="55.555553" />
+          <Connection Source="and2.OUT" Destination="permit2.PERMIT" dx1="177.77777" />
+          <Connection Source="and2.OUT" Destination="not1.IN" dx1="116.666664" dx2="55.555553" dy="811.1111" />
+          <Connection Source="not1.OUT" Destination="permit3.PERMIT" dx1="216.66666" />
+          <Connection Source="not1.OUT" Destination="permit4.PERMIT" dx1="55.555553" />
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+    <Resource Name="PUSHER3_MODEL" Type="PANEL_RESOURCE" x="2055.5554" y="894.4444" >
+      <FBNetwork >
+        <FB Name="pusher3command" Type="SUBL_1" x="477.77777" y="161.1111" >
+        </FB>
+        <FB Name="and1" Type="FB_AND" x="4900.0" y="1744.4443" >
+          <Parameter Name="IN2" Value="1" />
+        </FB>
+        <FB Name="permit1" Type="E_PERMIT" x="5316.6665" y="1488.8888" >
+        </FB>
+        <FB Name="unloadCNV2_3" Type="PUBL_0" x="5716.6665" y="1244.4443" >
+        </FB>
+        <FB Name="trig1" Type="E_R_TRIG" x="983.3333" y="2544.4443" >
+        </FB>
+        <FB Name="trig2" Type="E_R_TRIG" x="6138.8887" y="1661.1111" >
+        </FB>
+        <FB Name="sr1" Type="E_SR" x="3883.3333" y="2116.6665" >
+        </FB>
+        <FB Name="PUSHER3" Type="SOL_MDL" x="4272.222" y="1472.2222" >
+          <Parameter Name="VF" Value="20" />
+          <Parameter Name="VR" Value="20" />
+        </FB>
+        <FB Name="clock" Type="SUBL_0" x="994.4444" y="161.1111" >
+          <Parameter Name="ID" Value="&#34;PULSE_1&#34;" />
+        </FB>
+        <FB Name="BLUEPUSH" Type="PUBL_1" x="6188.8887" y="427.77777" >
+        </FB>
+        <FB Name="merge1" Type="E_MERGE" x="3461.111" y="1777.7777" >
+        </FB>
+        <FB Name="merge2" Type="E_MERGE" x="3433.3333" y="2700.0" >
+        </FB>
+        <FB Name="setP3" Type="SUBL_0" x="1838.8888" y="3050.0" >
+        </FB>
+        <FB Name="resetP3" Type="SUBL_0" x="2272.2222" y="3322.2222" >
+        </FB>
+        <FB Name="permit2" Type="E_PERMIT" x="2722.2222" y="1899.9999" >
+        </FB>
+        <FB Name="MAPub" Type="SUBL_1" x="1400.0" y="161.1111" >
+        </FB>
+        <FB Name="and2" Type="FB_AND" x="1899.9999" y="272.2222" >
+          <Parameter Name="IN2" Value="1" />
+        </FB>
+        <FB Name="permit3" Type="E_PERMIT" x="2716.6665" y="2561.111" >
+        </FB>
+        <FB Name="not1" Type="FB_NOT" x="1894.4443" y="972.22217" >
+        </FB>
+        <FB Name="permit4" Type="E_PERMIT" x="2694.4443" y="3172.2222" >
+        </FB>
+        <EventConnections>
+          <Connection Source="and1.CNF" Destination="permit1.EI" dx1="55.555553" />
+          <Connection Source="permit1.EO" Destination="unloadCNV2_3.REQ" dx1="55.555553" />
+          <Connection Source="unloadCNV2_3.CNF" Destination="trig2.EI" dx1="55.555553" dx2="55.555553" dy="722.22217" />
+          <Connection Source="START.COLD" Destination="pusher3command.INIT" dx1="55.555553" />
+          <Connection Source="pusher3command.INITO" Destination="clock.INIT" dx1="55.555553" />
+          <Connection Source="clock.IND" Destination="PUSHER3.CLK" dx1="55.555553" />
+          <Connection Source="PUSHER3.INDR" Destination="and1.REQ" dx1="55.555553" />
+          <Connection Source="pusher3command.IND" Destination="trig1.EI" dx1="127.77777" />
+          <Connection Source="PUSHER3.INDR" Destination="BLUEPUSH.REQ" dx1="55.555553" />
+          <Connection Source="unloadCNV2_3.INITO" Destination="BLUEPUSH.INIT" dx1="55.555553" dx2="55.555553" dy="83.33333" />
+          <Connection Source="trig2.EO" Destination="merge2.EI2" dx1="55.555553" dx2="55.555553" dy="1627.7777" />
+          <Connection Source="merge2.EO" Destination="sr1.R" dx1="55.555553" />
+          <Connection Source="merge1.EO" Destination="sr1.S" dx1="55.555553" />
+          <Connection Source="setP3.INITO" Destination="resetP3.INIT" dx1="55.555553" />
+          <Connection Source="resetP3.INITO" Destination="unloadCNV2_3.INIT" dx1="55.555553" />
+          <Connection Source="clock.INITO" Destination="MAPub.INIT" dx1="55.555553" />
+          <Connection Source="MAPub.INITO" Destination="setP3.INIT" dx1="83.33333" dx2="55.555553" dy="2922.2222" />
+          <Connection Source="trig1.EO" Destination="permit2.EI" dx1="55.555553" />
+          <Connection Source="permit2.EO" Destination="merge1.EI2" dx1="55.555553" />
+          <Connection Source="MAPub.IND" Destination="and2.REQ" dx1="55.555553" />
+          <Connection Source="setP3.IND" Destination="permit3.EI" dx1="55.555553" />
+          <Connection Source="and2.CNF" Destination="not1.REQ" dx1="55.555553" dx2="55.555553" dy="811.1111" />
+          <Connection Source="resetP3.IND" Destination="permit4.EI" dx1="55.555553" />
+          <Connection Source="permit4.EO" Destination="merge2.EI1" dx1="55.555553" />
+          <Connection Source="permit3.EO" Destination="merge1.EI1" dx1="55.555553" />
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="and1.OUT" Destination="permit1.PERMIT" dx1="55.555553" />
+          <Connection Source="pusher3command.RD_1" Destination="trig1.QI" dx1="38.888885" dx2="55.555553" dy="1922.2222" />
+          <Connection Source="and1.OUT" Destination="trig2.QI" dx1="55.555553" />
+          <Connection Source="PUSHER3.END" Destination="and1.IN1" dx1="55.555553" />
+          <Connection Source="sr1.Q" Destination="PUSHER3.FWD" dx1="55.555553" />
+          <Connection Source="PUSHER3.POS" Destination="BLUEPUSH.SD_1" dx1="55.555553" />
+          <Connection Source="MAPub.RD_1" Destination="and2.IN1" dx1="55.555553" />
+          <Connection Source="and2.OUT" Destination="permit2.PERMIT" dx1="177.77777" />
+          <Connection Source="and2.OUT" Destination="not1.IN" dx1="116.666664" dx2="55.555553" dy="811.1111" />
+          <Connection Source="not1.OUT" Destination="permit3.PERMIT" dx1="216.66666" />
+          <Connection Source="not1.OUT" Destination="permit4.PERMIT" dx1="55.555553" />
         </DataConnections>
       </FBNetwork>
     </Resource>
