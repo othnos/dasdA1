@@ -93,6 +93,42 @@
         <FB Name="startDelay" Type="SUBL_0" x="522.2222" y="2555.5554" >
           <Parameter Name="ID" Value="&#34;start_delay&#34;" />
         </FB>
+        <FB Name="pusher1SetManual" Type="IN_EVENT" x="427.77777" y="3638.8887" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;Push P1&#34;" />
+        </FB>
+        <FB Name="setP1" Type="PUBL_0" x="1050.0" y="3616.6665" >
+        </FB>
+        <FB Name="pusher1ResetManual" Type="IN_EVENT" x="1866.6666" y="3772.2222" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;Retract P1&#34;" />
+        </FB>
+        <FB Name="resetP1" Type="PUBL_0" x="2455.5554" y="3988.8887" >
+        </FB>
+        <FB Name="pusher2SetManual" Type="IN_EVENT" x="394.44443" y="4838.8887" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;Push P2&#34;" />
+        </FB>
+        <FB Name="setP2" Type="PUBL_0" x="988.88885" y="4844.4443" >
+        </FB>
+        <FB Name="pusher2ResetManual" Type="IN_EVENT" x="1838.8888" y="4844.4443" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;Retract P2&#34;" />
+        </FB>
+        <FB Name="resetP2" Type="PUBL_0" x="2466.6665" y="4850.0" >
+        </FB>
+        <FB Name="pusher3SetManual" Type="IN_EVENT" x="433.3333" y="5750.0" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;Push P2&#34;" />
+        </FB>
+        <FB Name="setP3" Type="PUBL_0" x="1016.6666" y="5777.7773" >
+        </FB>
+        <FB Name="pusher3ResetManual" Type="IN_EVENT" x="1811.1111" y="5783.333" >
+          <Parameter Name="QI" Value="1" />
+          <Parameter Name="LABEL" Value="&#34;Retract P2&#34;" />
+        </FB>
+        <FB Name="resetP3" Type="PUBL_0" x="2444.4443" y="5772.222" >
+        </FB>
         <EventConnections>
           <Connection Source="START.COLD" Destination="MAbutton.INIT" dx1="55.555553" />
           <Connection Source="BoxColor.INITO" Destination="ColorConverter.INIT" dx1="122.22221" />
@@ -128,6 +164,24 @@
           <Connection Source="rotateToUNL.IND" Destination="rotatrON.REQ" dx1="55.555553" />
           <Connection Source="METR_PUB.INITO" Destination="startDelay.INIT" dx1="55.555553" />
           <Connection Source="startDelay.IND" Destination="MAPub.REQ" dx1="55.555553" />
+          <Connection Source="pusher1SetManual.INITO" Destination="setP1.INIT" dx1="55.555553" />
+          <Connection Source="pusher1SetManual.IND" Destination="setP1.REQ" dx1="55.555553" />
+          <Connection Source="MAPub.INITO" Destination="pusher1SetManual.INIT" dx1="55.555553" dx2="55.555553" dy="1166.6666" />
+          <Connection Source="setP1.INITO" Destination="pusher1ResetManual.INIT" dx1="55.555553" />
+          <Connection Source="pusher1ResetManual.INITO" Destination="resetP1.INIT" dx1="55.555553" />
+          <Connection Source="pusher1ResetManual.IND" Destination="resetP1.REQ" dx1="55.555553" />
+          <Connection Source="resetP1.INITO" Destination="pusher2SetManual.INIT" dx1="55.555553" dx2="55.555553" dy="588.88885" />
+          <Connection Source="pusher2SetManual.INITO" Destination="setP2.INIT" dx1="55.555553" />
+          <Connection Source="pusher2SetManual.IND" Destination="setP2.REQ" dx1="55.555553" />
+          <Connection Source="setP2.INITO" Destination="pusher2ResetManual.INIT" dx1="55.555553" />
+          <Connection Source="pusher2ResetManual.INITO" Destination="resetP2.INIT" dx1="55.555553" />
+          <Connection Source="pusher2ResetManual.IND" Destination="resetP2.REQ" dx1="55.555553" />
+          <Connection Source="resetP2.INITO" Destination="pusher3SetManual.INIT" dx1="55.555553" dx2="55.555553" dy="716.6666" />
+          <Connection Source="pusher3SetManual.INITO" Destination="setP3.INIT" dx1="55.555553" />
+          <Connection Source="pusher3SetManual.IND" Destination="setP3.REQ" dx1="55.555553" />
+          <Connection Source="setP3.INITO" Destination="pusher3ResetManual.INIT" dx1="55.555553" />
+          <Connection Source="pusher3ResetManual.IND" Destination="resetP3.REQ" dx1="55.555553" />
+          <Connection Source="pusher3ResetManual.INITO" Destination="resetP3.INIT" dx1="55.555553" />
         </EventConnections>
         <DataConnections>
           <Connection Source="BoxColor.OUT" Destination="ColorConverter.boxColor" dx1="55.555553" />
@@ -324,7 +378,6 @@
     </Resource>
   </Device>
   <Device Name="MODEL_LAYER" Type="FRAME_DEVICE" x="555.55554" y="1811.1111" >
-    <Parameter Name="BOUNDS" Value="[0,600,200,200]" />
     <Resource Name="INIT_CLOCK" Type="PANEL_RESOURCE" x="383.3333" y="1572.2222" >
       <FBNetwork >
         <FB Name="startDelay" Type="E_DELAY" x="1288.8888" y="383.3333" >
@@ -1069,7 +1122,6 @@
     </Resource>
   </Device>
   <Device Name="CONTROLLER_LAYER" Type="FRAME_DEVICE" x="572.2222" y="2533.3333" >
-    <Parameter Name="BOUNDS" Value="[0,400,200,200]" />
     <Resource Name="Conveyor1Controller" Type="PANEL_RESOURCE" x="499.99997" y="949.99994" >
       <Parameter Name="ROWS" Value="0" />
       <Parameter Name="COLS" Value="1" />
